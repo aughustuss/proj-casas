@@ -8,7 +8,7 @@ const PropertyDropDown = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     return (
         <>
-            <Menu as='div' className='relative w-full md:w-[250px] z-10' >
+            <Menu as='div' className='relative w-full md:w-[250px]' >
                 <Menu.Button className='w-full text-left flex flex-row items-center gap-x-2' onClick={() => setIsOpen(!isOpen)}>
                     <AiOutlineHome size={24} />
                     <div className='flex flex-row items-center gap-x-2 w-full'>

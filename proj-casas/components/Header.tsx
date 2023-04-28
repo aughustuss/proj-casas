@@ -1,13 +1,14 @@
+import Link from 'next/link'
 import React from 'react'
 
 const Header = () => {
     return (
         <>
-            <header className='w-full fixed py-2 flex flex-row items-center text-black bg-white z-50' >
+            <header className='w-full fixed py-2 flex flex-row items-center text-black bg-neutral-100 shadow-sm z-50' >
                 <div className='w-5/6 mx-auto flex flex-row items-center justify-between'>
-                    <div>
+                    <Link href='/'>
                         Logo
-                    </div>
+                    </Link>
                     <div>
                         Links
                     </div>

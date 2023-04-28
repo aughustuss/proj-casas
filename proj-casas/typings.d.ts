@@ -31,5 +31,6 @@ export interface HouseContextType {
     price: string;
     setPrice: (value: string) => void;
     houses: any;
-    loading: boolean
+    loading: boolean,
+    handleClick: (value: any) => void;
 }

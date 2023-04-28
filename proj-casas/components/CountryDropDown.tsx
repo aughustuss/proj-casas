@@ -8,7 +8,7 @@ const CountryDropDown = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     return (
         <>
-            <Menu as='div' className='relative w-full z-20' >
+            <Menu as='div' className='relative w-full' >
                 <Menu.Button className='w-full text-left flex flex-row items-center gap-x-2' onClick={() => setIsOpen(!isOpen)}>
                     <HiOutlineMap size={24} />
                     <div className='flex flex-row items-center gap-x-2 w-full'>

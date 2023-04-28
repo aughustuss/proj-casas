@@ -5,21 +5,21 @@ import CountryDropDown from './CountryDropDown';
 import PropertyDropDown from './PropertyDropdowns';
 import PriceDropDown from './PriceDropdown';
 const Search = () => {
-    const { houses } = useContext(HouseContext);
+    const { houses, handleClick } = useContext(HouseContext);
     return (
         <>
             <div className='w-full mx-auto flex flex-col md:flex-row items-center'>
                 <div className='w-full flex flex-col gap-y-2 md:gap-y-0 items-center md:flex-row text-primaryPurple rounded-sm justify-center py-1  bg-white border shadow-md md:justify-between'>
-                    <div className='md:w-[250px] w-full'>
+                    <div className='md:w-[250px] w-full z-30'>
                         <CountryDropDown />
                     </div>
-                    <div className='md:w-[250px] w-full'>
+                    <div className='md:w-[250px] w-full z-20'>
                         <PropertyDropDown />
                     </div>
-                    <div className='md:w-[250px] w-full'>
+                    <div className='md:w-[250px] w-full z-10'>
                         <PriceDropDown/>
                     </div>
-                    <button className='w-full md:w-32 justify-center flex flex-row bg-primaryPurple rounded-md text-white hover:bg-primaryPurple/90 transition duration-200'>
+                    <button onClick={handleClick} className='w-full md:w-32 justify-center flex flex-row bg-primaryPurple rounded-md text-white hover:bg-primaryPurple/90 transition duration-200'>
                         <HiOutlineSearch size={20} className='m-3' />
                     </button>
                 </div>

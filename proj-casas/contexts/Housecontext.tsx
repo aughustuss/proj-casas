@@ -17,6 +17,7 @@ const HouseContext = createContext<HouseContextType>({
     setPrice: () => { },
     houses: [],
     loading: false,
+    handleClick: () => { },
 });
 
 const HouseContextProvider: React.FC<HouseProps> = ({ children }) => {
@@ -32,12 +33,63 @@ const HouseContextProvider: React.FC<HouseProps> = ({ children }) => {
         const allCountries = houses.map((country) => { return country.country });
         const uniqueCountries = new Set(allCountries);
         setCountries(Array.from(uniqueCountries));
-    }, [houses]);
+    }, []);
     useEffect(() => {
-        const allProperties = houses.map((property) => {return property.type});
+        const allProperties = houses.map((property) => { return property.type });
         const uniqueProperties = new Set(allProperties);
         setProperties(Array.from(uniqueProperties));
-    }, [houses])
+    }, []);
+    const handleClick = () => {
+        const isDefault = (str:string) => {
+            return str.split(' ').includes('Selecione');
+        }
+        setLoading(!loading);
+        const minPrice = parseInt(price.split(' ')[0]);
+        const maxPrice = parseInt(price.split(' ')[2]);
+        const newHouses = housesData.filter((house) => {
+            const housePrice = parseInt(house.price);
+            if(house.country === country && house.type === property && housePrice >= minPrice && housePrice <= maxPrice){
+                return house;
+            };
+            if(isDefault(country) && isDefault(property) && isDefault(price)){
+                return house
+            };
+
+            if(!isDefault(country) && isDefault(property) && isDefault(price)){
+                return house.country == country;
+            };
+            if(isDefault(country) && !isDefault(property) && isDefault(price)){
+                return house.type == property;
+            };
+            if(isDefault(country) && isDefault(property) && !isDefault(price)){
+                if(housePrice >= minPrice && housePrice <= maxPrice){
+                    return house;
+                };
+            };
+
+            if(isDefault(country) && !isDefault(property) && !isDefault(price)){
+                if(housePrice >= minPrice && housePrice <= maxPrice){
+                    return house.type == property;
+                };
+            };
+            if(!isDefault(country) && !isDefault(property) && isDefault(price)){
+                return house.country == country && house.type == property
+            };
+            if(!isDefault(country) && isDefault(property) && !isDefault(price)){
+                if(housePrice >= minPrice && housePrice <= maxPrice){
+                    return house.country == country;
+                };
+            };
+            if(!isDefault(country) && !isDefault(property) && !isDefault(price)){
+                if(housePrice >= minPrice && housePrice <= maxPrice){
+                    return house.type == property;
+                };
+            };
+        });
+        setTimeout(() => {
+            return newHouses.length < 1 ? setHouses([]) : setHouses(newHouses), setLoading(false);
+        }, 1000);
+    }
     return (
         <HouseContext.Provider value={{
             country,
@@ -50,6 +102,7 @@ const HouseContextProvider: React.FC<HouseProps> = ({ children }) => {
             setPrice,
             houses,
             loading,
+            handleClick,
         }}>
             {children}
         </HouseContext.Provider>
