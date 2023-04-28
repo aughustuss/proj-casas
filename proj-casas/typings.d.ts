@@ -20,3 +20,16 @@ export interface HouseData {
         phone: string;
     };
 }
+
+export interface HouseContextType {
+    country: string;
+    setCountry: (value: string) => void;
+    countries: string[];
+    property: string;
+    setProperty: (value: string) => void;
+    properties: string[];
+    price: string;
+    setPrice: (value: string) => void;
+    houses: any;
+    loading: boolean
+}
