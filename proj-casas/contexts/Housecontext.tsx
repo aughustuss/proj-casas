@@ -20,7 +20,7 @@ const HouseContext = createContext<HouseContextType>({
 });
 
 const HouseContextProvider: React.FC<HouseProps> = ({ children }) => {
-    const [houses, setHouses] = useState(housesData);
+    const [houses, setHouses] = useState<HouseData[]>(housesData);
     const [country, setCountry] = useState<string>('Selecione a sua localidade');
     const [countries, setCountries] = useState<string[]>([]);
     const [property, setProperty] = useState<string>('Selecione o tipo de imóvel');

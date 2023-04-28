@@ -8,7 +8,7 @@ const Search = () => {
     const { houses } = useContext(HouseContext);
     return (
         <>
-            <div className='w-5/6 mx-auto flex flex-col md:flex-row items-center'>
+            <div className='w-full mx-auto flex flex-col md:flex-row items-center'>
                 <div className='w-full flex flex-col gap-y-2 md:gap-y-0 items-center md:flex-row text-primaryPurple rounded-sm justify-center py-1  bg-white border shadow-md md:justify-between'>
                     <div className='md:w-[250px] w-full'>
                         <CountryDropDown />
