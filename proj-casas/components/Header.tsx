@@ -6,8 +6,8 @@ const Header = () => {
         <>
             <header className='w-full fixed py-2 flex flex-row items-center text-black bg-neutral-100 shadow-sm z-50' >
                 <div className='w-5/6 mx-auto flex flex-row items-center justify-between'>
-                    <Link href='/'>
-                        Logo
+                    <Link href='/' className='text-2xl font-semibold'>
+                        HomeLAD
                     </Link>
                     <div>
                         Links
