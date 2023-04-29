@@ -1,14 +1,17 @@
 import Banner from "@/components/Banner"
+import Footer from "@/components/Footer"
 import Header from "@/components/Header"
 import Houses from "@/components/Houses"
 import Search from "@/components/Search"
+import Sidebar from "@/components/Sidebar"
 
 
 export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <Sidebar/>
+      <main className="font-roboto">
         <div className="w-full">
           <Banner />
         </div>
@@ -19,6 +22,7 @@ export default function Home() {
           <Houses />
         </div>
       </main>
+      <Footer/>
     </>
   )
 }

@@ -19,7 +19,7 @@ export interface HouseData {
         name: string;
         phone: string;
     };
-}
+};
 
 export interface HouseContextType {
     country: string;
@@ -33,4 +33,9 @@ export interface HouseContextType {
     houses: any;
     loading: boolean,
     handleClick: (value: any) => void;
+};
+
+export interface SideBarType {
+    isOpen: boolean,
+    setIsOpen: (value: boolean) => void
 }

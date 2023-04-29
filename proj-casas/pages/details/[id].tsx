@@ -8,6 +8,8 @@ import React from 'react'
 import { BiBed, BiBath, BiMoney, BiArea } from 'react-icons/bi'
 import { TextField, styled, createTheme, ThemeProvider, Button } from '@mui/material';
 import { useForm } from 'react-hook-form'
+import Footer from '@/components/Footer';
+import Sidebar from '@/components/Sidebar';
 interface HouseProps {
     house: HouseData;
 };
@@ -52,6 +54,7 @@ const HouseDetails = ({ house }: HouseProps) => {
         },
     })
     const { register, formState: { errors }, trigger, reset } = useForm();
+
     const onSubmit = async (e: any) => {
         const isValid = await trigger();
         if (!isValid) {
@@ -63,6 +66,7 @@ const HouseDetails = ({ house }: HouseProps) => {
     return (
         <>
             <Header />
+            <Sidebar/>
             <ThemeProvider theme={theme}>
                 <section className='w-5/6 mx-auto py-24 min-h-screen h-auto flex justify-center items-center'>
                     <div className='w-full h-full flex flex-col'>
@@ -149,6 +153,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                     </div>
                 </section>
             </ThemeProvider>
+            <Footer/>
         </>
     )
 }

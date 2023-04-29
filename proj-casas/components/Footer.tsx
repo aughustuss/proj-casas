@@ -1,0 +1,27 @@
+import Link from 'next/link'
+import React from 'react'
+import { GiHouseKeys } from 'react-icons/gi'
+
+const Footer = () => {
+  return (
+    <>
+      <footer className='w-full flex flex-col bg-primaryPurple text-white  font-roboto'>
+        <div className='w-5/6 mx-auto py-4 h-[100px] flex flex-col justify-between'>
+          <div className='w-full flex flex-row justify-between'>
+            <Link href='/' className='text-4xl flex flex-row items-center text-primaryGreen font-semibold font-oswald'>
+                <GiHouseKeys/><span className='text-white' >House Ads</span>.
+            </Link >
+            <div className='text-xs'>
+              Copyright, 2023 - &copy; Todos os direitos reservados. 
+            </div>
+          </div>
+          <div className='w-full text-center text-[12px] text-gray-400'>
+            Feito com &hearts; por Augusto de Paula.
+          </div>
+        </div>
+      </footer>
+    </>
+  )
+}
+
+export default Footer

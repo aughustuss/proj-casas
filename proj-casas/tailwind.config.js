@@ -10,6 +10,11 @@ module.exports = {
       colors: {
         primaryGreen: '#30ba9f',
         primaryPurple: '#6d28d9',
+      },
+      fontFamily: {
+        roboto: ['Roboto', 'sans-serif'],
+        oswald: ['Oswald', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
       }
     },
   },
