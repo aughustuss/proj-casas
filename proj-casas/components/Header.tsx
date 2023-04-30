@@ -17,7 +17,7 @@ const Header = () => {
     const filteredSearch = search.length > 0 ? houses.filter((house: HouseData) => { return house.address.toLowerCase().includes(search.toLowerCase()) }) : [];
     return (
         <>
-            <header className='bg-primaryPurple text-white transition duration-200 w-full fixed py-2 flex flex-row items-center shadow-sm z-50 '>
+            <header className=' bg-primaryPurple text-white transition duration-200 w-full fixed py-2 flex flex-row items-center shadow-sm z-50 '>
                 <div className='w-5/6 relative mx-auto flex flex-row items-center justify-between'>
                     <Link href='/' className='text-4xl text-primaryGreen font-semibold z-10 flex flex-row items-center font-oswald'>
                         <GiHouseKeys size={36} /> <span className='text-white' >House Ads</span>.
@@ -32,11 +32,11 @@ const Header = () => {
                                 )
                             }
                         </div>
-                        <div className='w-full bg-primaryPurple rounded-b-md px-2 pt-2 text-center absolute top-full overflow-auto'>
+                        <div className='w-full bg-white text-black rounded-b-md px-2 text-center absolute top-full overflow-auto'>
                             {search.length > 0 ? (
                                 filteredSearch.slice(0, 10).map((houses: HouseData) => {
                                     return (
-                                        <Link className='text-xs gap-x-2 hover:bg-violet-800 duration-200 transition flex flex-row items-center w-full p-2' href={`details/${houses.id}`}>
+                                        <Link className='text-xs gap-x-2 hover:bg-primaryPurple duration-200 transition flex flex-row items-center w-full p-2 hover:text-white' href={`details/${houses.id}`}>
                                             <Image alt='Casa' src={houses.image} width={30} height={30} />{houses.address}, {houses.country}, ({houses.type})
                                         </Link>
                                     )
@@ -58,7 +58,7 @@ const Header = () => {
                         <button onClick={() => setSearchOpen(!isSearchOpen)}>
                             <HiOutlineSearch size={28} />
                         </button>
-                        <button onClick={() => setIsOpen(!isOpen)} className=' bg-primaryGreen hover:bg-primaryGreen/80 rounded-sm p-1 text-white transition duration-200'>
+                        <button onClick={() => setIsOpen(!isOpen)} className=' bg-primaryPurple hover:bg-primaryPurple/80 rounded-sm p-1 text-white transition duration-200'>
                             <MdOutlineMenu size={28} />
                         </button>
                     </div>
@@ -68,7 +68,7 @@ const Header = () => {
                                 <HiOutlineSearch className='absolute left-2' />
                                 <input value={search} onChange={(e) => setSearch(e.target.value)} className='w-full h-full outline-none pl-8' />
                                 <CgClose onClick={() => { setSearch(''); setSearchOpen(false) }} className='absolute right-2 cursor-pointer' />
-                                <div className='w-full absolute top-full flex flex-col px-2 pt-2 bg-primaryPurple gap-y-2'>
+                                <div className='w-full absolute top-full flex flex-col px-2 pt-2 bg-primaryPurple/90 gap-y-2'>
                                     {search.length > 0 && (
                                         filteredSearch.slice(0, 10).map((houses:HouseData) => {
                                             return (

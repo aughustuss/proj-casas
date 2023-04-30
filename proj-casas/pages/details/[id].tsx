@@ -15,19 +15,19 @@ interface HouseProps {
 };
 const CustomButton = styled(Button)({
     '&.MuiButton-contained': {
-        backgroundColor: '#30ba9f',
+        backgroundColor: '#01D28E',
         '&:hover': {
-            backgroundColor: '#30ba9f'
+            backgroundColor: '#01D28E'
         }
     }
 });
 const CustomTextField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
-            'borderColor': '#30ba9f',
+            'borderColor': '#01D28E',
         },
         '&:hover fieldset': {
-            'borderColor': '#30ba9f'
+            'borderColor': '#01D28E'
         },
         '& input': {
             'color': 'rgb(163, 163, 163) !important'
@@ -49,7 +49,7 @@ const HouseDetails = ({ house }: HouseProps) => {
     const theme = createTheme({
         palette: {
             primary: {
-                main: '#30ba9f'
+                main: '#01D28E'
             },
         },
     })
@@ -74,10 +74,10 @@ const HouseDetails = ({ house }: HouseProps) => {
                         <div className='flex flex-col py-2 md:gap-y-0 lg:flex-row items-center w-full lg:justify-between'>
                             <p className='font-semibold text-xl w-full lg:w-auto'>{house.address}</p>
                             <div className='flex flex-row items-center justify-start w-full lg:w-auto text-white gap-x-2'>
-                                <p className='bg-primaryGreen w-fit rounded-full px-2 lg:text-center'>{house.country}</p>
-                                <p className='bg-primaryPurple w-fit rounded-full px-2 text-left lg:text-center'>{house.type}</p>
+                                <p className='bg-primaryPurple w-fit rounded-full px-2 lg:text-center'>{house.country}</p>
+                                <p className='bg-primaryGreen w-fit rounded-full px-2 text-left lg:text-center '>{house.type}</p>
                             </div>
-                            <p className='text-primaryPurple font-semibold w-full lg:w-auto text-xl flex flex-row gap-x-1 items-center'><BiMoney />{house.price}</p>
+                            <p className='text-primaryGreen font-semibold w-full lg:w-auto text-xl flex flex-row gap-x-1 items-center'><BiMoney />{house.price}</p>
                         </div>
 
                         <div className='w-full flex flex-col lg:flex-row md:gap-x-4'>

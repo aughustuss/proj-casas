@@ -12,7 +12,7 @@ const Houses = () => {
     const [page, setPage] = useState(1);
     console.log(parseInt((houses.length / 9).toFixed(2)))
     if (loading) {
-        return <div className='w-full h-full flex justify-center items-center mt-48'><ImSpinner2 className='flex h-10 w-10 text-primaryPurple animate-spin' /></div>
+        return <div className='w-full h-full flex justify-center items-center mt-48'><ImSpinner2 className='flex h-10 w-10 text-primaryGreen animate-spin' /></div>
     };
     if (houses.length < 1) {
         return <div className='w-full h-full flex justify-center items-center mt-48'>Desculpe, não há resultados para a sua busca. </div>
@@ -29,8 +29,8 @@ const Houses = () => {
                                         <Image src={house.image} alt='Casa' className='hover:scale-105 transition duration-200' />
                                         <div className='flex flex-col w-full gap-y-2'>
                                             <div className='w-full flex flex-row items-center gap-x-2 text-white text-sm'>
-                                                <p className='bg-primaryGreen w-fit rounded-full px-2 text-center'>{house.type}</p>
-                                                <p className='bg-primaryPurple w-fit rounded-full px-2 text-center'>{house.country}</p>
+                                                <p className='bg-primaryPurple w-fit rounded-full px-2 text-center '>{house.type}</p>
+                                                <p className='bg-primaryGreen w-fit rounded-full px-2 text-center'>{house.country}</p>
                                             </div>
                                             <div>
                                                 <p className='font-semibold'>{house.address}</p>
@@ -40,7 +40,7 @@ const Houses = () => {
                                                 <p className='flex flex-row items-center gap-x-1'><BiBath />{house.bathrooms}</p>
                                                 <p className='flex flex-row items-center gap-x-1'><BiArea />{house.surface}</p>
                                             </div>
-                                            <p className='flex flex-row items-center text-primaryPurple font-semibold gap-x-2'><BiMoney />{house.price}</p>
+                                            <p className='flex flex-row items-center text-primaryGreen font-semibold gap-x-2'><BiMoney />{house.price}</p>
                                         </div>
                                     </div>
                                 </Link>

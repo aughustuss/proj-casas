@@ -1,5 +1,6 @@
 import SideBarContext from '@/contexts/Sidebarcontext'
 import React, { useContext } from 'react'
+import { Button } from '@mui/material';
 
 const Sidebar = () => {
     const { isOpen } = useContext(SideBarContext);
@@ -10,13 +11,13 @@ const Sidebar = () => {
                     <div>
                         Links
                     </div>
-                    <div className='w-full flex flex-col gap-y-2'>
-                        <button className='w-full py-2 px-4 rounded-sm hover:bg-violet-800 transition duration-200 text-white'>
+                    <div className='w-full flex flex-col gap-y-2 text-white'>
+                        <Button className='w-full py-2 px-4 rounded-sm hover:bg-violet-800 transition duration-200 text-white'>
                             Sign in
-                        </button>
-                        <button className='w-full py-2 px-4 bg-primaryGreen rounded-sm hover:bg-primaryGreen/80 transition duration-200 text-white'>
+                        </Button>
+                        <Button className='w-full py-2 px-4 bg-primaryGreen rounded-sm hover:bg-primaryGreen/80 transition duration-200 text-white'>
                             Sign up
-                        </button>
+                        </Button>
                     </div>
                 </div>
             </div>

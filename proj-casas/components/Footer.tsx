@@ -15,7 +15,7 @@ const Footer = () => {
               Copyright, 2023 - &copy; Todos os direitos reservados. 
             </div>
           </div>
-          <div className='w-full text-center text-[12px] text-gray-400'>
+          <div className='w-full text-center text-[12px]'>
             Feito com &hearts; por Augusto de Paula.
           </div>
         </div>
