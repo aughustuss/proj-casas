@@ -1,13 +1,12 @@
-import React from 'react'
-import BannerImage from '../public/images/house-banner.png'
 import Image from 'next/image'
-import RoomImage from '../public/images/room-banner.png'
+import React from 'react'
+import RoomBaner from '../public/images/room-banner.png'
 
-const Banner = () => {
+const Roombanner = () => {
     return (
         <>
             <section className='w-full md:h-[640px] pt-20 mb-8'>
-                <div className='w-full flex flex-col md:flex-row h-full'>
+                <div className='w-full flex flex-col md:flex-row-reverse h-full'>
                     <div className='flex-1 gap-y-6 h-full flex flex-col justify-start md:justify-center px-4 md:px-0 md:items-start md:ml-10 lg:ml-20 text-center md:text-left items-center'>
                         <p className='text-4xl lg:text-5xl leading-none font-semibold'><span className='text-violet-700'>Conquiste</span> a sua casa dos sonhos aqui. </p>
                         <p className=' max-w-lg'>
@@ -15,7 +14,7 @@ const Banner = () => {
                         </p>
                     </div>
                     <div className='flex-1 hidden md:flex'>
-                        <Image alt='Banner' src={BannerImage} />
+                        <Image alt='Banner' src={RoomBaner} />
                     </div>
                 </div>
             </section>
@@ -23,4 +22,4 @@ const Banner = () => {
     )
 }
 
-export default Banner
+export default Roombanner

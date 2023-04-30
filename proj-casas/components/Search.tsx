@@ -4,8 +4,9 @@ import { HiOutlineSearch } from 'react-icons/hi'
 import CountryDropDown from './CountryDropDown';
 import PropertyDropDown from './PropertyDropdowns';
 import PriceDropDown from './PriceDropdown';
+import { Button } from '@mui/material';
 const Search = () => {
-    const { houses, handleClick } = useContext(HouseContext);
+    const { handleClick } = useContext(HouseContext);
     return (
         <>
             <div className='w-full mx-auto flex flex-col md:flex-row items-center'>
@@ -19,9 +20,9 @@ const Search = () => {
                     <div className='md:w-[250px] w-full z-10'>
                         <PriceDropDown/>
                     </div>
-                    <button onClick={handleClick} className='w-full md:w-32 justify-center flex flex-row bg-primaryPurple rounded-md text-white hover:bg-primaryPurple/90 transition duration-200'>
-                        <HiOutlineSearch size={20} className='m-3' />
-                    </button>
+                    <Button onClick={handleClick} className='w-full md:w-32 justify-center flex flex-row bg-primaryPurple rounded-sm text-white hover:bg-primaryPurple/90 transition duration-200'>
+                        <HiOutlineSearch size={20} className='m-1' />
+                    </Button>
                 </div>
             </div>
         </>

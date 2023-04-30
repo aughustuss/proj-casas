@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { MdOutlineMenu } from 'react-icons/md'
 import SideBarContext from '@/contexts/Sidebarcontext';
 import {GiHouseKeys} from 'react-icons/gi'
+import { Button } from '@mui/material';
 const Header = () => {
     const { isOpen, setIsOpen } = useContext(SideBarContext);
     return (
@@ -13,12 +14,12 @@ const Header = () => {
                         <GiHouseKeys size={36}/> <span className='text-white' >House Ads</span>.
                     </Link>
                     <div className='hidden lg:flex flex-row items-center gap-x-4 font-roboto'>
-                        <button>
+                        <Button className='text-white py-1 px-4'>
                             Sign in
-                        </button>
-                        <button className='py-2 px-4 bg-primaryGreen rounded-sm hover:bg-primaryGreen/80 transition duration-200 text-white'>
+                        </Button>
+                        <Button className='py-1 px-4 bg-primaryGreen rounded-sm hover:bg-primaryGreen/80 transition duration-200 text-white'>
                             Sign up
-                        </button>
+                        </Button>
                     </div>
                     <button onClick={() => setIsOpen(!isOpen)} className='lg:hidden block bg-primaryGreen hover:bg-primaryGreen/80 rounded-sm p-1 text-white transition duration-200'>
                         <MdOutlineMenu size={28} />

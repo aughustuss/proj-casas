@@ -22,7 +22,7 @@ const Houses = () => {
             <section className='w-full '>
                 <div className='w-full flex flex-col justify-center '>
                     <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-8'>
-                        {houses.slice((page - 1) * 9, (page - 1) * 9 + 9).map((house: HouseData) => {
+                        {houses && houses.slice((page - 1) * 9, (page - 1) * 9 + 9).map((house: HouseData) => {
                             return (
                                 <Link key={house.id} className='w-full flex flex-col justify-center items-center brightness-95 hover:brightness-100 transition duration-200' href={`/details/${house.id}`}>
                                     <div className='flex flex-col justify-center w-full max-w-xs max-h-[450px] bg-white shadow-md p-4 gap-y-4'>
