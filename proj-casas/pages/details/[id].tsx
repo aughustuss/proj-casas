@@ -98,14 +98,14 @@ const HouseDetails = ({ house }: HouseProps) => {
                                 </div>
                             </div>
                             <div className='w-full lg:w-1/3 border flex flex-col rounded-lg'>
-                                <div className='flex flex-row items-center gap-x-4 w-full p-8 '>
+                                <div className='flex flex-col lg:flex-row items-center gap-x-4 w-full p-8 '>
                                     <Image width={90} height={90} alt='Locador' src={house.agent.image} className='object-cover border border-neutral-300 rounded-full p-1' />
                                     <div className='flex flex-col w-full '>
                                         <p className='text-[14px] text-center text-gray-400'>Proprietário(a)</p>
                                         <p className='text-center font-semibold text-lg'>{house.agent.name}</p>
                                     </div>
                                 </div>
-                                <form onSubmit={onSubmit} className='w-full h-full items-center flex flex-col justify-between gap-y-4' action="">
+                                <form autoComplete='off' onSubmit={onSubmit} className='w-full h-full items-center flex flex-col justify-between gap-y-4' action="">
                                     <div className='w-5/6 flex flex-col justify-center gap-y-4'>
                                         <CustomTextField
                                             label='Nome'
