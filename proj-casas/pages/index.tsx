@@ -1,4 +1,5 @@
 import Banner from "@/components/Banner"
+import Carousel from "@/components/Carousel"
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
 import Houses from "@/components/Houses"
@@ -18,6 +19,9 @@ export default function Home() {
         </div>
         <div className="w-full">
           <Roombanner/>
+        </div>
+        <div className="w-5/6 mx-auto">
+          <Carousel/>
         </div>
         <div className="w-5/6 mx-auto">
           <Search />

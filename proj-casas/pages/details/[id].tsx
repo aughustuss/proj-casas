@@ -66,7 +66,7 @@ const HouseDetails = ({ house }: HouseProps) => {
     return (
         <>
             <Header />
-            <Sidebar/>
+            <Sidebar />
             <ThemeProvider theme={theme}>
                 <section className='w-5/6 mx-auto py-24 min-h-screen h-auto flex justify-center items-center'>
                     <div className='w-full h-full flex flex-col'>
@@ -100,9 +100,12 @@ const HouseDetails = ({ house }: HouseProps) => {
                             <div className='w-full lg:w-1/3 border flex flex-col rounded-lg'>
                                 <div className='flex flex-row items-center gap-x-4 w-full p-8 '>
                                     <Image width={90} height={90} alt='Locador' src={house.agent.image} className='object-cover border border-neutral-300 rounded-full p-1' />
-                                    <p className='text-center font-semibold text-lg'>{house.agent.name}</p>
+                                    <div className='flex flex-col w-full '>
+                                        <p className='text-[14px] text-center text-gray-400'>Proprietário(a)</p>
+                                        <p className='text-center font-semibold text-lg'>{house.agent.name}</p>
+                                    </div>
                                 </div>
-                                <form onSubmit={onSubmit} className='w-full h-full items-center flex flex-col justify-between' action="">
+                                <form onSubmit={onSubmit} className='w-full h-full items-center flex flex-col justify-between gap-y-4' action="">
                                     <div className='w-5/6 flex flex-col justify-center gap-y-4'>
                                         <CustomTextField
                                             label='Nome'
@@ -116,7 +119,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                         <CustomTextField
                                             label='Email'
                                             type='email'
-                                            {...register("email",{
+                                            {...register("email", {
                                                 required: true,
                                                 pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                                             })}
@@ -144,7 +147,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                         />
                                     </div>
                                     <div className='gap-y-2 w-5/6 flex flex-col gap-x-4 pb-4'>
-                                        <CustomButton type='submit' variant='contained' className='w-full' sx={{color: "#FFF"}}>Enviar mensagem</CustomButton>
+                                        <CustomButton type='submit' variant='contained' className='w-full' sx={{ color: "#FFF" }}>Enviar mensagem</CustomButton>
                                         <Button type='button' variant='outlined' className='w-full'>Ligar</Button>
                                     </div>
                                 </form>
@@ -153,7 +156,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                     </div>
                 </section>
             </ThemeProvider>
-            <Footer/>
+            <Footer />
         </>
     )
 }

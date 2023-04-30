@@ -48,10 +48,10 @@ const PriceDropDown = () => {
                         </div>
                     </div>
                 </Menu.Button>
-                <Menu.Items className='list-none absolute bg-white top-full py-4 text-sm w-full'>
+                <Menu.Items className='list-none absolute bg-neutral-100 rounded-b-md top-full py-4 text-sm w-full'>
                     {prices && prices.map((price) => {
                         return (
-                            <Menu.Item className='cursor-pointer hover:bg-neutral-100 p-4 w-full text-center' onClick={() => setPrice(price.value)} as='li' key={price.value}>
+                            <Menu.Item className='cursor-pointer hover:bg-neutral-200 p-4 w-full text-center' onClick={() => setPrice(price.value)} as='li' key={price.value}>
                                 {price.value}
                             </Menu.Item>
                         )

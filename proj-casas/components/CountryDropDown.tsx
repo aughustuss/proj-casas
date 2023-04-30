@@ -23,10 +23,10 @@ const CountryDropDown = () => {
                         </div>
                     </div>
                 </Menu.Button>
-                <Menu.Items className='list-none absolute bg-white top-full z-10 py-4 text-sm w-full'>
+                <Menu.Items className='list-none absolute bg-neutral-100 rounded-b-md top-full z-10 py-4 text-sm w-full'>
                     {countries && countries.map((country) => {
                         return (
-                            <Menu.Item className='cursor-pointer hover:bg-neutral-100 p-4 w-full text-center' onClick={() => setCountry(country)} as='li' key={country}>
+                            <Menu.Item className='cursor-pointer hover:bg-neutral-200 p-4 w-full text-center' onClick={() => setCountry(country)} as='li' key={country}>
                                 {country}
                             </Menu.Item>
                         )

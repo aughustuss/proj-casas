@@ -23,10 +23,10 @@ const PropertyDropDown = () => {
                         </div>
                     </div>
                 </Menu.Button>
-                <Menu.Items className='list-none absolute bg-white rounded-b-md top-full py-4 text-sm w-full'>
+                <Menu.Items className='list-none absolute bg-neutral-100 rounded-b-md top-full py-4 text-sm w-full'>
                     {properties && properties.map((property) => {
                         return (
-                            <Menu.Item className='cursor-pointer hover:bg-neutral-100 p-4 w-full text-center' onClick={() => setProperty(property)} as='li' key={property}>
+                            <Menu.Item className='cursor-pointer hover:bg-neutral-200 p-4 w-full text-center' onClick={() => setProperty(property)} as='li' key={property}>
                                 {property}
                             </Menu.Item>
                         )

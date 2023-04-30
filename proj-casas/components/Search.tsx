@@ -10,7 +10,8 @@ const Search = () => {
     return (
         <>
             <div className='w-full mx-auto flex flex-col md:flex-row items-center'>
-                <div className='w-full flex flex-col gap-y-2 md:gap-y-0 items-center md:flex-row text-primaryPurple rounded-sm justify-center py-1  bg-white border shadow-md md:justify-between'>
+                <p className='text-xl pb-4 block lg:hidden'>Aplique seus filtros</p>
+                <div className='w-full flex flex-col gap-y-6 md:gap-y-0 items-center md:flex-row text-primaryPurple rounded-sm justify-center p-4 lg:py-2 border shadow-md md:justify-between'>
                     <div className='md:w-[250px] w-full z-30'>
                         <CountryDropDown />
                     </div>
