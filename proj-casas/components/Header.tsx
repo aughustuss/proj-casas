@@ -68,11 +68,11 @@ const Header = () => {
                                 <HiOutlineSearch className='absolute left-2' />
                                 <input value={search} onChange={(e) => setSearch(e.target.value)} className='w-full h-full outline-none pl-8' />
                                 <CgClose onClick={() => { setSearch(''); setSearchOpen(false) }} className='absolute right-2 cursor-pointer' />
-                                <div className='w-full absolute top-full flex flex-col px-2 pt-2 bg-primaryPurple/90 gap-y-2'>
+                                <div className='w-full absolute top-full flex flex-col px-2 bg-white gap-y-2'>
                                     {search.length > 0 && (
                                         filteredSearch.slice(0, 10).map((houses:HouseData) => {
                                             return (
-                                                <Link href={`details/${houses.id}`} className='w-full flex flex-row items-center hover:bg-violet-800 transition duration-200 text-xs gap-x-2 text-white'>
+                                                <Link href={`details/${houses.id}`} className='w-full flex flex-row items-center hover:bg-violet-800 p-2 hover:text-white transition duration-200 text-xs gap-x-2 text-primaryPurple'>
                                                     <Image src={houses.image} alt='Imagem da casa' width={30} height={30} /> {houses.address}, {houses.country} - ({houses.type})
                                                 </Link>
                                             )

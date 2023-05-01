@@ -12,7 +12,7 @@ const Houses = () => {
     const [page, setPage] = useState(1);
     console.log(parseInt((houses.length / 9).toFixed(2)))
     if (loading) {
-        return <div className='w-full h-full flex justify-center items-center mt-48'><ImSpinner2 className='flex h-10 w-10 text-primaryGreen animate-spin' /></div>
+        return <div className='w-full h-full flex justify-center items-center mt-48'><ImSpinner2 className='flex h-10 w-10 text-primaryPurple animate-spin' /></div>
     };
     if (houses.length < 1) {
         return <div className='w-full h-full flex justify-center items-center mt-48'>Desculpe, não há resultados para a sua busca. </div>
