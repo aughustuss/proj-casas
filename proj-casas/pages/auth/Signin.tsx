@@ -126,7 +126,7 @@ const Signin = () => {
                   </p>
                 )}
                 <Button disabled={submitted} className='bg-primaryPurple text-white hover:bg-primaryPurple/90 ' type='submit' fullWidth>{!submitted ? 'Entrar' : <div className='flex flex-row items-center gap-x-2'>Entrando... <ImSpinner2 className=' animate-spin' size={18} /> </div>}</Button>
-                <div className='flex flex-col w-full justify-center items-center gap-y-4'>
+                <div className='flex flex-col w-full justify-center items-center gap-y-2'>
                   <p className='text-center w-full text-xs text-gray-500'>ou</p>
                   <Button onClick={handleGoogleSignIn} className=' normal-case flex flex-row items-center gap-x-4 border bg-neutral-100 text-gray-600 shadow-md' fullWidth>
                     <FcGoogle size={32}/> Entre com o Google
