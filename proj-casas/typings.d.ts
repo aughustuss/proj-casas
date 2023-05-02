@@ -43,14 +43,14 @@ export interface SideBarType {
 export interface IUser {
     _id: string;
     email: string;
-    username: string;
+    name: string;
     password: string;
     matchPassword: string;
 };
 
 export interface UserForm {
     email: string;
-    username: string;
+    name: string;
     password: string;
 }
 

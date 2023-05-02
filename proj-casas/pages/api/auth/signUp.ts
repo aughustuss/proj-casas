@@ -12,7 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 return res.status(400).json({ error: "Preencha os campos. " });
             };
 
-            const { email, username, password } = req.body;
+            const { email, name, password } = req.body;
             const userExists = await User.findOne<IUser>({ email });
 
             if (userExists) {
@@ -24,14 +24,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 const hashedPassword = await hash(password, 12);
                 const newUser = new User({
                     email,
-                    username,
+                    name,
                     password: hashedPassword,
                 });
                 const savedUser = await newUser.save();
                 const user = {
                     id: savedUser._id,
                     email: savedUser.email,
-                    username: savedUser.username,
+                    name: savedUser.name,
                 };
                 return res.status(201).json({ success: true, user });
             };

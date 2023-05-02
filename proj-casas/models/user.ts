@@ -1,4 +1,3 @@
-import { hash } from 'bcryptjs';
 import {Schema, model, models} from 'mongoose';
 
 const userSchema = new Schema({
@@ -8,7 +7,7 @@ const userSchema = new Schema({
         required: [true, "Preencha o email."],
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Email inválido. "],
     },
-    username: {
+    name: {
         type: String,
         required: [true, "Preencha o nome de usuário"],
     },

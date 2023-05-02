@@ -118,9 +118,9 @@ const Signin = () => {
                     {error}
                   </p>
                 )}
-                <Button disabled={submitted} className='bg-primaryPurple text-white hover:bg-primaryPurple/90 ' type='submit' fullWidth>{!submitted ? 'Criar Conta' : <div className='flex flex-row items-center gap-x-2'>Enviando... <ImSpinner2 className=' animate-spin' size={18} /> </div>}</Button>
+                <Button disabled={submitted} className='bg-primaryPurple text-white hover:bg-primaryPurple/90 ' type='submit' fullWidth>{!submitted ? 'Entrar' : <div className='flex flex-row items-center gap-x-2'>Entrando... <ImSpinner2 className=' animate-spin' size={18} /> </div>}</Button>
               </form>
-              <p className='text-xs'>Ainda não possui uma conta? <Link className='text-primaryPurple' href='auth/Signup'>Crie uma!</Link></p>
+              <p className='text-xs'>Ainda não possui uma conta? <Link className='text-primaryPurple' href='Signup'>Crie uma!</Link></p>
             </div>
           </div>
           <Snackbar open={snack} autoHideDuration={5000} onClose={() => setSnack(false)}>

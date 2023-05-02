@@ -1,23 +1,25 @@
 import Link from 'next/link';
 import Image from 'next/image'
 import React, { useContext, useState } from 'react';
-import { MdAccountCircle, MdOutlineMenu } from 'react-icons/md'
+import { MdAccountCircle, } from 'react-icons/md'
 import SideBarContext from '@/contexts/Sidebarcontext';
 import { GiHouseKeys } from 'react-icons/gi'
 import { HiOutlineSearch } from 'react-icons/hi';
-import { CgClose } from 'react-icons/cg'
+import { CgClose, CgMenu } from 'react-icons/cg'
 import { Button } from '@mui/material';
 import { HouseData } from '@/typings';
 import HouseContext from '@/contexts/Housecontext';
 import { useSession, signOut } from 'next-auth/react'
+import { BiLogIn, BiLogOut } from 'react-icons/bi';
+import { BsPersonFillAdd } from 'react-icons/bs';
 const Header = () => {
     const { isOpen, setIsOpen } = useContext(SideBarContext);
+    const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
     const { houses } = useContext(HouseContext);
     const [search, setSearch] = useState<string>('');
     const [isSearchOpen, setSearchOpen] = useState<boolean>(false);
     const filteredSearch = search.length > 0 ? houses.filter((house: HouseData) => { return house.address.toLowerCase().includes(search.toLowerCase()) }) : [];
     const { data: session } = useSession();
-    console.log(session);
     return (
         <>
             <header className=' bg-primaryPurple text-white transition duration-200 w-full fixed py-2 flex flex-row items-center shadow-sm z-50 '>
@@ -68,8 +70,8 @@ const Header = () => {
                             <Link href=''>
                                 <Button onClick={() => signOut()} className='py-1 px-4 bg-primaryGreen rounded-sm hover:bg-primaryGreen/80 transition duration-200 text-white'>Sign Out</Button>
                             </Link>
-                            <Link href=''>
-                                <MdAccountCircle size={24}/>
+                            <Link href='/profile'>
+                                <MdAccountCircle size={24} />
                             </Link>
                         </div>
                     )}
@@ -78,9 +80,31 @@ const Header = () => {
                         <button onClick={() => setSearchOpen(!isSearchOpen)}>
                             <HiOutlineSearch size={28} />
                         </button>
-                        <button onClick={() => setIsOpen(!isOpen)} className=' bg-primaryPurple hover:bg-primaryPurple/80 rounded-sm p-1 text-white transition duration-200'>
-                            <MdOutlineMenu size={28} />
-                        </button>
+                        <div className='relative flex flex-row items-center'>
+                            <button onClick={() => setMenuOpen(!isMenuOpen)} className='  hover:bg-violet-800 rounded-sm p-1 text-white transition duration-200 '>
+                                <CgMenu size={28} />
+                            </button>
+                            {isMenuOpen ? (
+                                <div className={`${isMenuOpen ? 'top-full' : '-top-20'} transition-all duration-200 absolute w-[240px] h-auto -right-full  bg-primaryPurple`}>
+                                    <ul className='flex flex-col w-full p-2 gap-y-2'>
+                                        {session ? (
+                                            <div className='flex flex-col w-full gap-y-2'>
+                                                <Link className='w-full border-b pb-2' href='/profile'><Button fullWidth startIcon={<MdAccountCircle />} className=' hover:bg-violet-800 text-white'>Minha Conta</Button></Link>
+                                                <Button startIcon={<BiLogOut />} onClick={() => signOut()} className='hover:bg-violet-800 text-white'>Sign Out</Button>
+                                            </div>
+                                        ) : (
+                                            <div className='flex flex-col w-full gap-y-2'>
+                                                <Link className='w-full' href='/auth/Signin'><Button fullWidth startIcon={<BiLogIn />} className='hover:bg-violet-800 text-white'>Sign In</Button></Link>
+                                                <Link className='w-full' href='/auth/Signup'><Button fullWidth startIcon={<BsPersonFillAdd />} className='hover:bg-violet-800 text-white'>Sign Up</Button></Link>
+                                            </div>
+                                        )}
+                                    </ul>
+                                </div>
+                            ) : (
+                                null
+                            )}
+
+                        </div>
                     </div>
                     {isSearchOpen ? (
                         <div className='absolute lg:hidden top-0 left-0 bg-white w-full h-full z-50 flex flex-row items-center'>

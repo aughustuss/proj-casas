@@ -87,11 +87,11 @@ const Signup = () => {
                                     <CustomTextField
                                         label='Nome'
                                         type='text'
-                                        {...register("username", {
+                                        {...register("name", {
                                             required: true,
                                             minLength: 8,
                                         })}
-                                        helperText={errors.username && (errors.username.type === 'required' ? 'Digite o nome.' : 'Deve ter no mínimo 8 caractéres.')}
+                                        helperText={errors.name && (errors.name.type === 'required' ? 'Digite o nome.' : 'Deve ter no mínimo 8 caractéres.')}
                                         InputProps={{
                                             startAdornment: (
                                                 <InputAdornment position='start'>
@@ -144,7 +144,7 @@ const Signup = () => {
                                 )}
                                 <Button disabled={submitted} className='bg-primaryPurple text-white hover:bg-primaryPurple/90 ' type='submit' fullWidth>{!submitted ? 'Criar Conta' : <div className='flex flex-row items-center gap-x-2'>Enviando... <ImSpinner2 className=' animate-spin' size={18} /> </div>}</Button>
                             </form>
-                            <p className='text-xs'>Já possui uma conta? <Link className='text-primaryPurple' href='auth/Signin'>Faça o Login!</Link></p>
+                            <p className='text-xs'>Já possui uma conta? <Link className='text-primaryPurple' href='Signin'>Faça o Login!</Link></p>
                         </div>
                     </div>
                     <Snackbar open={snack} autoHideDuration={5000} onClose={() => setSnack(false)}>

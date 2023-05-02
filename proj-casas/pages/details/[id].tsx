@@ -4,6 +4,8 @@ import { housesData } from '@/utils/data';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 import React from 'react'
 import { BiBed, BiBath, BiMoney, BiArea } from 'react-icons/bi'
 import { TextField, styled, createTheme, ThemeProvider, Button } from '@mui/material';
@@ -42,6 +44,7 @@ const CustomTextField = styled(TextField)({
 });
 
 const HouseDetails = ({ house }: HouseProps) => {
+    const { data: session } = useSession();
     const router = useRouter();
     if (router.isFallback) {
         return <div>Carregando...</div>
@@ -105,52 +108,58 @@ const HouseDetails = ({ house }: HouseProps) => {
                                         <p className='text-center font-semibold text-lg'>{house.agent.name}</p>
                                     </div>
                                 </div>
-                                <form autoComplete='off' onSubmit={onSubmit} className='w-full h-full items-center flex flex-col justify-between gap-y-4' action="">
-                                    <div className='w-5/6 flex flex-col justify-center gap-y-4'>
-                                        <CustomTextField
-                                            label='Nome'
-                                            type='text'
-                                            {...register("name", {
-                                                required: true,
-                                                minLength: 10,
-                                            })}
-                                            helperText={errors.name && (errors.name?.type === 'required' ? 'Preencha o seu nome.' : 'Deve ter no mínimo 10 caractéres. ')}
-                                        />
-                                        <CustomTextField
-                                            label='Email'
-                                            type='email'
-                                            {...register("email", {
-                                                required: true,
-                                                pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                                            })}
-                                            helperText={errors.email && (errors.email.type === 'required' ? 'Preencha o seu e-mail.' : 'E-mail inválido. ')}
-                                        />
-                                        <CustomTextField
-                                            label='Telefone'
-                                            type='tel'
-                                            {...register("tel", {
-                                                required: true,
-                                                minLength: 11,
-                                                maxLength: 11,
-                                            })}
-                                            helperText={errors.tel && (errors.tel.type === 'required' ? 'Preencha o seu telefone.' : 'Deve ter 11 caractéres. ')}
-                                        />
-                                        <CustomTextField
-                                            multiline
-                                            rows={6}
-                                            label='Mensagem'
-                                            {...register('msg', {
-                                                required: true,
-                                                maxLength: 2000
-                                            })}
-                                            helperText={errors.msg && (errors.msg.type === 'required' ? 'Escreva a sua mensagem. ' : 'Máximo de 2000 caractéres. ')}
-                                        />
+                                {session ? (
+                                    <form autoComplete='off' onSubmit={onSubmit} className='w-full h-full items-center flex flex-col justify-between gap-y-4' action="">
+                                        <div className='w-5/6 flex flex-col justify-center gap-y-4'>
+                                            <CustomTextField
+                                                label='Nome'
+                                                type='text'
+                                                {...register("name", {
+                                                    required: true,
+                                                    minLength: 10,
+                                                })}
+                                                helperText={errors.name && (errors.name?.type === 'required' ? 'Preencha o seu nome.' : 'Deve ter no mínimo 10 caractéres. ')}
+                                            />
+                                            <CustomTextField
+                                                label='Email'
+                                                type='email'
+                                                {...register("email", {
+                                                    required: true,
+                                                    pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                                                })}
+                                                helperText={errors.email && (errors.email.type === 'required' ? 'Preencha o seu e-mail.' : 'E-mail inválido. ')}
+                                            />
+                                            <CustomTextField
+                                                label='Telefone'
+                                                type='tel'
+                                                {...register("tel", {
+                                                    required: true,
+                                                    minLength: 11,
+                                                    maxLength: 11,
+                                                })}
+                                                helperText={errors.tel && (errors.tel.type === 'required' ? 'Preencha o seu telefone.' : 'Deve ter 11 caractéres. ')}
+                                            />
+                                            <CustomTextField
+                                                multiline
+                                                rows={6}
+                                                label='Mensagem'
+                                                {...register('msg', {
+                                                    required: true,
+                                                    maxLength: 2000
+                                                })}
+                                                helperText={errors.msg && (errors.msg.type === 'required' ? 'Escreva a sua mensagem. ' : 'Máximo de 2000 caractéres. ')}
+                                            />
+                                        </div>
+                                        <div className='gap-y-2 w-5/6 flex flex-col gap-x-4 pb-4'>
+                                            <CustomButton type='submit' variant='contained' className='w-full' sx={{ color: "#FFF" }}>Enviar mensagem</CustomButton>
+                                            <Button type='button' variant='outlined' className='w-full'>Ligar</Button>
+                                        </div>
+                                    </form>
+                                ) : (
+                                    <div className='w-full h-5/6 text-sm text-center text-gray-500 sm:mt-24'>
+                                        Faça o <Link href='/auth/Signin' className='underline'>{' '} Login {' '}</Link> para enviar mensagens ao proprietário(a).
                                     </div>
-                                    <div className='gap-y-2 w-5/6 flex flex-col gap-x-4 pb-4'>
-                                        <CustomButton type='submit' variant='contained' className='w-full' sx={{ color: "#FFF" }}>Enviar mensagem</CustomButton>
-                                        <Button type='button' variant='outlined' className='w-full'>Ligar</Button>
-                                    </div>
-                                </form>
+                                )}
                             </div>
                         </div>
                     </div>
