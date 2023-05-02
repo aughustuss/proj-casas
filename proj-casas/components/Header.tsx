@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image'
 import React, { useContext, useState } from 'react';
-import { MdOutlineMenu } from 'react-icons/md'
+import { MdAccountCircle, MdOutlineMenu } from 'react-icons/md'
 import SideBarContext from '@/contexts/Sidebarcontext';
 import { GiHouseKeys } from 'react-icons/gi'
 import { HiOutlineSearch } from 'react-icons/hi';
@@ -9,12 +9,15 @@ import { CgClose } from 'react-icons/cg'
 import { Button } from '@mui/material';
 import { HouseData } from '@/typings';
 import HouseContext from '@/contexts/Housecontext';
+import { useSession, signOut } from 'next-auth/react'
 const Header = () => {
     const { isOpen, setIsOpen } = useContext(SideBarContext);
     const { houses } = useContext(HouseContext);
     const [search, setSearch] = useState<string>('');
     const [isSearchOpen, setSearchOpen] = useState<boolean>(false);
     const filteredSearch = search.length > 0 ? houses.filter((house: HouseData) => { return house.address.toLowerCase().includes(search.toLowerCase()) }) : [];
+    const { data: session } = useSession();
+    console.log(session);
     return (
         <>
             <header className=' bg-primaryPurple text-white transition duration-200 w-full fixed py-2 flex flex-row items-center shadow-sm z-50 '>
@@ -46,18 +49,31 @@ const Header = () => {
                             )}
                         </div>
                     </div>
-                    <div className='hidden lg:flex flex-row items-center gap-x-4 font-roboto'>
-                        <Link href='/auth/Sigin'>
-                            <Button className='text-white py-1 px-4'>
-                                Sign in
-                            </Button>
-                        </Link>
-                        <Link href='/auth/Signup'>
-                            <Button className='py-1 px-4 bg-primaryGreen rounded-sm hover:bg-primaryGreen/80 transition duration-200 text-white'>
-                                Sign up
-                            </Button>
-                        </Link>
-                    </div>
+
+                    {!session ? (
+                        <div className='hidden lg:flex flex-row items-center gap-x-4 font-roboto'>
+                            <Link href='/auth/Signin'>
+                                <Button className='text-white py-1 px-4'>
+                                    Sign in
+                                </Button>
+                            </Link>
+                            <Link href='/auth/Signup'>
+                                <Button className='py-1 px-4 bg-primaryGreen rounded-sm hover:bg-primaryGreen/80 transition duration-200 text-white'>
+                                    Sign up
+                                </Button>
+                            </Link>
+                        </div>
+                    ) : (
+                        <div className='hidden lg:flex flex-row items-center gap-x-4 font-roboto'>
+                            <Link href=''>
+                                <Button onClick={() => signOut()} className='py-1 px-4 bg-primaryGreen rounded-sm hover:bg-primaryGreen/80 transition duration-200 text-white'>Sign Out</Button>
+                            </Link>
+                            <Link href=''>
+                                <MdAccountCircle size={24}/>
+                            </Link>
+                        </div>
+                    )}
+
                     <div className='flex-row items-center gap-x-4 lg:hidden flex'>
                         <button onClick={() => setSearchOpen(!isSearchOpen)}>
                             <HiOutlineSearch size={28} />
