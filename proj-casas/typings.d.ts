@@ -38,4 +38,18 @@ export interface HouseContextType {
 export interface SideBarType {
     isOpen: boolean,
     setIsOpen: (value: boolean) => void
+};
+
+export interface IUser {
+    _id: string;
+    email: string;
+    username: string;
+    password: string;
+    matchPassword: string;
+};
+
+export interface UserForm {
+    email: string;
+    username: string;
+    password: string;
 }

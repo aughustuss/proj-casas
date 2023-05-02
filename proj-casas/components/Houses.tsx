@@ -10,7 +10,6 @@ import { Pagination } from '@mui/material';
 const Houses = () => {
     const { houses, loading } = useContext(HouseContext);
     const [page, setPage] = useState(1);
-    console.log(parseInt((houses.length / 9).toFixed(2)))
     if (loading) {
         return <div className='w-full h-full flex justify-center items-center mt-48'><ImSpinner2 className='flex h-10 w-10 text-primaryPurple animate-spin' /></div>
     };

@@ -47,12 +47,16 @@ const Header = () => {
                         </div>
                     </div>
                     <div className='hidden lg:flex flex-row items-center gap-x-4 font-roboto'>
-                        <Button className='text-white py-1 px-4'>
-                            Sign in
-                        </Button>
-                        <Button className='py-1 px-4 bg-primaryGreen rounded-sm hover:bg-primaryGreen/80 transition duration-200 text-white'>
-                            Sign up
-                        </Button>
+                        <Link href='/auth/Sigin'>
+                            <Button className='text-white py-1 px-4'>
+                                Sign in
+                            </Button>
+                        </Link>
+                        <Link href='/auth/Signup'>
+                            <Button className='py-1 px-4 bg-primaryGreen rounded-sm hover:bg-primaryGreen/80 transition duration-200 text-white'>
+                                Sign up
+                            </Button>
+                        </Link>
                     </div>
                     <div className='flex-row items-center gap-x-4 lg:hidden flex'>
                         <button onClick={() => setSearchOpen(!isSearchOpen)}>
@@ -70,7 +74,7 @@ const Header = () => {
                                 <CgClose onClick={() => { setSearch(''); setSearchOpen(false) }} className='absolute right-2 cursor-pointer' />
                                 <div className='w-full absolute top-full flex flex-col px-2 bg-white gap-y-2'>
                                     {search.length > 0 && (
-                                        filteredSearch.slice(0, 10).map((houses:HouseData) => {
+                                        filteredSearch.slice(0, 10).map((houses: HouseData) => {
                                             return (
                                                 <Link href={`details/${houses.id}`} className='w-full flex flex-row items-center hover:bg-violet-800 p-2 hover:text-white transition duration-200 text-xs gap-x-2 text-primaryPurple'>
                                                     <Image src={houses.image} alt='Imagem da casa' width={30} height={30} /> {houses.address}, {houses.country} - ({houses.type})
