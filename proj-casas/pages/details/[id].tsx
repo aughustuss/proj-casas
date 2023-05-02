@@ -157,7 +157,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                     </form>
                                 ) : (
                                     <div className='w-full h-5/6 text-sm text-center text-gray-500 sm:mt-24'>
-                                        Faça o <Link href='/auth/Signin' className='underline'>{' '} Login {' '}</Link> para enviar mensagens ao proprietário(a).
+                                        Faça o <Link href='/auth/Signin' className='underline'>{' '} Login</Link> para entrar em contato com o proprietário(a).
                                     </div>
                                 )}
                             </div>
