@@ -71,7 +71,13 @@ const Header = () => {
                                 <Button onClick={() => signOut()} className='py-1 px-4 bg-primaryGreen rounded-sm hover:bg-primaryGreen/80 transition duration-200 text-white'>Sign Out</Button>
                             </Link>
                             <Link href='/profile'>
-                                <MdAccountCircle size={24} />
+                                {session && session.user?.image ? (
+                                    <img src={session.user.image} className='w-8 h-8 rounded-full' />
+                                ) : (
+                                    <div>
+                                        <MdAccountCircle className='w-8 h-8'/>
+                                    </div>
+                                )}
                             </Link>
                         </div>
                     )}
@@ -89,7 +95,7 @@ const Header = () => {
                                     <ul className='flex flex-col w-full p-2 gap-y-2'>
                                         {session ? (
                                             <div className='flex flex-col w-full gap-y-2'>
-                                                <Link className='w-full border-b pb-2' href='/profile'><Button fullWidth startIcon={<MdAccountCircle />} className=' hover:bg-violet-800 text-white'>Minha Conta</Button></Link>
+                                                <Link className='w-full border-b pb-2' href='/profile'> <Button fullWidth startIcon={<MdAccountCircle />} className=' hover:bg-violet-800 text-white'>Minha Conta</Button></Link>
                                                 <Button startIcon={<BiLogOut />} onClick={() => signOut()} className='hover:bg-violet-800 text-white'>Sign Out</Button>
                                             </div>
                                         ) : (

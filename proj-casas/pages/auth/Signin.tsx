@@ -10,8 +10,10 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { ImSpinner2 } from 'react-icons/im'
 import { MdEmail } from 'react-icons/md'
 import { BsFillKeyFill } from 'react-icons/bs'
+import {FcGoogle} from 'react-icons/fc'
 import { loginUser } from '@/helpers'
-
+import {signIn} from 'next-auth/react'
+import { AiFillGithub } from 'react-icons/ai'
 
 export const CustomTextField = styled(TextField)({
   '& .MuiOutlinedInput-root': {
@@ -43,12 +45,17 @@ const Signin = () => {
   const [error, setError] = useState<string>('');
   const [snack, setSnack] = useState<boolean>(false);
   const router = useRouter();
-
+  const handleGoogleSignIn = () => {
+    signIn('google', {callbackUrl: "http://localhost:3000"})
+  };
+  const handleGitHubSignIn = () => {
+    signIn('github', {callbackUrl: "http://localhost:3000"})
+  }
   const onSubmit: SubmitHandler<UserForm> = async (data) => {
     try {
       setSubmitted(true);
       const loginRes = await loginUser(data);
-      if(loginRes){
+      if (loginRes) {
         setSnack(true);
         setError("");
       }
@@ -119,6 +126,15 @@ const Signin = () => {
                   </p>
                 )}
                 <Button disabled={submitted} className='bg-primaryPurple text-white hover:bg-primaryPurple/90 ' type='submit' fullWidth>{!submitted ? 'Entrar' : <div className='flex flex-row items-center gap-x-2'>Entrando... <ImSpinner2 className=' animate-spin' size={18} /> </div>}</Button>
+                <div className='flex flex-col w-full justify-center items-center gap-y-4'>
+                  <p className='text-center w-full text-xs text-gray-500'>ou</p>
+                  <Button onClick={handleGoogleSignIn} className=' normal-case flex flex-row items-center gap-x-4 border bg-neutral-100 text-gray-600 shadow-md' fullWidth>
+                    <FcGoogle size={32}/> Entre com o Google
+                  </Button>
+                  <Button onClick={handleGitHubSignIn} className=' normal-case flex flex-row items-center gap-x-4 border bg-neutral-100 text-gray-600 shadow-md' fullWidth>
+                    <AiFillGithub size={32}/> Entre com o GitHub
+                  </Button>
+                </div>
               </form>
               <p className='text-xs'>Ainda não possui uma conta? <Link className='text-primaryPurple' href='Signup'>Crie uma!</Link></p>
             </div>
