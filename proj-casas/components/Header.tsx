@@ -2,7 +2,6 @@ import Link from 'next/link';
 import Image from 'next/image'
 import React, { useContext, useState } from 'react';
 import { MdAccountCircle, } from 'react-icons/md'
-import SideBarContext from '@/contexts/Sidebarcontext';
 import { GiHouseKeys } from 'react-icons/gi'
 import { HiOutlineSearch } from 'react-icons/hi';
 import { CgClose, CgMenu } from 'react-icons/cg'
@@ -13,7 +12,6 @@ import { useSession, signOut } from 'next-auth/react'
 import { BiLogIn, BiLogOut } from 'react-icons/bi';
 import { BsPersonFillAdd } from 'react-icons/bs';
 const Header = () => {
-    const { isOpen, setIsOpen } = useContext(SideBarContext);
     const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
     const { houses } = useContext(HouseContext);
     const [search, setSearch] = useState<string>('');

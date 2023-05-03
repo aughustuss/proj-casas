@@ -5,14 +5,12 @@ import Header from "@/components/Header"
 import Houses from "@/components/Houses"
 import Roombanner from "@/components/Roombanner"
 import Search from "@/components/Search"
-import Sidebar from "@/components/Sidebar"
 
 
 export default function Home() {
   return (
     <>
       <Header />
-      <Sidebar/>
       <main className="font-roboto overflow-x-hidden">
         <div className="w-full">
           <Banner />
