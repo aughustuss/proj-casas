@@ -22,7 +22,7 @@ const Header = () => {
     const { data: session } = useSession();
     return (
         <>
-            <header className=' bg-primaryPurple text-white transition duration-200 w-full fixed py-2 flex flex-row items-center shadow-sm z-50 '>
+            <header className=' bg-primaryPurple text-white transition duration-200 w-full fixed py-2 flex flex-row items-center shadow-md z-50 '>
                 <div className='w-5/6 relative mx-auto flex flex-row items-center justify-between'>
                     <Link href='/' className='text-4xl text-primaryGreen font-semibold z-10 flex flex-row items-center font-oswald'>
                         <GiHouseKeys size={36} /> <span className='text-white' >House Ads</span>.
@@ -37,11 +37,11 @@ const Header = () => {
                                 )
                             }
                         </div>
-                        <div className='w-full bg-white text-black rounded-b-md px-2 text-center absolute top-full overflow-auto'>
-                            {search.length > 0 ? (
-                                filteredSearch.slice(0, 10).map((houses: HouseData) => {
+                        <div className='w-full bg-white h-auto max-h-[200px] shadow-lg text-black rounded-b-md px-2 text-center absolute top-full overflow-auto'>
+                            {search && search.length > 0 ? (
+                                filteredSearch.map((houses: HouseData) => {
                                     return (
-                                        <Link key={houses.id} className='text-xs gap-x-2 hover:bg-primaryPurple duration-200 transition flex flex-row items-center w-full p-2 hover:text-white' href={`/details/${houses.id}`}>
+                                        <Link key={houses.id} className='font-semibold text-xs gap-x-2 hover:bg-primaryPurple duration-200 transition flex flex-row items-center w-full p-2 hover:text-white' href={`/details/${houses.id}`}>
                                             <Image alt='Casa' src={houses.image} width={30} height={30} />{houses.address}, {houses.country}, ({houses.type})
                                         </Link>
                                     )
@@ -72,7 +72,7 @@ const Header = () => {
                             </Link>
                             <Link href='/profile'>
                                 {session && session.user?.image ? (
-                                    <img src={session.user.image} className='w-8 h-8 rounded-full' />
+                                    <img alt='Foto de perfil' src={session.user.image} className='w-8 h-8 rounded-full' />
                                 ) : (
                                     <div>
                                         <MdAccountCircle className='w-8 h-8'/>
@@ -118,11 +118,11 @@ const Header = () => {
                                 <HiOutlineSearch className='absolute left-2' />
                                 <input value={search} onChange={(e) => setSearch(e.target.value)} className='w-full h-full outline-none pl-8' />
                                 <CgClose onClick={() => { setSearch(''); setSearchOpen(false) }} className='absolute right-2 cursor-pointer' />
-                                <div className='w-full absolute top-full flex flex-col px-2 bg-white gap-y-2'>
+                                <div className='w-full absolute overflow-auto shadow-lg h-auto max-h-[200px] top-full flex flex-col px-2 bg-white gap-y-2'>
                                     {search.length > 0 && (
-                                        filteredSearch.slice(0, 10).map((houses: HouseData) => {
+                                        filteredSearch.map((houses: HouseData) => {
                                             return (
-                                                <Link key={houses.id} href={`/details/${houses.id}`} className='w-full flex flex-row items-center hover:bg-violet-800 p-2 hover:text-white transition duration-200 text-xs gap-x-2 text-primaryPurple'>
+                                                <Link key={houses.id} href={`/details/${houses.id}`} className='font-semibold w-full flex flex-row items-center hover:bg-violet-800 p-2 hover:text-white transition duration-200 text-xs gap-x-2 text-primaryPurple'>
                                                     <Image src={houses.image} alt='Imagem da casa' width={30} height={30} /> {houses.address}, {houses.country} - ({houses.type})
                                                 </Link>
                                             )

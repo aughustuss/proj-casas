@@ -7,9 +7,9 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React from 'react'
+import { useForm } from 'react-hook-form'
 import { BiBed, BiBath, BiMoney, BiArea } from 'react-icons/bi'
 import { TextField, styled, createTheme, ThemeProvider, Button } from '@mui/material';
-import { useForm } from 'react-hook-form'
 import Footer from '@/components/Footer';
 import Sidebar from '@/components/Sidebar';
 interface HouseProps {
@@ -44,6 +44,7 @@ const CustomTextField = styled(TextField)({
 });
 
 const HouseDetails = ({ house }: HouseProps) => {
+    const { register, formState: { errors }, trigger, reset } = useForm();
     const { data: session } = useSession();
     const router = useRouter();
     if (router.isFallback) {
@@ -56,7 +57,6 @@ const HouseDetails = ({ house }: HouseProps) => {
             },
         },
     })
-    const { register, formState: { errors }, trigger, reset } = useForm();
 
     const onSubmit = async (e: any) => {
         const isValid = await trigger();
@@ -73,7 +73,6 @@ const HouseDetails = ({ house }: HouseProps) => {
             <ThemeProvider theme={theme}>
                 <section className='w-5/6 mx-auto py-24 min-h-screen h-auto flex justify-center items-center'>
                     <div className='w-full h-full flex flex-col'>
-
                         <div className='flex flex-col py-2 md:gap-y-0 lg:flex-row items-center w-full lg:justify-between'>
                             <p className='font-semibold text-xl w-full lg:w-auto'>{house.address}</p>
                             <div className='flex flex-row items-center justify-start w-full lg:w-auto text-white gap-x-2'>
@@ -82,8 +81,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                             </div>
                             <p className='text-primaryGreen font-semibold w-full lg:w-auto text-xl flex flex-row gap-x-1 items-center'><BiMoney />{house.price}</p>
                         </div>
-
-                        <div className='w-full flex flex-col lg:flex-row md:gap-x-4'>
+                        <div className='w-full flex flex-col lg:flex-row md:gap-x-4 gap-y-4 xl:gap-y-0'>
                             <div className='flex flex-col gap-y-2'>
 
                                 <div className='max-w-3xl'>

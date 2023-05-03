@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <Header />
       <Sidebar/>
-      <main className="font-roboto">
+      <main className="font-roboto overflow-x-hidden">
         <div className="w-full">
           <Banner />
         </div>
