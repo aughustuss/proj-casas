@@ -24,7 +24,7 @@ const options: NextAuthOptions = {
                 }).select("+password");
 
                 if(!user){
-                    throw new Error("Email ou senha inválidos.");
+                    throw new Error("Não há nenhum usuário com este email.");
                 };
 
                 const isPassword = await compare(credentials!.password, user.password);

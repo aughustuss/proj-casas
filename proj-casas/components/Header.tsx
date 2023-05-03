@@ -41,7 +41,7 @@ const Header = () => {
                             {search.length > 0 ? (
                                 filteredSearch.slice(0, 10).map((houses: HouseData) => {
                                     return (
-                                        <Link className='text-xs gap-x-2 hover:bg-primaryPurple duration-200 transition flex flex-row items-center w-full p-2 hover:text-white' href={`details/${houses.id}`}>
+                                        <Link key={houses.id} className='text-xs gap-x-2 hover:bg-primaryPurple duration-200 transition flex flex-row items-center w-full p-2 hover:text-white' href={`/details/${houses.id}`}>
                                             <Image alt='Casa' src={houses.image} width={30} height={30} />{houses.address}, {houses.country}, ({houses.type})
                                         </Link>
                                     )
@@ -122,7 +122,7 @@ const Header = () => {
                                     {search.length > 0 && (
                                         filteredSearch.slice(0, 10).map((houses: HouseData) => {
                                             return (
-                                                <Link href={`details/${houses.id}`} className='w-full flex flex-row items-center hover:bg-violet-800 p-2 hover:text-white transition duration-200 text-xs gap-x-2 text-primaryPurple'>
+                                                <Link key={houses.id} href={`/details/${houses.id}`} className='w-full flex flex-row items-center hover:bg-violet-800 p-2 hover:text-white transition duration-200 text-xs gap-x-2 text-primaryPurple'>
                                                     <Image src={houses.image} alt='Imagem da casa' width={30} height={30} /> {houses.address}, {houses.country} - ({houses.type})
                                                 </Link>
                                             )
