@@ -49,7 +49,7 @@ const Carousel = () => {
                             },
                         }
                     }
-                    className='bg-black w-full'
+                    className='w-full'
                 >
                     {houses && houses.map((house: HouseData) => {
                         return (
