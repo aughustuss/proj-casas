@@ -5,7 +5,6 @@ import React from 'react'
 import { useSession, signOut } from 'next-auth/react'
 const Profile = () => {
     const { data: session } = useSession();
-    console.log(session);
     return (
         <>
             <Header />

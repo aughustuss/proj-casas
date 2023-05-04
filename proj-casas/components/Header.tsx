@@ -19,7 +19,6 @@ const Header = () => {
     const [isSearchOpen, setSearchOpen] = useState<boolean>(false);
     const filteredSearch = search.length > 0 ? houses.filter((house: HouseData) => { return house.address.toLowerCase().includes(search.toLowerCase()) }) : [];
     const { data: session } = useSession();
-    console.log(session);
     return (
         <>
             <header className=' bg-primaryPurple text-white transition duration-200 w-full fixed py-2 flex flex-row items-center shadow-md z-50 '>
@@ -83,25 +82,25 @@ const Header = () => {
                     )}
 
                     <div className='flex-row items-center gap-x-4 lg:hidden flex'>
-                        <button onClick={() => setSearchOpen(!isSearchOpen)}>
+                        <CustomButton className='text-white' onClick={() => setSearchOpen(!isSearchOpen)}>
                             <HiOutlineSearch size={28} />
-                        </button>
+                        </CustomButton>
                         <div className='relative flex flex-row items-center'>
-                            <button onClick={() => setMenuOpen(!isMenuOpen)} className='  hover:bg-violet-800 rounded-sm p-1 text-white transition duration-200 '>
+                            <CustomButton onClick={() => setMenuOpen(!isMenuOpen)} className='  hover:bg-violet-800 rounded-sm text-white transition duration-200 '>
                                 <CgMenu size={28} />
-                            </button>
+                            </CustomButton>
                             {isMenuOpen ? (
                                 <div className={`${isMenuOpen ? 'top-full' : '-top-20'} transition-all duration-200 absolute w-[240px] h-auto -right-full  bg-primaryPurple`}>
                                     <ul className='flex flex-col w-full p-2 gap-y-2'>
                                         {session ? (
                                             <div className='flex flex-col w-full gap-y-2'>
-                                                <Link className='w-full border-b pb-2' href='/profile'> <Button fullWidth startIcon={<MdAccountCircle />} className=' hover:bg-violet-800 text-white'>Minha Conta</Button></Link>
-                                                <Button startIcon={<BiLogOut />} onClick={() => signOut()} className='hover:bg-violet-800 text-white'>Sign Out</Button>
+                                                <Link className='w-full border-b pb-2' href='/profile'> <CustomButton fullWidth startIcon={<MdAccountCircle />} className=' hover:bg-violet-800 text-white'>Minha Conta</CustomButton></Link>
+                                                <CustomButton startIcon={<BiLogOut />} onClick={() => signOut()} className='hover:bg-violet-800 text-white'>Sign Out</CustomButton>
                                             </div>
                                         ) : (
                                             <div className='flex flex-col w-full gap-y-2'>
-                                                <Link className='w-full' href='/auth/Signin'><Button fullWidth startIcon={<BiLogIn />} className='hover:bg-violet-800 text-white'>Sign In</Button></Link>
-                                                <Link className='w-full' href='/auth/Signup'><Button fullWidth startIcon={<BsPersonFillAdd />} className='hover:bg-violet-800 text-white'>Sign Up</Button></Link>
+                                                <Link className='w-full' href='/auth/Signin'><CustomButton fullWidth startIcon={<BiLogIn />} className='hover:bg-violet-800 text-white'>Sign In</CustomButton></Link>
+                                                <Link className='w-full' href='/auth/Signup'><CustomButton fullWidth startIcon={<BsPersonFillAdd />} className='hover:bg-violet-800 text-white'>Sign Up</CustomButton></Link>
                                             </div>
                                         )}
                                     </ul>

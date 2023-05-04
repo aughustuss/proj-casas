@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/dist/client/router'
 import { UserForm } from '@/typings'
 import { Button, InputAdornment, TextField, ThemeProvider, createTheme, styled, Snackbar, Alert } from '@mui/material'
-import axios, { AxiosError } from 'axios'
 import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { ImSpinner2 } from 'react-icons/im'
@@ -43,7 +42,12 @@ const Signup = () => {
     const { register, formState: { errors }, reset, handleSubmit } = useForm<UserForm>();
 
     const onSubmit: SubmitHandler<UserForm> = async (data) => {
-        
+        setSubmitted(true);
+        setTimeout(() => {
+            setSubmitted(false);
+            setSnack(true);
+            router.push('/');
+        }, 3000)
     }
 
     return (
@@ -51,7 +55,7 @@ const Signup = () => {
             <Header />
             <ThemeProvider theme={theme}>
                 <main className='h-screen w-full flex justify-center items-center'>
-                    <div className='w-5/6 sm:w-4/6 md:w-1/2 lg:w-1/4 h-fit rounded-md shadow-md bg-white flex justify-center'>
+                    <div className='w-5/6 sm:w-4/6 md:w-1/2 lg:w-1/3 xl:w-1/4 h-fit rounded-md shadow-md bg-white flex justify-center'>
                         <div className='w-5/6 h-full flex flex-col items-center gap-y-4 py-4'>
                             <h1 className='font-oswald font-semibold text-3xl text-primaryPurple'>Crie sua conta</h1>
                             <form autoComplete='off' onSubmit={handleSubmit(onSubmit)} action="" className='w-full h-full flex flex-col justify-between items-center gap-y-4'>

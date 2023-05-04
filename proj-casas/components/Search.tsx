@@ -4,7 +4,6 @@ import { HiOutlineSearch } from 'react-icons/hi'
 import CountryDropDown from './CountryDropDown';
 import PropertyDropDown from './PropertyDropdowns';
 import PriceDropDown from './PriceDropdown';
-import { Button } from '@mui/material';
 import CustomButton from './Custom';
 const Search = () => {
     const { handleClick } = useContext(HouseContext);
