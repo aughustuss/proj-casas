@@ -5,13 +5,11 @@ import { MdAccountCircle, } from 'react-icons/md'
 import { GiHouseKeys } from 'react-icons/gi'
 import { HiOutlineSearch } from 'react-icons/hi';
 import { CgClose, CgMenu } from 'react-icons/cg'
-import { Button } from '@mui/material';
 import { HouseData } from '@/typings';
 import HouseContext from '@/contexts/Housecontext';
 import { useSession, signOut } from 'next-auth/react'
 import { BiLogIn, BiLogOut } from 'react-icons/bi';
 import { BsPersonFillAdd } from 'react-icons/bs';
-import CustomButton from './Custom';
 const Header = () => {
     const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
     const { houses } = useContext(HouseContext);
@@ -21,7 +19,7 @@ const Header = () => {
     const { data: session } = useSession();
     return (
         <>
-            <header className=' bg-primaryPurple text-white transition duration-200 w-full fixed py-2 flex flex-row items-center shadow-md z-50 '>
+            <header className=' bg-primaryPurple text-white transition duration-200 w-full fixed py-2 flex flex-row items-center shadow-md z-50 font-roboto'>
                 <div className='w-5/6 relative mx-auto flex flex-row items-center justify-between'>
                     <Link href='/' className='text-4xl text-primaryGreen font-semibold z-10 flex flex-row items-center font-oswald'>
                         <GiHouseKeys size={36} /> <span className='text-white' >House Ads</span>.
@@ -54,20 +52,20 @@ const Header = () => {
                     {!session ? (
                         <div className='hidden lg:flex flex-row items-center gap-x-4 font-roboto'>
                             <Link href='/auth/Signin'>
-                                <CustomButton className='py-1 px-4 rounded-sm  transition duration-200 text-white'>
+                                <button className='py-1 px-4 rounded-sm tracking-wide transition duration-200 text-white'>
                                     Sign in
-                                </CustomButton>
+                                </button>
                             </Link>
                             <Link href='/auth/Signup'>
-                                <CustomButton className='py-1 px-4 bg-primaryGreen rounded-sm hover:bg-primaryGreen/80 transition duration-200 text-white'>
+                                <button className='py-1 px-4 bg-primaryGreen tracking-wide rounded-sm hover:bg-primaryGreen/80 transition duration-200 text-white'>
                                     Sign up
-                                </CustomButton>
+                                </button>
                             </Link>
                         </div>
                     ) : (
                         <div className='hidden lg:flex flex-row items-center gap-x-4 font-roboto'>
                             <Link href=''>
-                                <CustomButton onClick={() => signOut()} className='py-1 px-4 bg-primaryGreen rounded-sm hover:bg-primaryGreen/80 transition duration-200 text-white'>Sign Out</CustomButton>
+                                <button onClick={() => signOut()} className='py-1 px-4 bg-primaryGreen rounded-sm hover:bg-primaryGreen/80 transition duration-200 text-white'>Sign Out</button>
                             </Link>
                             <Link href='/profile'>
                                 {session && session.user?.image ? (
@@ -82,25 +80,25 @@ const Header = () => {
                     )}
 
                     <div className='flex-row items-center gap-x-4 lg:hidden flex'>
-                        <CustomButton className='text-white' onClick={() => setSearchOpen(!isSearchOpen)}>
+                        <button onClick={() => setSearchOpen(!isSearchOpen)}>
                             <HiOutlineSearch size={28} />
-                        </CustomButton>
+                        </button>
                         <div className='relative flex flex-row items-center'>
-                            <CustomButton onClick={() => setMenuOpen(!isMenuOpen)} className='  hover:bg-violet-800 rounded-sm text-white transition duration-200 '>
+                            <button onClick={() => setMenuOpen(!isMenuOpen)} className='  hover:bg-violet-800 rounded-sm p-1 text-white transition duration-200 '>
                                 <CgMenu size={28} />
-                            </CustomButton>
+                            </button>
                             {isMenuOpen ? (
                                 <div className={`${isMenuOpen ? 'top-full' : '-top-20'} transition-all duration-200 absolute w-[240px] h-auto -right-full  bg-primaryPurple`}>
                                     <ul className='flex flex-col w-full p-2 gap-y-2'>
                                         {session ? (
-                                            <div className='flex flex-col w-full gap-y-2'>
-                                                <Link className='w-full border-b pb-2' href='/profile'> <CustomButton fullWidth startIcon={<MdAccountCircle />} className=' hover:bg-violet-800 text-white'>Minha Conta</CustomButton></Link>
-                                                <CustomButton startIcon={<BiLogOut />} onClick={() => signOut()} className='hover:bg-violet-800 text-white'>Sign Out</CustomButton>
+                                            <div className='flex flex-col w-full gap-y-2 justify-center'>
+                                                <Link className='w-full border-b pb-2' href='/profile'><button className='w-full justify-center px-4 py-2 hover:bg-violet-800 text-white flex flex-row-reverse items-center relative'>Minha Conta <MdAccountCircle size={24} className='absolute left-0'/> </button></Link>
+                                                <button onClick={() => signOut()} className='w-full justify-center px-4 py-2 hover:bg-violet-800 text-white flex flex-row-reverse items-center relative'>Sign Out <BiLogOut size={24} className='absolute left-0'/> </button>
                                             </div>
                                         ) : (
-                                            <div className='flex flex-col w-full gap-y-2'>
-                                                <Link className='w-full' href='/auth/Signin'><CustomButton fullWidth startIcon={<BiLogIn />} className='hover:bg-violet-800 text-white'>Sign In</CustomButton></Link>
-                                                <Link className='w-full' href='/auth/Signup'><CustomButton fullWidth startIcon={<BsPersonFillAdd />} className='hover:bg-violet-800 text-white'>Sign Up</CustomButton></Link>
+                                            <div className='flex flex-col w-full gap-y-2 justify-center '>
+                                                <Link className='w-full' href='/auth/Signin'><button className='w-full justify-center px-4 py-2 hover:bg-violet-800 text-white flex flex-row-reverse items-center relative'>Sign In <BiLogIn size={24} className='absolute left-0'/> </button></Link>
+                                                <Link className='w-full' href='/auth/Signup'><button className='w-full justify-center px-4 py-2 hover:bg-violet-800 text-white flex flex-row-reverse items-center relative'>Sign Up <BsPersonFillAdd size={24} className='absolute left-0' /> </button></Link>
                                             </div>
                                         )}
                                     </ul>

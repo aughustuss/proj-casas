@@ -3,7 +3,7 @@ import Header from '@/components/Header'
 import Link from 'next/link'
 import { useRouter } from 'next/dist/client/router'
 import { UserForm } from '@/typings'
-import { Button, InputAdornment, TextField, ThemeProvider, createTheme, styled, Snackbar, Alert } from '@mui/material'
+import { InputAdornment, TextField, ThemeProvider, createTheme, styled, Snackbar, Alert } from '@mui/material'
 import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { ImSpinner2 } from 'react-icons/im'
@@ -118,7 +118,7 @@ const Signup = () => {
                                         {error}
                                     </p>
                                 )}
-                                <Button disabled={submitted} className='bg-primaryPurple text-white hover:bg-primaryPurple/90 ' type='submit' fullWidth>{!submitted ? 'Criar Conta' : <div className='flex flex-row items-center gap-x-2'>Enviando... <ImSpinner2 className=' animate-spin' size={18} /> </div>}</Button>
+                                <button disabled={submitted} className='bg-primaryPurple text-white hover:bg-primaryPurple/90 w-full p-2 rounded-sm font-semibold' type='submit'>{!submitted ? 'Criar Conta' : <div className='flex flex-row items-center gap-x-2'>Enviando... <ImSpinner2 className=' animate-spin' size={18} /> </div>}</button>
                             </form>
                             <p className='text-xs'>Já possui uma conta? <Link className='text-primaryPurple' href='Signin'>Faça o Login!</Link></p>
                         </div>

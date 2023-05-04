@@ -69,7 +69,7 @@ const HouseDetails = ({ house }: HouseProps) => {
         <>
             <Header />
             <ThemeProvider theme={theme}>
-                <section className='w-5/6 mx-auto py-24 min-h-screen h-auto flex justify-center items-center'>
+                <section className='w-5/6 mx-auto py-24 min-h-screen h-auto flex justify-center items-center font-roboto'>
                     <div className='w-full h-full flex flex-col'>
                         <div className='flex flex-col py-2 md:gap-y-0 lg:flex-row items-center w-full lg:justify-between'>
                             <p className='font-semibold text-xl w-full lg:w-auto'>{house.address}</p>
@@ -147,8 +147,8 @@ const HouseDetails = ({ house }: HouseProps) => {
                                             />
                                         </div>
                                         <div className='gap-y-2 w-5/6 flex flex-col gap-x-4 pb-4'>
-                                            <CustomButton type='submit' variant='contained' className='w-full' sx={{ color: "#FFF" }}>Enviar mensagem</CustomButton>
-                                            <Button type='button' variant='outlined' className='w-full'>Ligar</Button>
+                                            <button type='submit' className='w-full bg-primaryGreen p-2 rounded-sm text-white'>Enviar mensagem</button>
+                                            <button type='button' className='w-full text-primaryGreen p-2 rounded-sm border border-primaryGreen'>Ligar</button>
                                         </div>
                                     </form>
                                 ) : (

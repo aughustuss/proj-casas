@@ -3,7 +3,7 @@ import Header from '@/components/Header'
 import Link from 'next/link'
 import { useRouter } from 'next/dist/client/router'
 import { UserForm } from '@/typings'
-import { Button, InputAdornment, TextField, ThemeProvider, createTheme, styled, Snackbar, Alert } from '@mui/material'
+import {InputAdornment, TextField, ThemeProvider, createTheme, styled, Snackbar, Alert } from '@mui/material'
 import axios, { AxiosError } from 'axios'
 import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -13,7 +13,6 @@ import { BsFillKeyFill } from 'react-icons/bs'
 import { FcGoogle } from 'react-icons/fc'
 import { signIn } from 'next-auth/react'
 import { AiFillGithub } from 'react-icons/ai'
-import CustomButton from '@/components/Custom'
 
 export const CustomTextField = styled(TextField)({
   '& .MuiOutlinedInput-root': {
@@ -112,15 +111,15 @@ const Signin = () => {
                     {error}
                   </p>
                 )}
-                <CustomButton disabled={submitted} className='bg-primaryPurple text-white hover:bg-primaryPurple/90 ' type='submit' fullWidth>{!submitted ? 'Entrar' : <div className='flex flex-row items-center gap-x-2'>Entrando... <ImSpinner2 className=' animate-spin' size={18} /> </div>}</CustomButton>
+                <button disabled={submitted} className='bg-primaryPurple text-white hover:bg-primaryPurple/90 w-full p-2 rounded-sm font-semibold' type='submit' >{!submitted ? 'Entrar' : <div className='flex flex-row items-center gap-x-2'>Entrando... <ImSpinner2 className=' animate-spin' size={18} /> </div>}</button>
                 <div className='flex flex-col w-full justify-center items-center gap-y-2'>
                   <p className='text-center w-full text-xs text-gray-500'>ou</p>
-                  <CustomButton onClick={handleGoogleSignIn} className=' normal-case flex flex-row items-center gap-x-4 border bg-neutral-100 text-gray-600 shadow-md' fullWidth>
+                  <button onClick={handleGoogleSignIn} className='w-full normal-case flex flex-row items-center gap-x-4 border bg-neutral-100 text-gray-600 hover:shadow-md p-2 rounded-sm justify-center'>
                     <FcGoogle size={32} /> Entre com o Google
-                  </CustomButton>
-                  <CustomButton onClick={handleGitHubSignIn} className=' normal-case flex flex-row items-center gap-x-4 border bg-neutral-100 text-gray-600 shadow-md' fullWidth>
+                  </button>
+                  <button onClick={handleGitHubSignIn} className='w-full normal-case flex flex-row items-center gap-x-4 border bg-neutral-100 text-gray-600 hover:shadow-md p-2 rounded-sm justify-center' >
                     <AiFillGithub size={32} /> Entre com o GitHub
-                  </CustomButton>
+                  </button>
                 </div>
               </form>
               <p className='text-xs'>Ainda não possui uma conta? <Link className='text-primaryPurple' href='Signup'>Crie uma!</Link></p>

@@ -1,6 +1,5 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import { Button } from '@mui/material'
 import React from 'react'
 import { useSession, signOut } from 'next-auth/react'
 const Profile = () => {
@@ -28,7 +27,7 @@ const Profile = () => {
                             </div>
                         </div>
                         <div className='w-full justify-center flex flex-row'>
-                            <Button onClick={() => signOut()} className='w-2/5 bg-primaryPurple text-white hover:bg-primaryPurple/90'>Sign Out</Button>
+                            <button onClick={() => signOut()} className='w-2/5 bg-primaryPurple text-white hover:bg-primaryPurple/90 px-4 py-2 rounded-sm tracking-wide'>Sign Out</button>
                         </div>
                     </div>
                 </div>
