@@ -11,7 +11,6 @@ import { ImSpinner2 } from 'react-icons/im'
 import { MdEmail } from 'react-icons/md'
 import { BsFillKeyFill } from 'react-icons/bs'
 import {FcGoogle} from 'react-icons/fc'
-import { loginUser } from '@/helpers'
 import {signIn} from 'next-auth/react'
 import { AiFillGithub } from 'react-icons/ai'
 
@@ -52,26 +51,8 @@ const Signin = () => {
     signIn('github', {callbackUrl: "http://localhost:3000"})
   }
   const onSubmit: SubmitHandler<UserForm> = async (data) => {
-    try {
-      setSubmitted(true);
-      const loginRes = await loginUser(data);
-      if (loginRes) {
-        
-        setError("");
-      }
-      if (loginRes && !loginRes.ok) {
-        setError(loginRes.error || '');
-      } else {
-        setSnack(true);
-        router.push('/');
-      }
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        const err = error.response?.data.error;
-        setError(err);
-      }
-    };
-    setSubmitted(false);
+    console.log(data);
+    setSubmitted(true);
   }
 
   return (

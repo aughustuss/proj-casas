@@ -11,8 +11,6 @@ import { ImSpinner2 } from 'react-icons/im'
 import { MdEmail } from 'react-icons/md'
 import { FaUserCircle } from 'react-icons/fa'
 import { BsFillKeyFill } from 'react-icons/bs'
-import { loginUser } from '@/helpers'
-
 
 export const CustomTextField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
@@ -45,33 +43,7 @@ const Signup = () => {
     const { register, formState: { errors }, reset, handleSubmit } = useForm<UserForm>();
 
     const onSubmit: SubmitHandler<UserForm> = async (data) => {
-        setSubmitted(true);
-        try {
-            const res = await axios.post("http://localhost:3000/api/auth/signUp", data);
-            if (res.status === 201) {
-                setSubmitted(false);
-                setSnack(true);
-                reset();
-                setError("");
-            };
-            if(res.data?.success){
-                const loginRes = await loginUser({
-                    email: data.email,
-                    password: data.password,
-                });
-                if(loginRes && !loginRes.ok){
-                    setError(loginRes.error || '');
-                } else {
-                    router.push('/');
-                }
-            }
-        } catch (error: unknown) {
-            if (error instanceof AxiosError) {
-                const errMsg = error.response?.data?.error;
-                setSubmitted(false);
-                setError(errMsg);
-            }
-        }
+        
     }
 
     return (

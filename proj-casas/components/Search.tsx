@@ -5,6 +5,7 @@ import CountryDropDown from './CountryDropDown';
 import PropertyDropDown from './PropertyDropdowns';
 import PriceDropDown from './PriceDropdown';
 import { Button } from '@mui/material';
+import CustomButton from './Custom';
 const Search = () => {
     const { handleClick } = useContext(HouseContext);
     return (
@@ -21,9 +22,9 @@ const Search = () => {
                     <div className='md:w-[250px] w-full z-10'>
                         <PriceDropDown/>
                     </div>
-                    <Button onClick={handleClick} className='w-full lg:w-32 justify-center flex flex-row bg-primaryGreen rounded-sm text-white hover:bg-primaryGreen/80 transition duration-200'>
+                    <CustomButton onClick={handleClick} className='w-full lg:w-32 justify-center flex flex-row bg-primaryGreen rounded-sm text-white hover:bg-primaryGreen/80 transition duration-200'>
                         <HiOutlineSearch size={20} className='m-1' />
-                    </Button>
+                    </CustomButton>
                 </div>
             </div>
         </>

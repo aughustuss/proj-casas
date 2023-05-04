@@ -5,6 +5,7 @@ import React from 'react'
 import { useSession, signOut } from 'next-auth/react'
 const Profile = () => {
     const { data: session } = useSession();
+    console.log(session);
     return (
         <>
             <Header />
@@ -15,7 +16,7 @@ const Profile = () => {
                             <div className='flex flex-col-reverse gap-y-4 lg:flex-row items-center w-full text-center'>
                                 <p className='md:flex-1'>Olá, {session && session?.user?.name}!</p>
                                 {session && session.user?.image && (
-                                    <img alt='Perfil' src={session.user.image} className='rounded-full object-cover h-28 w-28' />
+                                    <img alt='Perfill' src={session.user.image} className='rounded-full object-cover h-28 w-28' />
                                 )}
                             </div>
                         </div>
