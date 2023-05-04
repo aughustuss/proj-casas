@@ -7,6 +7,9 @@ const PriceDropDown = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const prices = [
         {
+            value: "10000 - 100000",
+        },
+        {
             value: '100000 - 120000',
         },
         {
@@ -33,7 +36,7 @@ const PriceDropDown = () => {
     ];
     return (
         <>
-            <Menu as='div' className='relative w-full md:w-[250px]' >
+            <Menu as='div' className='relative w-full md:w-[250px] ' >
                 <Menu.Button className='w-full text-left flex flex-row items-center gap-x-2' onClick={() => setIsOpen(!isOpen)}>
                     <RiWalletLine size={24} />
                     <div className='flex flex-row items-center gap-x-2 w-full'>
@@ -48,11 +51,11 @@ const PriceDropDown = () => {
                         </div>
                     </div>
                 </Menu.Button>
-                <Menu.Items className='list-none absolute bg-neutral-100 rounded-b-md top-full py-4 text-sm w-full'>
+                <Menu.Items className='list-none absolute bg-neutral-100 rounded-b-md top-full py-4 text-sm w-full h-[200px] overflow-auto'>
                     {prices && prices.map((price) => {
                         return (
                             <Menu.Item className='cursor-pointer hover:bg-neutral-200 p-4 w-full text-center' onClick={() => setPrice(price.value)} as='li' key={price.value}>
-                                {price.value}
+                                R${price.value}
                             </Menu.Item>
                         )
                     })}

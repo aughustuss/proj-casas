@@ -36,13 +36,17 @@ const Header = () => {
                         </div>
                         <div className='w-full bg-white h-auto max-h-[200px] shadow-lg text-black rounded-b-md px-2 text-center absolute top-full overflow-auto'>
                             {search && search.length > 0 ? (
-                                filteredSearch.map((houses: HouseData) => {
-                                    return (
-                                        <Link key={houses.id} className='font-semibold text-xs gap-x-2 hover:bg-primaryPurple duration-200 transition flex flex-row items-center w-full p-2 hover:text-white' href={`/details/${houses.id}`}>
-                                            <Image alt='Casa' src={houses.image} width={30} height={30} />{houses.address}, {houses.country}, ({houses.type})
-                                        </Link>
-                                    )
-                                })
+                                filteredSearch.length > 0 ? (
+                                    filteredSearch.map((houses: HouseData) => {
+                                        return (
+                                            <Link key={houses.id} className='font-semibold text-xs gap-x-2 hover:bg-primaryPurple duration-200 transition flex flex-row items-center w-full p-2 hover:text-white' href={`/details/${houses.id}`}>
+                                                <Image alt='Casa' src={houses.image} width={30} height={30} />{houses.address}, {houses.country}, ({houses.type})
+                                            </Link>
+                                        )
+                                    })
+                                ) : (
+                                    <p className='text-gray-600 text-sm'>Não encontramos resultados para a sua busca.</p>
+                                )
                             ) : (
                                 null
                             )}
@@ -72,7 +76,7 @@ const Header = () => {
                                     <img alt='Foto de perfil' src={session.user.image} className='w-8 h-8 rounded-full' />
                                 ) : (
                                     <div>
-                                        <MdAccountCircle className='w-8 h-8'/>
+                                        <MdAccountCircle className='w-8 h-8' />
                                     </div>
                                 )}
                             </Link>
@@ -92,12 +96,12 @@ const Header = () => {
                                     <ul className='flex flex-col w-full p-2 gap-y-2'>
                                         {session ? (
                                             <div className='flex flex-col w-full gap-y-2 justify-center'>
-                                                <Link className='w-full border-b pb-2' href='/profile'><button className='w-full justify-center px-4 py-2 hover:bg-violet-800 text-white flex flex-row-reverse items-center relative'>Minha Conta <MdAccountCircle size={24} className='absolute left-0'/> </button></Link>
-                                                <button onClick={() => signOut()} className='w-full justify-center px-4 py-2 hover:bg-violet-800 text-white flex flex-row-reverse items-center relative'>Sign Out <BiLogOut size={24} className='absolute left-0'/> </button>
+                                                <Link className='w-full border-b pb-2' href='/profile'><button className='w-full justify-center px-4 py-2 hover:bg-violet-800 text-white flex flex-row-reverse items-center relative'>Minha Conta <MdAccountCircle size={24} className='absolute left-0' /> </button></Link>
+                                                <button onClick={() => signOut()} className='w-full justify-center px-4 py-2 hover:bg-violet-800 text-white flex flex-row-reverse items-center relative'>Sign Out <BiLogOut size={24} className='absolute left-0' /> </button>
                                             </div>
                                         ) : (
                                             <div className='flex flex-col w-full gap-y-2 justify-center '>
-                                                <Link className='w-full' href='/auth/Signin'><button className='w-full justify-center px-4 py-2 hover:bg-violet-800 text-white flex flex-row-reverse items-center relative'>Sign In <BiLogIn size={24} className='absolute left-0'/> </button></Link>
+                                                <Link className='w-full' href='/auth/Signin'><button className='w-full justify-center px-4 py-2 hover:bg-violet-800 text-white flex flex-row-reverse items-center relative'>Sign In <BiLogIn size={24} className='absolute left-0' /> </button></Link>
                                                 <Link className='w-full' href='/auth/Signup'><button className='w-full justify-center px-4 py-2 hover:bg-violet-800 text-white flex flex-row-reverse items-center relative'>Sign Up <BsPersonFillAdd size={24} className='absolute left-0' /> </button></Link>
                                             </div>
                                         )}
@@ -116,14 +120,20 @@ const Header = () => {
                                 <input value={search} onChange={(e) => setSearch(e.target.value)} className='w-full h-full outline-none pl-8' />
                                 <CgClose onClick={() => { setSearch(''); setSearchOpen(false) }} className='absolute right-2 cursor-pointer' />
                                 <div className='w-full absolute overflow-auto shadow-lg h-auto max-h-[200px] top-full flex flex-col px-2 bg-white gap-y-2'>
-                                    {search.length > 0 && (
-                                        filteredSearch.map((houses: HouseData) => {
-                                            return (
-                                                <Link key={houses.id} href={`/details/${houses.id}`} className='font-semibold w-full flex flex-row items-center hover:bg-violet-800 p-2 hover:text-white transition duration-200 text-xs gap-x-2 text-primaryPurple'>
-                                                    <Image src={houses.image} alt='Imagem da casa' width={30} height={30} /> {houses.address}, {houses.country} - ({houses.type})
-                                                </Link>
-                                            )
-                                        })
+                                    {search && search.length > 0 ? (
+                                        filteredSearch.length > 0 ? (
+                                            filteredSearch.map((houses: HouseData) => {
+                                                return (
+                                                    <Link key={houses.id} href={`/details/${houses.id}`} className='font-semibold w-full flex flex-row items-center hover:bg-violet-800 p-2 hover:text-white transition duration-200 text-xs gap-x-2 text-primaryPurple'>
+                                                        <Image src={houses.image} alt='Imagem da casa' width={30} height={30} /> {houses.address}, {houses.country} - ({houses.type})
+                                                    </Link>
+                                                )
+                                            })
+                                        ) : (
+                                            <p className='text-gray-600 text-xs'>Não encontramos resultados para a sua busca.</p>
+                                        )
+                                    ) : (
+                                        null
                                     )}
                                 </div>
                             </div>

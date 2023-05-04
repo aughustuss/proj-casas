@@ -9,19 +9,11 @@ import Link from 'next/link'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { BiBed, BiBath, BiMoney, BiArea } from 'react-icons/bi'
-import { TextField, styled, createTheme, ThemeProvider, Button } from '@mui/material';
+import { TextField, styled, createTheme, ThemeProvider } from '@mui/material';
 import Footer from '@/components/Footer';
 interface HouseProps {
     house: HouseData;
 };
-const CustomButton = styled(Button)({
-    '&.MuiButton-contained': {
-        backgroundColor: '#01D28E',
-        '&:hover': {
-            backgroundColor: '#01D28E'
-        }
-    }
-});
 const CustomTextField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
