@@ -19,6 +19,7 @@ export interface HouseData {
         name: string;
         phone: string;
     };
+    rentable: boolean;
 };
 
 export interface HouseContextType {

@@ -12,7 +12,7 @@ module.exports = {
         primaryPurple: '#6d28d9',
         primaryOrange: '#EF962D',
         primaryYellow: '#FFE05D',
-        primaryBlue: '#646464',
+        primaryBlue: '#3258a8',
         primaryBege: '#E6E5A3',
         secondaryGreen: '#7D8F69',
         tertiaryGreen: '#A9AF7E',

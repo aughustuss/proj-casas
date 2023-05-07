@@ -30,8 +30,11 @@ const Houses = () => {
                                             <div className='w-full flex flex-row items-center gap-x-2 text-white text-sm'>
                                                 <p className='bg-primaryPurple w-fit rounded-full px-2 text-center '>{house.type}</p>
                                                 <p className='bg-primaryGreen w-fit rounded-full px-2 text-center'>{house.country}</p>
+                                                {house.rentable && (
+                                                    <p className=' bg-primaryBlue w-fit rounded-full px-2 text-center'>Alugável</p>
+                                                )}
                                             </div>
-                                            <div>
+                                            <div className='flex flex-col w-full'>
                                                 <p className='font-semibold'>{house.address}</p>
                                             </div>
                                             <div className='flex flex-row items-center text-gray-400 gap-x-4'>

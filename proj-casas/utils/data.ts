@@ -74,6 +74,7 @@ export const housesData: Array<HouseData> = [
       name: 'Patricia Tullert',
       phone: '0123 456 78910',
     },
+    rentable: false,
   },
   {
     id: 2,
@@ -95,6 +96,7 @@ export const housesData: Array<HouseData> = [
       name: 'Daryl Hawker',
       phone: '0123 456 78910',
     },
+    rentable: true,
   },
   {
     id: 3,
@@ -116,6 +118,7 @@ export const housesData: Array<HouseData> = [
       name: 'Amado Smith',
       phone: '0123 456 78910',
     },
+    rentable: true,
   },
   {
     id: 4,
@@ -137,6 +140,7 @@ export const housesData: Array<HouseData> = [
       name: 'Kaitlyn Gonzalez',
       phone: '0123 456 78910',
     },
+    rentable: false,
   },
   {
     id: 5,
@@ -158,6 +162,7 @@ export const housesData: Array<HouseData> = [
       name: 'Grover Robinson',
       phone: '0123 456 78910',
     },
+    rentable: true,
   },
   {
     id: 6,
@@ -179,6 +184,7 @@ export const housesData: Array<HouseData> = [
       name: 'Karen Sorensen',
       phone: '0123 456 78910',
     },
+    rentable: true,
   },
   {
     id: 7,
@@ -200,6 +206,7 @@ export const housesData: Array<HouseData> = [
       name: 'Jawhar Shamil Naser',
       phone: '0123 456 78910',
     },
+    rentable: true,
   },
   {
     id: 8,
@@ -221,6 +228,7 @@ export const housesData: Array<HouseData> = [
       name: 'Juana Douglass',
       phone: '0123 456 78910',
     },
+    rentable: true,
   },
   {
     id: 9,
@@ -242,6 +250,7 @@ export const housesData: Array<HouseData> = [
       name: 'Jerry Schenck',
       phone: '0123 456 78910',
     },
+    rentable: true,
   },
   {
     id: 10,
@@ -263,6 +272,7 @@ export const housesData: Array<HouseData> = [
       name: 'Vera Levesque',
       phone: '0123 456 78910',
     },
+    rentable: true,
   },
   {
     id: 11,
@@ -284,6 +294,7 @@ export const housesData: Array<HouseData> = [
       name: 'Sofia Gomes',
       phone: '0123 456 78910',
     },
+    rentable: false,
   },
   {
     id: 12,
@@ -305,6 +316,7 @@ export const housesData: Array<HouseData> = [
       name: 'Raymond Hood',
       phone: '0123 456 78910',
     },
+    rentable: false,
   },
   {
     id: 13,
@@ -326,6 +338,7 @@ export const housesData: Array<HouseData> = [
       name: 'Patricia Tullert',
       phone: '0123 456 78910',
     },
+    rentable: false,
   },
   {
     id: 14,
@@ -347,6 +360,7 @@ export const housesData: Array<HouseData> = [
       name: 'Daryl Hawker',
       phone: '0123 456 78910',
     },
+    rentable: false,
   },
   {
     id: 15,
@@ -368,6 +382,7 @@ export const housesData: Array<HouseData> = [
       name: 'Amado Smith',
       phone: '0123 456 78910',
     },
+    rentable: false,
   },
   {
     id: 16,
@@ -389,6 +404,7 @@ export const housesData: Array<HouseData> = [
       name: 'Kaitlyn Gonzalez',
       phone: '0123 456 78910',
     },
+    rentable: true,
   },
   {
     id: 17,
@@ -410,6 +426,7 @@ export const housesData: Array<HouseData> = [
       name: 'Grover Robinson',
       phone: '0123 456 78910',
     },
+    rentable: true,
   },
   {
     id: 18,
@@ -431,5 +448,6 @@ export const housesData: Array<HouseData> = [
       name: 'Karen Sorensen',
       phone: '0123 456 78910',
     },
+    rentable: false,
   },
 ];
