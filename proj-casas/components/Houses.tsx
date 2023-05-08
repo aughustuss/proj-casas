@@ -42,7 +42,7 @@ const Houses = () => {
                                                 <p className='flex flex-row items-center gap-x-1'><BiBath />{house.bathrooms}</p>
                                                 <p className='flex flex-row items-center gap-x-1'><BiArea />{house.surface}</p>
                                             </div>
-                                            <p className='flex flex-row items-center text-primaryGreen font-semibold gap-x-2'><BiMoney />{house.price}</p>
+                                            <p className='flex flex-row items-center text-primaryGreen font-semibold gap-x-2'> R$ {house.price},00</p>
                                         </div>
                                     </div>
                                 </Link>

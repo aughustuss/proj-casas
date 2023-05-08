@@ -49,7 +49,9 @@ const HouseDetails = ({ house }: HouseProps) => {
     const [buyOption, setBuyOption] = useState<boolean>(false)
     const [buyBar, setBuyBar] = useState<boolean>(false);
     const [rentBar, setRentBar] = useState<boolean>(false);
+    const [rentDaysError, setRentDaysError] = useState<boolean>(false);
     const rentDaysPrice = parseFloat(house.price);
+    const key = session?.user?.email
     const RentOpts = [
         {
             days: '1',
@@ -96,21 +98,22 @@ const HouseDetails = ({ house }: HouseProps) => {
             router.push('/');
         }, 2000);
     };
-    const confirmRent = () => {
+    const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
+        if (data.rentDays === "Selecione os dias para alugar") {
+            setRentDaysError(true);
+            return
+        }
+        localStorage.setItem(`user_email_${key}_data`, JSON.stringify({ ...house, data }));
         setRentBar(true);
         setTimeout(() => {
-            router.push('/')
+            router.push('/');
         }, 2000);
-    }
-    const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
-        console.log(data);
-        confirmRent();
     }
     return (
         <>
             <Header />
             <ThemeProvider theme={theme}>
-                <section className='w-5/6 mx-auto py-24 min-h-screen h-auto flex justify-center items-center font-roboto'>
+                <section className='w-5/6 mx-auto py-24 min-h-screen h-auto flex justify-center items-center font-roboto relative'>
                     <div className='w-full h-full flex flex-col'>
                         <div className='flex flex-col py-2 md:gap-y-0 lg:flex-row items-center w-full lg:justify-between'>
                             <p className='font-semibold text-xl w-full lg:w-auto'>{house.address}</p>
@@ -140,60 +143,62 @@ const HouseDetails = ({ house }: HouseProps) => {
                                     {house.description}
                                 </div>
                             </div>
-                            <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:w-1/3 flex flex-col gap-y-4 justify-between'>
-                                <div>
-                                    <div className='flex flex-col w-full justify-center gap-y-4'>
-                                        <button type="submit" onClick={() => setBuyOption(true)} className='w-full bg-primaryGreen hover:bg-primaryGreen/80 transition duration-200 p-2 rounded-sm text-white'>Comprar</button>
-                                        {house.rentable ? (
-                                            <div className='flex flex-col gap-y-4'>
-                                                <div className='text-gray-500'>
-                                                    Esta propriedade pode ser alugada ou comprada inteiramente, selecione abaixo uma das opções e entre em contato com o proprietário em caso de dúvidas.
-                                                </div>
-                                                <p className='text-gray-500'>Se desejar alugar, selecione a quantidade de dias abaixo: </p>
-                                                <select {...register("rentDays", { required: buyOption })} name="rentDays" className='outline-none w-full text-center border border-primaryGreen p-2 rounded-sm text-primaryGreen'>
-                                                    <option defaultValue='Selecione os dias para alugar' >Selecione os dias para alugar</option>
-                                                    {RentOpts && RentOpts.map(({ days, label, price }) => {
-                                                        return (
-                                                            <option value={days} key={days} >{days} {label} - R$ {price % 365 * parseInt(days)},00</option>
-                                                        )
-                                                    })}
-                                                </select>
-                                            </div>
-                                        ) : (
-                                            <div className='text-gray-500'>
-                                                Esta propriedade não está disponível para aluguel. Mande uma mensagem para o proprietário em caso
-                                                de dúvidas ou se apresente caso queira comprar.
-                                            </div>
-                                        )}
+                            {session ? (
+                                <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:w-1/3 flex flex-col gap-y-4 justify-between border border-primaryGreen p-2 rounded-sm'>
+                                    <div>
+                                        <div className='flex flex-col w-full justify-center gap-y-4'>
 
-                                        {!contactOwner && (
-                                            <div className='w-full flex flex-col gap-y-4 justify-center items-center text-gray-500'>
-                                                <p >Deseja enviar uma mensagem para o proprietário?</p>
-                                                <div className='flex flex-row w-full items-center justify-evenly'>
-                                                    <div className='flex flex-row gap-x-1'>
-                                                        <input type="checkbox" onClick={() => setContactOwner(true)} />
-                                                        <label >Sim</label>
+                                            {house.rentable ? (
+                                                <div className='flex flex-col gap-y-4'>
+                                                    <div className='text-gray-500'>
+                                                        Esta propriedade pode ser alugada ou comprada inteiramente, selecione abaixo uma das opções e entre em contato com o proprietário em caso de dúvidas.
                                                     </div>
-                                                    <div className='flex flex-row gap-x-1'>
-                                                        <input type="checkbox" value='Não mandar mensagem.' {...register("notSendMessage", { required: !contactOwner ? true : false })} />
-                                                        <label >Não</label>
+                                                    <p className='text-gray-500'>Se desejar alugar, selecione a quantidade de dias abaixo: </p>
+                                                    <select {...register("rentDays", { required: buyOption })} name="rentDays" className='outline-none w-full text-center border border-primaryGreen p-2 rounded-sm text-primaryGreen'>
+                                                        <option defaultValue='Selecione os dias para alugar' >Selecione os dias para alugar</option>
+                                                        {RentOpts && RentOpts.map(({ days, label, price }) => {
+                                                            return (
+                                                                <option value={days} key={days} >{days} {label} - R$ {price % 365 * parseInt(days)},00</option>
+                                                            )
+                                                        })}
+                                                    </select>
+                                                    <p className='w-full text-center text-gray-500 text-xs'>{rentDaysError && (<p>Selecione quantos dias.</p>)}</p>
+                                                </div>
+                                            ) : (
+                                                <div className='text-gray-500'>
+                                                    Esta propriedade não está disponível para aluguel. Mande uma mensagem para o proprietário em caso
+                                                    de dúvidas ou se apresente caso queira comprar.
+                                                </div>
+                                            )}
+
+                                            {!contactOwner && (
+                                                <div className='w-full flex flex-col gap-y-4 justify-center items-center text-gray-500'>
+                                                    <p >Deseja enviar uma mensagem para o proprietário?</p>
+                                                    <div className='flex flex-row w-full items-center justify-evenly'>
+                                                        <div className='flex flex-row gap-x-1'>
+                                                            <input type="checkbox" onClick={() => setContactOwner(true)} />
+                                                            <label >Sim</label>
+                                                        </div>
+                                                        <div className='flex flex-row gap-x-1'>
+                                                            <input type="checkbox" value='Não mandar mensagem.' {...register("notSendMessage", { required: !contactOwner ? true : false })} />
+                                                            <label >Não</label>
+                                                        </div>
+                                                    </div>
+                                                    <p className='w-full text-center text-gray-500 text-xs'>{errors.notSendMessage && errors.notSendMessage.type === 'required' && 'Selecione uma das opções acima.'}</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                        {contactOwner && (
+                                            <div className='border flex flex-col rounded-lg h-auto relative'>
+                                                <button onClick={() => setContactOwner(false)} className='bg-gray-300 hover:bg-gray-400 transition duration-200 rounded-sm absolute right-0 top-0 text-gray-500 m-1 px-2' title='Cancelar mensagem'>x</button>
+                                                <div className='flex flex-col lg:flex-row items-center gap-x-4 w-full p-8 '>
+                                                    <Image width={90} height={90} alt='Locador' src={house.agent.image} className='object-cover border border-neutral-300 rounded-full p-1' />
+                                                    <div className='flex flex-col w-full '>
+                                                        <p className='text-[14px] text-center text-gray-500'>Proprietário(a)</p>
+                                                        <p className='text-center font-semibold text-lg'>{house.agent.name}</p>
                                                     </div>
                                                 </div>
-                                                <p className='w-full text-center text-gray-500 text-xs'>{errors.notSendMessage && errors.notSendMessage.type === 'required' && 'Selecione uma das opções acima.'}</p>
-                                            </div>
-                                        )}
-                                    </div>
-                                    {contactOwner && (
-                                        <div className='border flex flex-col rounded-lg h-auto relative'>
-                                            <button onClick={() => setContactOwner(false)} className='bg-gray-300 hover:bg-gray-400 transition duration-200 rounded-sm absolute right-0 top-0 text-gray-500 m-1 px-2' title='Cancelar mensagem'>x</button>
-                                            <div className='flex flex-col lg:flex-row items-center gap-x-4 w-full p-8 '>
-                                                <Image width={90} height={90} alt='Locador' src={house.agent.image} className='object-cover border border-neutral-300 rounded-full p-1' />
-                                                <div className='flex flex-col w-full '>
-                                                    <p className='text-[14px] text-center text-gray-500'>Proprietário(a)</p>
-                                                    <p className='text-center font-semibold text-lg'>{house.agent.name}</p>
-                                                </div>
-                                            </div>
-                                            {session ? (
+
                                                 <div className='w-full h-full items-center flex flex-col justify-between gap-y-4'>
                                                     <div className='w-5/6 flex flex-col justify-center gap-y-4'>
                                                         <CustomTextField
@@ -236,41 +241,47 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                         />
                                                     </div>
                                                     <div className='gap-y-2 w-5/6 flex flex-col gap-x-4 pb-4'>
+
                                                         <button type='button' className='w-full text-primaryGreen p-2 rounded-sm border border-primaryGreen'>Ligar</button>
                                                     </div>
                                                 </div>
-                                            ) : (
-                                                <div className='w-full text-sm text-center text-gray-500 sm:mt-24'>
-                                                    Faça o <Link href='/auth/Signin' className='underline'>{' '} Login</Link> para entrar em contato com o proprietário(a).
-                                                </div>
-                                            )}
-                                        </div>
 
-                                    )}
+
+
+                                            </div>
+
+                                        )}
+                                    </div>
+                                    <div className='w-full flex flex-col gap-y-2'>
+                                        <button type="submit" onClick={() => setBuyOption(true)} className='w-full bg-primaryGreen hover:bg-primaryGreen/80 transition duration-200 p-2 rounded-sm text-white'>Comprar</button>
+                                        {house.rentable && (<button type='submit' className='w-full border border-primaryGreen  transition duration-200 p-2 rounded-sm text-primaryGreen'>Alugar</button>)}
+                                    </div>
+                                </form>
+                            ) : (
+                                <div className='lg:w-1/3 min-h-[150px] h-auto w-full text-sm text-center text-gray-500 border flex flex-col justify-center'>
+                                    <p className='flex flex-row items-center w-full justify-center gap-x-1'>Faça o <Link href='/auth/Signin' className='underline'>{' '} Login</Link> para solicitar aluguel ou compra a casa.</p>
                                 </div>
-                                <div>
-                                    <button type='submit' className='w-full bg-primaryGreen hover:bg-primaryGreen/80 transition duration-200 p-2 rounded-sm text-white'>Alugar</button>
-                                </div>
-                            </form>
+                            )}
                         </div>
                     </div>
                     {buyOption && (
-                        <div className='absolute bg-blurred w-full h-full text-gray-500'>
+                        <div className='absolute inset-0 bg-blurred w-full h-full text-gray-500'>
                             <div className='flex justify-center items-center w-full h-full'>
-                                <div className='w-96 h-auto min-h-48 bg-white border border-primaryGreen shadow-md flex flex-col justify-between relative p-4 gap-y-4'>
+                                <div className='w-[300px] h-auto min-h-[380px] bg-white shadow-md shadow-gray-400 flex flex-col justify-between relative p-8 gap-y-4'>
                                     <button onClick={() => setBuyOption(false)} className='bg-gray-300 hover:bg-gray-400 transition duration-200 rounded-sm absolute right-0 top-0 text-gray-500 m-1 px-2' title='Cancelar mensagem'>x</button>
                                     <div className='flex flex-col w-full pt-6 gap-y-4'>
-                                        <p className='text-center text-2xl font-semibold border-b' >Resumo da compra</p>
-                                        <div className='flex flex-col w-full gap-y-2 '>
+                                        <p className='text-2xl font-semibold border-b' >Resumo do pedido</p>
+                                        <div className='flex flex-col w-full gap-y-4 text-sm'>
                                             <p className='flex flex-row items-center gap-x-2' >Valor do imóvel: R$ {house.price},00</p>
                                             <p >Proprietário: {house.agent.name}</p>
+                                            <p>Telefone para contato: {house.agent.phone}</p>
                                             <p>Endereço: {house.address}, {house.country}</p>
                                             <p>Tipo do imóvel: {house.type} </p>
-                                            <div className='flex flex-row items-center gap-x-4'>
+                                            <div className='flex flex-row items-center justify-between gap-x-4'>
                                                 <p>Quartos: {house.bedrooms}</p>
                                                 <p>Banheiros: {house.bathrooms}</p>
-                                                <p>Área: {house.surface}</p>
                                             </div>
+                                            <p>Área: {house.surface}</p>
                                         </div>
                                     </div>
                                     <div className='flex flex-row w-full gap-x-4'>
@@ -282,10 +293,10 @@ const HouseDetails = ({ house }: HouseProps) => {
                         </div>
                     )}
                     <Snackbar open={buyBar} autoHideDuration={6000} onClose={() => setBuyBar(false)}>
-                        <Alert severity='success' onClose={() => setBuyBar(false)}>Sua compra foi realizada com sucesso.</Alert>
+                        <Alert severity='success' onClose={() => setBuyBar(false)}>Seu pedido de compra foi realizado com sucesso. Logo receberá atualizações.</Alert>
                     </Snackbar>
                     <Snackbar open={rentBar} autoHideDuration={6000} onClose={() => setRentBar(false)}>
-                        <Alert severity='success' onClose={() => setRentBar(false)}>Seu aluguel foi realizado com sucesso.</Alert>
+                        <Alert severity='success' onClose={() => setRentBar(false)}>Sua solicitação de alguel foi realizada com sucesso. Acesse sua conta para acompanhar seu pedido.</Alert>
                     </Snackbar>
                 </section>
             </ThemeProvider>

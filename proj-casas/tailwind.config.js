@@ -1,9 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 const plugin = require("tailwindcss/plugin");
+const PrelinePlugin = require("preline/plugin")
 const MyPlugin = plugin(function({addUtilities}) {
   addUtilities({
     ".bg-blurred": {
-      backgroundColor: "rgba(245,245,245,0.8)",
+      backgroundColor: "rgba(245,245,245, 0.9)",
     }
   })
 })
@@ -12,6 +13,7 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    'node_modules/preline/dist/*.js',
   ],
   theme: {
     extend: {
@@ -32,5 +34,5 @@ module.exports = {
       }
     },
   },
-  plugins: [MyPlugin],
+  plugins: [MyPlugin, PrelinePlugin],
 }
