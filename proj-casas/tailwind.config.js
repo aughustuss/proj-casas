@@ -1,4 +1,12 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require("tailwindcss/plugin");
+const MyPlugin = plugin(function({addUtilities}) {
+  addUtilities({
+    ".bg-blurred": {
+      backgroundColor: "rgba(245,245,245,0.8)",
+    }
+  })
+})
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -24,5 +32,5 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [MyPlugin],
 }

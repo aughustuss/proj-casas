@@ -58,4 +58,13 @@ export interface UserForm {
 export interface LoginUserParams {
     email: string;
     password: string;
+};
+
+export interface ContactFormData {
+    rentDays: string;
+    name: string;
+    tel: string;
+    email: string;
+    msg: string;
+    notSendMessage: string;
 }

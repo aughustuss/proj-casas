@@ -1,5 +1,5 @@
 import Header from '@/components/Header';
-import { HouseData } from '@/typings'
+import { ContactFormData, HouseData } from '@/typings'
 import { housesData } from '@/utils/data';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
@@ -7,10 +7,9 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { BiBed, BiBath, BiMoney, BiArea } from 'react-icons/bi'
-import { TextField, styled, createTheme, ThemeProvider } from '@mui/material';
-import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
+import { TextField, styled, createTheme, ThemeProvider, Snackbar, Alert } from '@mui/material';
 import Footer from '@/components/Footer';
 interface HouseProps {
     house: HouseData;
@@ -36,40 +35,6 @@ const CustomTextField = styled(TextField)({
 });
 
 const HouseDetails = ({ house }: HouseProps) => {
-    const { register, formState: { errors }, trigger, reset, handleSubmit } = useForm();
-    const { data: session } = useSession();
-    const router = useRouter();
-    const [contactOwner, setContactOwner] = useState<boolean>(false);
-    const [rentableOpt, setRentableOpt] = useState<boolean>(false);
-    const [rentDays, setRentDays] = useState<string>('');
-    console.log(rentDays);
-    const RentOpts = [
-        {
-            value: '1',
-        },
-        {
-            value: '2',
-        },
-        {
-            value: '3',
-        },
-        {
-            value: '4',
-        },
-        {
-            value: '5',
-        },
-        {
-            value: '6',
-        },
-        {
-            value: '7',
-        }
-    ];
-
-    if (router.isFallback) {
-        return <div>Carregando...</div>
-    };
     const theme = createTheme({
         palette: {
             primary: {
@@ -77,14 +42,69 @@ const HouseDetails = ({ house }: HouseProps) => {
             },
         },
     })
-
-    const onSubmit = async (e: any) => {
-        const isValid = await trigger();
-        if (!isValid) {
-            e.preventDefault();
-        } else {
-            reset();
+    const { register, formState: { errors }, handleSubmit } = useForm<ContactFormData>();
+    const { data: session } = useSession();
+    const router = useRouter();
+    const [contactOwner, setContactOwner] = useState<boolean>(false);
+    const [buyOption, setBuyOption] = useState<boolean>(false)
+    const [buyBar, setBuyBar] = useState<boolean>(false);
+    const [rentBar, setRentBar] = useState<boolean>(false);
+    const rentDaysPrice = parseFloat(house.price);
+    const RentOpts = [
+        {
+            days: '1',
+            label: 'dia',
+            price: rentDaysPrice,
+        },
+        {
+            days: '2',
+            label: 'dias',
+            price: rentDaysPrice,
+        },
+        {
+            days: '3',
+            label: 'dias',
+            price: rentDaysPrice,
+        },
+        {
+            days: '4',
+            label: 'dias',
+            price: rentDaysPrice,
+        },
+        {
+            days: '5',
+            label: 'dias',
+            price: rentDaysPrice,
+        },
+        {
+            days: '6',
+            label: 'dias',
+            price: rentDaysPrice,
+        },
+        {
+            days: '7',
+            label: 'dias',
+            price: rentDaysPrice,
         }
+    ];
+    if (router.isFallback) {
+        return <div>Carregando...</div>
+    };
+    const confirmBuy = () => {
+        setBuyBar(true);
+        setTimeout(() => {
+            router.push('/');
+        }, 2000);
+    };
+    const confirmRent = () => {
+        setRentBar(true);
+        setTimeout(() => {
+            router.push('/')
+        }, 2000);
+    }
+    const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
+        console.log(data);
+        confirmRent();
     }
     return (
         <>
@@ -101,7 +121,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                     <p className='bg-primaryBlue w-fit rounded-full px-2 text-left lg:text-center '>Alugável</p>
                                 )}
                             </div>
-                            <p className='text-primaryGreen font-semibold w-full lg:w-auto text-xl flex flex-row gap-x-1 items-center'><BiMoney />{house.price}</p>
+                            <p className='text-primaryGreen font-semibold w-full lg:w-auto text-xl flex flex-row gap-x-1 items-center'>R$ {house.price},00</p>
                         </div>
                         <div className='w-full flex flex-col lg:flex-row md:gap-x-4 gap-y-4 xl:gap-y-0'>
                             <div className='flex flex-col gap-y-2'>
@@ -123,9 +143,21 @@ const HouseDetails = ({ house }: HouseProps) => {
                             <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:w-1/3 flex flex-col gap-y-4 justify-between'>
                                 <div>
                                     <div className='flex flex-col w-full justify-center gap-y-4'>
+                                        <button type="submit" onClick={() => setBuyOption(true)} className='w-full bg-primaryGreen hover:bg-primaryGreen/80 transition duration-200 p-2 rounded-sm text-white'>Comprar</button>
                                         {house.rentable ? (
-                                            <div className='text-gray-500'>
-                                                Esta propriedade pode ser alugada ou comprada inteiramente, selecione abaixo uma das opções e entre em contato com o proprietário em caso de dúvidas.
+                                            <div className='flex flex-col gap-y-4'>
+                                                <div className='text-gray-500'>
+                                                    Esta propriedade pode ser alugada ou comprada inteiramente, selecione abaixo uma das opções e entre em contato com o proprietário em caso de dúvidas.
+                                                </div>
+                                                <p className='text-gray-500'>Se desejar alugar, selecione a quantidade de dias abaixo: </p>
+                                                <select {...register("rentDays", { required: buyOption })} name="rentDays" className='outline-none w-full text-center border border-primaryGreen p-2 rounded-sm text-primaryGreen'>
+                                                    <option defaultValue='Selecione os dias para alugar' >Selecione os dias para alugar</option>
+                                                    {RentOpts && RentOpts.map(({ days, label, price }) => {
+                                                        return (
+                                                            <option value={days} key={days} >{days} {label} - R$ {price % 365 * parseInt(days)},00</option>
+                                                        )
+                                                    })}
+                                                </select>
                                             </div>
                                         ) : (
                                             <div className='text-gray-500'>
@@ -133,14 +165,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                 de dúvidas ou se apresente caso queira comprar.
                                             </div>
                                         )}
-                                        <button className='w-full bg-primaryGreen p-2 rounded-sm text-white'>Comprar</button>
-                                        <ul {...register("rentDays", { required: true })} onClick={() => setRentableOpt(!rentableOpt)} className='outline-none cursor-pointer w-full border border-primaryGreen p-2 rounded-sm text-primaryGreen text-center transition-all duration-200 '>
-                                            {RentOpts && RentOpts.map((days) => {
-                                                return (
-                                                    <li value={days.value}> {days.value} </li>
-                                                )
-                                            })}
-                                        </ul>
+
                                         {!contactOwner && (
                                             <div className='w-full flex flex-col gap-y-4 justify-center items-center text-gray-500'>
                                                 <p >Deseja enviar uma mensagem para o proprietário?</p>
@@ -150,16 +175,17 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                         <label >Sim</label>
                                                     </div>
                                                     <div className='flex flex-row gap-x-1'>
-                                                        <input type="checkbox" name="" id="" />
+                                                        <input type="checkbox" value='Não mandar mensagem.' {...register("notSendMessage", { required: !contactOwner ? true : false })} />
                                                         <label >Não</label>
                                                     </div>
                                                 </div>
+                                                <p className='w-full text-center text-gray-500 text-xs'>{errors.notSendMessage && errors.notSendMessage.type === 'required' && 'Selecione uma das opções acima.'}</p>
                                             </div>
                                         )}
                                     </div>
                                     {contactOwner && (
                                         <div className='border flex flex-col rounded-lg h-auto relative'>
-                                            <button onClick={() => setContactOwner(false)} className='absolute right-0 top-0 text-gray-500 p-2' title='Cancelar mensagem'>x</button>
+                                            <button onClick={() => setContactOwner(false)} className='bg-gray-300 hover:bg-gray-400 transition duration-200 rounded-sm absolute right-0 top-0 text-gray-500 m-1 px-2' title='Cancelar mensagem'>x</button>
                                             <div className='flex flex-col lg:flex-row items-center gap-x-4 w-full p-8 '>
                                                 <Image width={90} height={90} alt='Locador' src={house.agent.image} className='object-cover border border-neutral-300 rounded-full p-1' />
                                                 <div className='flex flex-col w-full '>
@@ -174,7 +200,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                             label='Nome'
                                                             type='text'
                                                             {...register("name", {
-                                                                required: true,
+                                                                required: contactOwner,
                                                                 minLength: 10,
                                                             })}
                                                             helperText={errors.name && (errors.name?.type === 'required' ? 'Preencha o seu nome.' : 'Deve ter no mínimo 10 caractéres. ')}
@@ -183,7 +209,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                             label='Email'
                                                             type='email'
                                                             {...register("email", {
-                                                                required: true,
+                                                                required: contactOwner,
                                                                 pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                                                             })}
                                                             helperText={errors.email && (errors.email.type === 'required' ? 'Preencha o seu e-mail.' : 'E-mail inválido. ')}
@@ -192,7 +218,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                             label='Telefone'
                                                             type='tel'
                                                             {...register("tel", {
-                                                                required: true,
+                                                                required: contactOwner,
                                                                 minLength: 11,
                                                                 maxLength: 11,
                                                             })}
@@ -203,7 +229,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                             rows={6}
                                                             label='Mensagem'
                                                             {...register('msg', {
-                                                                required: true,
+                                                                required: contactOwner,
                                                                 maxLength: 2000
                                                             })}
                                                             helperText={errors.msg && (errors.msg.type === 'required' ? 'Escreva a sua mensagem. ' : 'Máximo de 2000 caractéres. ')}
@@ -223,11 +249,44 @@ const HouseDetails = ({ house }: HouseProps) => {
                                     )}
                                 </div>
                                 <div>
-                                    <button type='submit' className='w-full bg-primaryGreen p-2 rounded-sm text-white'>Finalizar</button>
+                                    <button type='submit' className='w-full bg-primaryGreen hover:bg-primaryGreen/80 transition duration-200 p-2 rounded-sm text-white'>Alugar</button>
                                 </div>
                             </form>
                         </div>
                     </div>
+                    {buyOption && (
+                        <div className='absolute bg-blurred w-full h-full text-gray-500'>
+                            <div className='flex justify-center items-center w-full h-full'>
+                                <div className='w-96 h-auto min-h-48 bg-white border border-primaryGreen shadow-md flex flex-col justify-between relative p-4 gap-y-4'>
+                                    <button onClick={() => setBuyOption(false)} className='bg-gray-300 hover:bg-gray-400 transition duration-200 rounded-sm absolute right-0 top-0 text-gray-500 m-1 px-2' title='Cancelar mensagem'>x</button>
+                                    <div className='flex flex-col w-full pt-6 gap-y-4'>
+                                        <p className='text-center text-2xl font-semibold border-b' >Resumo da compra</p>
+                                        <div className='flex flex-col w-full gap-y-2 '>
+                                            <p className='flex flex-row items-center gap-x-2' >Valor do imóvel: R$ {house.price},00</p>
+                                            <p >Proprietário: {house.agent.name}</p>
+                                            <p>Endereço: {house.address}, {house.country}</p>
+                                            <p>Tipo do imóvel: {house.type} </p>
+                                            <div className='flex flex-row items-center gap-x-4'>
+                                                <p>Quartos: {house.bedrooms}</p>
+                                                <p>Banheiros: {house.bathrooms}</p>
+                                                <p>Área: {house.surface}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='flex flex-row w-full gap-x-4'>
+                                        <button onClick={confirmBuy} type="submit" className='w-full bg-primaryGreen p-2 rounded-sm text-white hover:bg-primaryGreen/80 transition duration-200'>Confirmar</button>
+                                        <button onClick={() => setBuyOption(false)} className='w-full p-2 border border-primaryGreen rounded-sm text-primaryGreen'>Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                    <Snackbar open={buyBar} autoHideDuration={6000} onClose={() => setBuyBar(false)}>
+                        <Alert severity='success' onClose={() => setBuyBar(false)}>Sua compra foi realizada com sucesso.</Alert>
+                    </Snackbar>
+                    <Snackbar open={rentBar} autoHideDuration={6000} onClose={() => setRentBar(false)}>
+                        <Alert severity='success' onClose={() => setRentBar(false)}>Seu aluguel foi realizado com sucesso.</Alert>
+                    </Snackbar>
                 </section>
             </ThemeProvider>
             <Footer />
