@@ -20,7 +20,7 @@ export interface HouseData {
         phone: string;
     };
     rentable: boolean;
-    data: ContactFormData | undefined;
+    data: ContactFormData | null;
 };
 
 export interface HouseContextType {

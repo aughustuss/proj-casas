@@ -8,7 +8,7 @@ export default function Document() {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Oswald&family=Poppins&family=Roboto&display=swap" rel="stylesheet" />
-        <script src="./assets/vendor/preline/dist/preline.js"></script>
+        <script src="./assets/vendor/preline/dist/preline.js" async></script>
       </Head>
       <body>
         <Main />

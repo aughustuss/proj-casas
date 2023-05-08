@@ -52,6 +52,7 @@ const HouseDetails = ({ house }: HouseProps) => {
     const [rentBar, setRentBar] = useState<boolean>(false);
     const [rentDaysError, setRentDaysError] = useState<boolean>(false);
     const [rentHouses, setRentHouses] = useState<HouseData[]>([]);
+    const [boughtHouses, setBoughtHouses] = useState<HouseData[]>([]);
     const rentDaysPrice = parseFloat(house.price);
     const key = session?.user?.email
     const RentOpts = [
@@ -92,35 +93,42 @@ const HouseDetails = ({ house }: HouseProps) => {
         }
     ];
     if (router.isFallback) {
-        return <div>Carregando...</div>
-    };
+        return <div>Carregando...</div>;
+    }
+    useEffect(() => {
+
+        const userBoughtHouses = localStorage.getItem(`user_email_${key}_buy_data`);
+        if (userBoughtHouses) {
+            setBoughtHouses(JSON.parse(userBoughtHouses));
+        }
+
+        const userRentHouses = localStorage.getItem(`user_email_${key}_rent_data`);
+        if (userRentHouses) {
+            setRentHouses(JSON.parse(userRentHouses));
+        }
+    }, [key]);
+
     const confirmBuy = () => {
+        const newHouse = { ...house };
+        const newHouses = [...Object.values(boughtHouses), newHouse];
+        localStorage.setItem(`user_email_${key}_buy_data`, JSON.stringify(newHouses));
         setBuyBar(true);
         setTimeout(() => {
             router.push('/');
         }, 2000);
     };
 
-    useEffect(() => {
-        const userHouses = localStorage.getItem(`user_email_${key}_data`);
-        if (userHouses) {
-            setRentHouses(JSON.parse(userHouses));
-        }
-    }, [key]);
+    //aluguel
 
     const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
         if (data.rentDays === "Selecione os dias para alugar") {
             setRentDaysError(true);
             return;
-        }
-
+        };
         const newHouse = { ...house, data };
         const newHouses = [...Object.values(rentHouses), newHouse];
-
-        localStorage.setItem(`user_email_${key}_data`, JSON.stringify(newHouses));
-
+        localStorage.setItem(`user_email_${key}_rent_data`, JSON.stringify(newHouses));
         setRentBar(true);
-
         setTimeout(() => {
             router.push('/');
         }, 2000);
@@ -269,7 +277,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                         )}
                                     </div>
                                     <div className='w-full flex flex-col gap-y-2'>
-                                        <button type="submit" onClick={() => setBuyOption(true)} className='w-full bg-primaryGreen hover:bg-primaryGreen/80 transition duration-200 p-2 rounded-sm text-white'>Comprar</button>
+                                        <button onClick={() => setBuyOption(true)} className='w-full bg-primaryGreen hover:bg-primaryGreen/80 transition duration-200 p-2 rounded-sm text-white'>Comprar</button>
                                         {house.rentable && (<button type='submit' className='w-full border border-primaryGreen  transition duration-200 p-2 rounded-sm text-primaryGreen'>Alugar</button>)}
                                     </div>
                                 </form>
