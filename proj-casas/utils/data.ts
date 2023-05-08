@@ -52,7 +52,7 @@ import Agent9 from '../public/images/people/agent9.png';
 import Agent10 from '../public/images/people/agent10.png';
 import Agent11 from '../public/images/people/agent11.png';
 import Agent12 from '../public/images/people/agent12.png';
-import { HouseData } from '@/typings';
+import { HouseData, ContactFormData } from '@/typings';
 export const housesData: Array<HouseData> = [
   {
     id: 1,
@@ -75,6 +75,7 @@ export const housesData: Array<HouseData> = [
       phone: '0123 456 78910',
     },
     rentable: false,
+    data: undefined,
   },
   {
     id: 2,
@@ -97,6 +98,7 @@ export const housesData: Array<HouseData> = [
       phone: '0123 456 78910',
     },
     rentable: true,
+    data: undefined,
   },
   {
     id: 3,
@@ -119,6 +121,7 @@ export const housesData: Array<HouseData> = [
       phone: '0123 456 78910',
     },
     rentable: true,
+    data: undefined,
   },
   {
     id: 4,
@@ -141,6 +144,7 @@ export const housesData: Array<HouseData> = [
       phone: '0123 456 78910',
     },
     rentable: false,
+    data: undefined,
   },
   {
     id: 5,
@@ -163,6 +167,7 @@ export const housesData: Array<HouseData> = [
       phone: '0123 456 78910',
     },
     rentable: true,
+    data: undefined,
   },
   {
     id: 6,
@@ -185,6 +190,7 @@ export const housesData: Array<HouseData> = [
       phone: '0123 456 78910',
     },
     rentable: true,
+    data: undefined,
   },
   {
     id: 7,
@@ -207,6 +213,7 @@ export const housesData: Array<HouseData> = [
       phone: '0123 456 78910',
     },
     rentable: true,
+    data: undefined,
   },
   {
     id: 8,
@@ -229,6 +236,7 @@ export const housesData: Array<HouseData> = [
       phone: '0123 456 78910',
     },
     rentable: true,
+    data: undefined,
   },
   {
     id: 9,
@@ -251,6 +259,7 @@ export const housesData: Array<HouseData> = [
       phone: '0123 456 78910',
     },
     rentable: true,
+    data: undefined,
   },
   {
     id: 10,
@@ -273,6 +282,7 @@ export const housesData: Array<HouseData> = [
       phone: '0123 456 78910',
     },
     rentable: true,
+    data: undefined,
   },
   {
     id: 11,
@@ -295,6 +305,7 @@ export const housesData: Array<HouseData> = [
       phone: '0123 456 78910',
     },
     rentable: false,
+    data: undefined,
   },
   {
     id: 12,
@@ -317,6 +328,7 @@ export const housesData: Array<HouseData> = [
       phone: '0123 456 78910',
     },
     rentable: false,
+    data: undefined,
   },
   {
     id: 13,
@@ -339,6 +351,7 @@ export const housesData: Array<HouseData> = [
       phone: '0123 456 78910',
     },
     rentable: false,
+    data: undefined,
   },
   {
     id: 14,
@@ -361,6 +374,7 @@ export const housesData: Array<HouseData> = [
       phone: '0123 456 78910',
     },
     rentable: false,
+    data: undefined,
   },
   {
     id: 15,
@@ -383,6 +397,7 @@ export const housesData: Array<HouseData> = [
       phone: '0123 456 78910',
     },
     rentable: false,
+    data: undefined,
   },
   {
     id: 16,
@@ -405,6 +420,7 @@ export const housesData: Array<HouseData> = [
       phone: '0123 456 78910',
     },
     rentable: true,
+    data: undefined,
   },
   {
     id: 17,
@@ -427,6 +443,7 @@ export const housesData: Array<HouseData> = [
       phone: '0123 456 78910',
     },
     rentable: true,
+    data: undefined,
   },
   {
     id: 18,
@@ -449,5 +466,6 @@ export const housesData: Array<HouseData> = [
       phone: '0123 456 78910',
     },
     rentable: false,
+    data: undefined,
   },
 ];

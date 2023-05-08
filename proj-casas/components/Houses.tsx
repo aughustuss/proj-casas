@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 import { HouseData } from '@/typings';
 import Link from 'next/link';
 import Image from 'next/image';
-import { BiBed, BiBath, BiMoney, BiArea } from 'react-icons/bi'
+import { BiBed, BiBath, BiArea } from 'react-icons/bi'
 import { ImSpinner2 } from 'react-icons/im'
 import { Pagination } from '@mui/material';
 

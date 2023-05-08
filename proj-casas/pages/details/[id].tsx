@@ -6,13 +6,14 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { BiBed, BiBath, BiMoney, BiArea } from 'react-icons/bi'
 import { TextField, styled, createTheme, ThemeProvider, Snackbar, Alert } from '@mui/material';
 import Footer from '@/components/Footer';
 interface HouseProps {
     house: HouseData;
+    houses: HouseData[];
 };
 const CustomTextField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
@@ -50,6 +51,7 @@ const HouseDetails = ({ house }: HouseProps) => {
     const [buyBar, setBuyBar] = useState<boolean>(false);
     const [rentBar, setRentBar] = useState<boolean>(false);
     const [rentDaysError, setRentDaysError] = useState<boolean>(false);
+    const [rentHouses, setRentHouses] = useState<HouseData[]>([]);
     const rentDaysPrice = parseFloat(house.price);
     const key = session?.user?.email
     const RentOpts = [
@@ -98,13 +100,27 @@ const HouseDetails = ({ house }: HouseProps) => {
             router.push('/');
         }, 2000);
     };
+
+    useEffect(() => {
+        const userHouses = localStorage.getItem(`user_email_${key}_data`);
+        if (userHouses) {
+            setRentHouses(JSON.parse(userHouses));
+        }
+    }, [key]);
+
     const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
         if (data.rentDays === "Selecione os dias para alugar") {
             setRentDaysError(true);
-            return
+            return;
         }
-        localStorage.setItem(`user_email_${key}_data`, JSON.stringify({ ...house, data }));
+
+        const newHouse = { ...house, data };
+        const newHouses = [...Object.values(rentHouses), newHouse];
+
+        localStorage.setItem(`user_email_${key}_data`, JSON.stringify(newHouses));
+
         setRentBar(true);
+
         setTimeout(() => {
             router.push('/');
         }, 2000);

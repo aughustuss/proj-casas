@@ -20,6 +20,7 @@ export interface HouseData {
         phone: string;
     };
     rentable: boolean;
+    data: ContactFormData | undefined;
 };
 
 export interface HouseContextType {
@@ -67,4 +68,5 @@ export interface ContactFormData {
     email: string;
     msg: string;
     notSendMessage: string;
+    ownerAnswer: boolean;
 }

@@ -1,20 +1,29 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import React from 'react'
-import { HouseData } from '@/typings'
+import React, { useState, useEffect } from 'react'
+import { ContactFormData, HouseData } from '@/typings'
 import { useSession, signOut } from 'next-auth/react'
+import { ImSpinner2 } from 'react-icons/im'
 import Image from 'next/image'
 const Profile = () => {
+    const [boughtHouses, setBoughtHouses] = useState<HouseData[]>([]);
+    const [loadingBoughtHouse, setLoadingBoughtHouse] = useState<boolean>(false);
     const { data: session } = useSession();
     const key = session?.user?.email
-    const userBoughtHouse: HouseData = JSON.parse(localStorage.getItem(`user_email_${key}_data`)!);
+
+    useEffect(() => {
+        const userBoughtHouse = localStorage.getItem(`user_email_${key}_data`);
+        if (userBoughtHouse) {
+            setBoughtHouses(JSON.parse(userBoughtHouse));
+        };
+    }, []);
     return (
         <>
             <Header />
-            <section className='h-screen w-full mx-auto flex justify-center items-center pt-16 pb-2 font-roboto '>
-                <div className='w-5/6 flex flex-col h-full bg-white shadow-sm border text-black'>
+            <section className='h-screen w-full mx-auto flex justify-center md:items-start items-center pt-16 pb-2 font-roboto overflow-y-auto'>
+                <div className='w-full md:w-5/6 flex flex-col h-full bg-white shadow-sm border text-black'>
                     <div className='flex flex-col lg:flex-row w-full h-[50px] ' >
-                        <ul role="tablist" aria-label='Tabs' className='flex flex-row items-center justify-between w-full px-4 text-gray-500 text-sm border-b'>
+                        <ul role="tablist" aria-label='Tabs' className='flex flex-row items-center justify-between w-full px-4 text-gray-500 text-sm border-b-neutral-100 border-b'>
                             <button type="button" className='hover:text-primaryGreen hs-tab-active:text-primaryGreen' id="tabs-with-underline-item-1" data-hs-tab="#tabs-with-underline-1" aria-controls="tabs-with-underline-1" role="tab">
                                 Minha Conta
                             </button>
@@ -49,11 +58,39 @@ const Profile = () => {
                             </div>
                         </div>
                         <div id="tabs-with-underline-2" className="hidden" role="tabpanel" aria-labelledby="tabs-with-underline-item-2">
-                            <div className='w-full flex flex-col border bg-neutral-100 h-[160px]'>
-                                <div className='flex flex-row justify-between items-center p-2'>
-                                    <Image src={userBoughtHouse.image} alt="Casa" className='h-full max-w-[140px] ' />
+                            {!loadingBoughtHouse ? (
+                                <div className='grid grid-cols-2 lg:grid-cols-2 gap-4 text-gray-500'>
+                                    {boughtHouses.length > 0 && boughtHouses.map((house) => {
+                                        return (
+                                            <div key={house.id} className='max-w-[240px] md:w-full lg:max-w-full justify-center items-center flex flex-col h-auto min-h-[160px] border bg-neutral-100 p-2 '>
+                                                <div className="flex flex-col xl:flex-row items-center gap-x-4">
+                                                    <Image alt='Casa' src={house.image} className=' h-auto w-[200px] bg-cover' />
+                                                    <div className='flex flex-col gap-y-2 h-full justify-between w-full'>
+                                                        <div className='flex flex-col w-full gap-y-2 text-sm'>
+                                                            <p className='text-lg'>{house.address}, {house.country}</p>
+                                                            <div className='flex flex-col gap-y-4 lg:gap-y-0 lg:flex-row w-full lg:w-full gap-x-8 '>
+                                                                <p>R${house.price},00</p>
+                                                                <p>Quartos: {house.bedrooms}</p>
+                                                                <p>Banheiros: {house.bathrooms}</p>
+                                                            </div>
+                                                            <p>Dias solicitados para aluguel: {house?.data?.rentDays}</p>
+                                                            <p>Mensagem enviada para o proprietário: {house?.data?.notSendMessage ? 'Não' : 'Sim'}</p>
+                                                            <p>Resposta do proprietário: {!house?.data?.ownerAnswer ? 'Pendente' : 'Respondida'}</p>
+                                                        </div>
+                                                        <div className='flex flex-col text-xs'>
+                                                            <p className='flex flex-row items-center gap-x-2'><Image alt='Proprietário' src={house.agent.image} className='w-6 h-6 bg-cover' />  {house.agent.name} - ({house.agent.phone}) - Proprietário</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
                                 </div>
-                            </div>
+                            ) : (
+                                <div className='flex justify-center items-center w-full bg-red-600'>
+                                    Carregando... <ImSpinner2 className='text-primaryPurple animate-spin' />
+                                </div>
+                            )}
                         </div>
                         <div id="tabs-with-underline-3" className="hidden" role="tabpanel" aria-labelledby="tabs-with-underline-item-3">
                             <p className="text-gray-500 dark:text-gray-400">
