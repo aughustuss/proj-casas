@@ -43,7 +43,7 @@ const HouseDetails = ({ house }: HouseProps) => {
             },
         },
     })
-    const { register, formState: { errors }, handleSubmit } = useForm<ContactFormData>();
+    const { register, formState: { errors }, handleSubmit, getValues } = useForm<ContactFormData>();
     const { data: session } = useSession();
     const router = useRouter();
 
@@ -113,8 +113,15 @@ const HouseDetails = ({ house }: HouseProps) => {
         return <div>Carregando...</div>;
     }
 
-    function handleBuyOption(data: any){
-        console.log(data);
+    function handleBuyOption(){
+        if(contactOwner){
+            const contactData = getValues();
+            const emptyField = Object.values(contactData).some((field) => field === '');
+            if(emptyField){
+                console.log("vazio");
+            }
+        }
+        
     }
 
     const confirmBuy = () => {
@@ -173,7 +180,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                 )}
                             </div>
                         </div>
-                        <div className='w-full flex flex-col lg:flex-row md:gap-x-4 gap-y-4 xl:gap-y-0'>
+                        <div className='w-full flex flex-col lg:flex-row md:gap-x-4 gap-y-4 xl:gap-y-0 h-full'>
                             <div className='flex flex-col gap-y-2'>
 
                                 <div className='max-w-3xl'>
@@ -192,7 +199,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                 </details>
                             </div>
                             {session ? (
-                                <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:w-1/3 flex flex-col gap-y-4 justify-between border border-primaryGreen p-2 rounded-sm h-auto min-h-[450px]'>
+                                <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:w-1/3 flex flex-col gap-y-4 justify-between border border-primaryGreen p-2 rounded-sm '>
                                     {!rentHouseAlreadyExists ? (
                                         <div>
                                             <div className='flex flex-col w-full justify-center items-center text-center gap-y-4 text-sm lg:text-md h-full'>
@@ -304,7 +311,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                     </div>
                                 </form>
                             ) : (
-                                <div className='lg:w-1/3 min-h-[450px] h-auto w-full text-sm text-center text-gray-500 border flex flex-col justify-center'>
+                                <div className='lg:w-1/3 h-auto w-full text-sm text-center text-gray-500 border flex flex-col justify-center'>
                                     <p className='flex flex-col xl:flex-row items-center w-full justify-center gap-x-1'>Faça o <Link href='/auth/Signin' className='underline'>{' '} Login</Link> para solicitar aluguel ou compra da casa.</p>
                                 </div>
                             )}
