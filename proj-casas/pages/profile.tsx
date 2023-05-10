@@ -28,46 +28,46 @@ const Profile = () => {
     return (
         <>
             <Header />
-            <section className='h-screen w-full mx-auto flex justify-center md:items-start items-center pt-16 pb-2 font-roboto overflow-y-auto'>
+            <section className='min-h-screen h-auto w-full mx-auto flex justify-center md:items-start items-center pt-16 pb-2 font-roboto overflow-y-auto'>
                 <div className='w-full md:w-5/6 flex flex-col h-full bg-white shadow-sm border text-black overflow-y-auto'>
-                    <div className='flex flex-col lg:flex-row w-full h-[140px] md:h-[50px] mb-auto' >
-                        <ul role="tablist" aria-label='Tabs' className='flex flex-col py-2 gap-y-8 mb-auto md:flex-row items-center justify-between w-full px-4 text-gray-500 text-sm border-b-neutral-100 border-b'>
-                            <button type="button" className='hover:text-primaryGreen hs-tab-active:text-primaryGreen' id="tabs-with-underline-item-1" data-hs-tab="#tabs-with-underline-1" aria-controls="tabs-with-underline-1" role="tab">
+                    <div className='flex flex-col lg:flex-row w-full h-auto min-h-[140px] md:h-[50px] mb-auto' >
+                        <ul role="tablist" aria-label='Tabs' className='flex flex-col py-2 gap-y-2 lg:text-[14px] text-xs mb-auto md:flex-row items-center gap-x-4 justify-between w-full px-4 text-gray-500 border-b-neutral-100 border-b'>
+                            <button type="button" className='hover:text-primaryGreen hs-tab-active:text-primaryGreen lg:bg-none bg-neutral-100 w-full p-2 rounded-sm border' id="tabs-with-underline-item-1" data-hs-tab="#tabs-with-underline-1" aria-controls="tabs-with-underline-1" role="tab">
                                 Minha Conta
                             </button>
-                            <button type="button" className='hover:text-primaryGreen hs-tab-active:text-primaryGreen' id="tabs-with-underline-item-2" data-hs-tab="#tabs-with-underline-2" aria-controls="tabs-with-underline-2" role="tab">
+                            <button type="button" className='hover:text-primaryGreen hs-tab-active:text-primaryGreen lg:bg-none bg-neutral-100 w-full p-2 rounded-sm border ' id="tabs-with-underline-item-2" data-hs-tab="#tabs-with-underline-2" aria-controls="tabs-with-underline-2" role="tab">
                                 Meus pedidos de aluguel
                             </button>
-                            <button type="button" className='hover:text-primaryGreen hs-tab-active:text-primaryGreen' id="tabs-with-underline-item-3" data-hs-tab="#tabs-with-underline-3" aria-controls="tabs-with-underline-3" role="tab">
+                            <button type="button" className='hover:text-primaryGreen hs-tab-active:text-primaryGreen lg:bg-none bg-neutral-100 w-full p-2 rounded-sm border' id="tabs-with-underline-item-3" data-hs-tab="#tabs-with-underline-3" aria-controls="tabs-with-underline-3" role="tab">
                                 Meus pedidos de compra
                             </button>
                         </ul>
                     </div>
                     <div className="p-4 m-auto h-full">
-                        <div className='flex flex-col justify-between h-full' id="tabs-with-underline-1" role="tabpanel" aria-labelledby="tabs-with-underline-item-1">
-                            <div className='text-center capitalize font-oswald font-semibold text-4xl w-full'>
-                                <div className='flex flex-col-reverse gap-y-4 lg:flex-row items-center w-full text-center'>
+                        <div className='flex flex-col justify-between h-full min-h-[540px] gap-y-8' id="tabs-with-underline-1" role="tabpanel" aria-labelledby="tabs-with-underline-item-1">
+                            <div className='text-center capitalize font-oswald text-2xl lg:text-4xl w-full flex flex-col gap-y-12 h-full'>
+                                <div className='flex flex-col-reverse gap-y-4 lg:flex-row items-center font-semibold  w-full text-center'>
                                     <p className='md:flex-1'>Olá, {session && session?.user?.name}!</p>
                                     {session && session.user?.image && (
-                                        <img alt='Perfill' src={session.user.image} className='rounded-full object-cover h-28 w-28' />
+                                        <img alt='Perfill' src={session.user.image} className='rounded-full object-cover h-20 w-20 lg:h-28 lg:w-28' />
                                     )}
                                 </div>
-                            </div>
-                            <div className='flex flex-col w-full gap-y-8'>
-                                <p className='text-2xl font-semibold font-oswald text-center'>Suas informações pessoais: </p>
-                                <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 text-gray-700 text-sm'>
-                                    <p className='p-2 bg-neutral-200 border rounded-sm'>Email: {session && session?.user?.email}</p>
-                                    <p className='p-2 bg-neutral-200 border rounded-sm'>Nome registrado: {session && session?.user?.name}</p>
-                                    <p className='p-2 bg-neutral-200 border rounded-sm col-span-1 lg:col-span-2'>Sessão expira em: {session && session.expires ? new Date(session?.expires).toLocaleDateString() : ''} </p>
+                                <div className='flex flex-col w-full gap-y-8 font-roboto'>
+                                    <p className='text-xl lg:text-2xl font-semibold font-oswald text-center'>Suas informações pessoais: </p>
+                                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 text-gray-700 text-xs lg:text-sm'>
+                                        <p className='p-2 bg-neutral-200 border rounded-sm'>Email: {session && session?.user?.email}</p>
+                                        <p className='p-2 bg-neutral-200 border rounded-sm'>Nome registrado: {session && session?.user?.name}</p>
+                                        <p className='p-2 bg-neutral-200 border rounded-sm col-span-1 lg:col-span-2'>Sessão expira em: {session && session.expires ? new Date(session?.expires).toLocaleDateString() : ''} </p>
+                                    </div>
                                 </div>
                             </div>
-                            <div className='w-full justify-center flex flex-row'>
+                            <div className='w-full justify-center flex flex-row text-xs lg:text-base'>
                                 <button onClick={() => signOut()} className='w-2/5 bg-primaryPurple text-white hover:bg-primaryPurple/90 px-4 py-2 rounded-sm tracking-wide'>Sign Out</button>
                             </div>
                         </div>
                         <div id="tabs-with-underline-2" className="hidden" role="tabpanel" aria-labelledby="tabs-with-underline-item-2">
-                            {!loadingBoughtHouse ? (
-                                <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-500 place-items-center'>
+                            {rentHouses && rentHouses.length > 0 ? (
+                                <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-500 place-items-center py-4'>
                                     {rentHouses.length > 0 && rentHouses.map((house) => {
                                         return (
                                             <div key={house.id} className='max-w-[300px] md:w-full lg:max-w-full justify-center items-center flex flex-col h-auto min-h-[160px] border bg-neutral-100 p-2 '>
@@ -95,38 +95,44 @@ const Profile = () => {
                                     })}
                                 </div>
                             ) : (
-                                <div className='flex justify-center items-center w-full bg-red-600'>
-                                    Carregando... <ImSpinner2 className='text-primaryPurple animate-spin' />
+                                <div className='flex justify-center items-center w-full h-full text-gray-500 text-sm min-h-[540px]'>
+                                    Não há nada para exibir.
                                 </div>
                             )}
                         </div>
                         <div id="tabs-with-underline-3" className="hidden" role="tabpanel" aria-labelledby="tabs-with-underline-item-3">
-                            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-500 place-items-center'>
-                                {boughtHouses.length > 0 && boughtHouses.map((house) => {
-                                    return (
-                                        <div key={house.id} className='max-w-[300px] md:w-full lg:max-w-full justify-center items-center flex flex-col h-auto min-h-[160px] border bg-neutral-100 p-2 '>
-                                            <div className="flex flex-col xl:flex-row items-center gap-x-4">
-                                                <Image alt='Casa' src={house.image} className=' h-auto w-[200px] bg-cover' />
-                                                <div className='flex flex-col gap-y-2 h-full justify-between w-full'>
-                                                    <div className='flex flex-col w-full gap-y-2 text-sm'>
-                                                        <p className='text-lg'>{house.address}, {house.country}</p>
-                                                        <div className='flex flex-col gap-y-4 lg:gap-y-0 lg:flex-row w-full lg:w-full gap-x-8 '>
-                                                            <p>R${house.price},00</p>
-                                                            <p>Quartos: {house.bedrooms}</p>
-                                                            <p>Banheiros: {house.bathrooms}</p>
+                            {boughtHouses && boughtHouses.length ? (
+                                <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-500 place-items-center py-4'>
+                                    {boughtHouses.length > 0 && boughtHouses.map((house) => {
+                                        return (
+                                            <div key={house.id} className='max-w-[300px] md:w-full lg:max-w-full justify-center items-center flex flex-col h-auto min-h-[160px] border bg-neutral-100 p-2 '>
+                                                <div className="flex flex-col xl:flex-row items-center gap-x-4">
+                                                    <Image alt='Casa' src={house.image} className=' h-auto w-[200px] bg-cover' />
+                                                    <div className='flex flex-col gap-y-2 h-full justify-between w-full'>
+                                                        <div className='flex flex-col w-full gap-y-2 text-sm'>
+                                                            <p className='text-lg'>{house.address}, {house.country}</p>
+                                                            <div className='flex flex-col gap-y-4 lg:gap-y-0 lg:flex-row w-full lg:w-full gap-x-8 '>
+                                                                <p>R${house.price},00</p>
+                                                                <p>Quartos: {house.bedrooms}</p>
+                                                                <p>Banheiros: {house.bathrooms}</p>
+                                                            </div>
+                                                            <p>Mensagem enviada para o proprietário: {house?.data?.notSendMessage ? 'Não' : 'Sim'}</p>
+                                                            <p>Resposta do proprietário: {!house?.data?.ownerAnswer ? 'Pendente' : 'Respondida'}</p>
                                                         </div>
-                                                        <p>Mensagem enviada para o proprietário: {house?.data?.notSendMessage ? 'Não' : 'Sim'}</p>
-                                                        <p>Resposta do proprietário: {!house?.data?.ownerAnswer ? 'Pendente' : 'Respondida'}</p>
-                                                    </div>
-                                                    <div className='flex flex-col text-xs'>
-                                                        <p className='flex flex-row items-center gap-x-2'><Image alt='Proprietário' src={house.agent.image} className='w-6 h-6 bg-cover' />  {house.agent.name} - ({house.agent.phone}) - Proprietário</p>
+                                                        <div className='flex flex-col text-xs'>
+                                                            <p className='flex flex-row items-center gap-x-2'><Image alt='Proprietário' src={house.agent.image} className='w-6 h-6 bg-cover' />  {house.agent.name} - ({house.agent.phone}) - Proprietário</p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    )
-                                })}
-                            </div>
+                                        )
+                                    })}
+                                </div>
+                            ) : (
+                                <div className='flex justify-center items-center w-full h-full text-gray-500 text-sm min-h-[540px]'>
+                                    Não há nada para exibir.
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

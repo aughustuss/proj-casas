@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="font-roboto overflow-x-hidden">
+      <main className="font-roboto overflow-x-hidden tracking-wide">
         <div className="w-full">
           <Banner />
         </div>
