@@ -11,6 +11,10 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { BiBed, BiBath, BiArea } from 'react-icons/bi'
 import { TextField, styled, createTheme, ThemeProvider, Snackbar, Alert } from '@mui/material';
 import Footer from '@/components/Footer';
+import { AiFillMobile } from 'react-icons/ai';
+import { collectAppConfig } from 'next/dist/build/utils';
+import { CompletionInfoFlags } from 'typescript';
+import { setMaxIdleHTTPParsers } from 'http';
 interface HouseProps {
     house: HouseData;
     houses: HouseData[];
@@ -54,6 +58,7 @@ const HouseDetails = ({ house }: HouseProps) => {
     const [rentDaysError, setRentDaysError] = useState<boolean>(false);
     const [boughtHouseAlreadyExists, setBoughtHouseAlreadyExists] = useState<boolean>(false);
     const [rentHouseAlreadyExists, setRentHouseAlreadyExists] = useState<boolean>(false);
+    const [emptyFieldsError, setEmptyFieldsError] = useState<boolean>(false)
 
     const [rentHouses, setRentHouses] = useState<HouseData[]>([]);
     const [boughtHouses, setBoughtHouses] = useState<HouseData[]>([]);
@@ -113,15 +118,19 @@ const HouseDetails = ({ house }: HouseProps) => {
         return <div>Carregando...</div>;
     }
 
-    function handleBuyOption(){
-        if(contactOwner){
+    function handleBuyOption() {
+        if (contactOwner) {
             const contactData = getValues();
             const emptyField = Object.values(contactData).some((field) => field === '');
-            if(emptyField){
-                console.log("vazio");
+            if (emptyField) {
+                setEmptyFieldsError(true);
+            } else {
+                setEmptyFieldsError(false);
             }
+        } else {
+            confirmBuy();
         }
-        
+
     }
 
     const confirmBuy = () => {
@@ -202,7 +211,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                 <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:w-1/3 flex flex-col gap-y-4 justify-between border border-primaryGreen p-2 rounded-sm '>
                                     {!rentHouseAlreadyExists ? (
                                         <div>
-                                            <div className='flex flex-col w-full justify-center items-center text-center gap-y-4 text-sm lg:text-md h-full'>
+                                            <div className='flex flex-col w-full justify-center items-center text-center gap-y-4 text-sm lg:text-md '>
                                                 {house.rentable ? (
                                                     <div className='flex flex-col gap-y-4'>
                                                         <div className='text-gray-500'>
@@ -256,6 +265,7 @@ const HouseDetails = ({ house }: HouseProps) => {
 
                                                     <div className='w-full h-full items-center flex flex-col justify-between gap-y-4 py-2'>
                                                         <div className='w-5/6 flex flex-col justify-center gap-y-4'>
+                                                            <p className='text-red-500 text-sm'>{emptyFieldsError && ( <p>Preencha todos os campos.</p> )}</p>
                                                             <CustomTextField
                                                                 label='Nome'
                                                                 type='text'
