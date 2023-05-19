@@ -18,14 +18,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primaryGreen: '#01D28E',
-        primaryPurple: '#6d28d9',
-        primaryOrange: '#EF962D',
-        primaryYellow: '#FFE05D',
-        primaryBlue: '#3258a8',
-        primaryBege: '#E6E5A3',
-        secondaryGreen: '#7D8F69',
-        tertiaryGreen: '#A9AF7E',
+        primary: '#1f3e72',
+        secondary: '#ffa500',
+        tertiary: '#4066ff',
+        quartiary: "#e6e6ff",
+        gray: '#8c8b8b',
       },
       fontFamily: {
         roboto: ['Roboto', 'sans-serif'],

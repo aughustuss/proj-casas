@@ -23,6 +23,13 @@ export interface HouseData {
     data: ContactFormData | null;
 };
 
+export interface HeaderLink {
+    id: string;
+    href: string;
+    offset: string;
+    children: string;
+};
+
 export interface HouseContextType {
     country: string;
     setCountry: (value: string) => void;

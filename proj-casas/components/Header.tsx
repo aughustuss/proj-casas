@@ -1,58 +1,30 @@
 import Link from 'next/link';
-import Image from 'next/image'
-import React, { useContext, useState } from 'react';
+import React, {  useState } from 'react';
 import { MdAccountCircle, } from 'react-icons/md'
 import { GiHouseKeys } from 'react-icons/gi'
-import { HiOutlineSearch } from 'react-icons/hi';
-import { CgClose, CgMenu } from 'react-icons/cg'
-import { HouseData } from '@/typings';
-import HouseContext from '@/contexts/Housecontext';
+import { CgMenu } from 'react-icons/cg'
 import { useSession, signOut } from 'next-auth/react'
 import { BiLogIn, BiLogOut } from 'react-icons/bi';
 import { BsPersonFillAdd } from 'react-icons/bs';
+import AnchorLink from 'react-anchor-link-smooth-scroll'
+import { headerLinks } from '@/utils/data';
 const Header = () => {
     const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
-    const { houses } = useContext(HouseContext);
-    const [search, setSearch] = useState<string>('');
-    const [isSearchOpen, setSearchOpen] = useState<boolean>(false);
-    const filteredSearch = search.length > 0 ? houses.filter((house: HouseData) => { return house.address.toLowerCase().includes(search.toLowerCase()) }) : [];
     const { data: session } = useSession();
     return (
         <>
-            <header className=' bg-primaryPurple text-white transition duration-200 w-full fixed py-2 flex flex-row items-center shadow-md z-50 font-roboto'>
+            <header className=' bg-primary text-white transition duration-200 w-full fixed py-2 flex flex-row items-center shadow-md z-50 font-roboto'>
                 <div className='w-5/6 relative mx-auto flex flex-row items-center justify-between'>
-                    <Link href='/' className='text-4xl text-primaryGreen font-semibold z-10 flex flex-row items-center font-oswald'>
+                    <Link href='/' className='text-4xl text-secondary font-semibold z-10 flex flex-row items-center font-oswald'>
                         <GiHouseKeys size={36} /> <span className='text-white' >House Ads</span>.
                     </Link>
-                    <div className='hidden lg:flex w-2/4 relative flex-row items-center'>
-                        <div className='w-full flex flex-row items-center'>
-                            <input placeholder='Pesquise pelo endereço...' value={search} onChange={(e) => setSearch(e.target.value)} className={` ${search.length > 0 ? 'w-full' : 'w-3/5'} focus:w-full transition-all duration-200 py-1 outline-none rounded-sm text-gray-500 pl-8`} />
-                            <HiOutlineSearch className='absolute left-2' color='gray' />
-                            {
-                                search && search.length > 0 && (
-                                    <CgClose onClick={() => setSearch('')} color='gray' className='absolute right-2 cursor-pointer' />
-                                )
-                            }
-                        </div>
-                        <div className='w-full bg-white h-auto max-h-[200px] shadow-lg text-black rounded-b-md px-2 text-center absolute top-full overflow-auto'>
-                            {search && search.length > 0 ? (
-                                filteredSearch.length > 0 ? (
-                                    filteredSearch.map((houses: HouseData) => {
-                                        return (
-                                            <Link key={houses.id} className='font-semibold text-xs gap-x-2 hover:bg-primaryPurple duration-200 transition flex flex-row items-center w-full p-2 hover:text-white' href={`/details/${houses.id}`}>
-                                                <Image alt='Casa' src={houses.image} width={30} height={30} />{houses.address}, {houses.country}, ({houses.type})
-                                            </Link>
-                                        )
-                                    })
-                                ) : (
-                                    <p className='text-gray-600 text-sm'>Não encontramos resultados para a sua busca.</p>
-                                )
-                            ) : (
-                                null
-                            )}
-                        </div>
+                    <div className='hidden md:flex flex-row gap-x-8 text-sm'>
+                        {headerLinks && headerLinks.map((link) => {
+                            return (
+                                <AnchorLink className='hover:after:border' id={link.id} href={link.href} offset={link.offset}>{link.children}</AnchorLink>
+                            )
+                        })}
                     </div>
-
                     {!session ? (
                         <div className='hidden lg:flex flex-row items-center gap-x-4 font-roboto'>
                             <Link href='/auth/Signin'>
@@ -61,7 +33,7 @@ const Header = () => {
                                 </button>
                             </Link>
                             <Link href='/auth/Signup'>
-                                <button className='py-1 px-4 bg-primaryGreen tracking-wide rounded-sm hover:bg-primaryGreen/80 transition duration-200 text-white'>
+                                <button className='py-1 px-4 bg-secondary tracking-wide rounded-sm hover:bg-secondary/80 transition duration-200 text-white'>
                                     Sign up
                                 </button>
                             </Link>
@@ -69,7 +41,7 @@ const Header = () => {
                     ) : (
                         <div className='hidden lg:flex flex-row items-center gap-x-4 font-roboto'>
                             <Link href=''>
-                                <button onClick={() => signOut()} className='py-1 px-4 bg-primaryGreen rounded-sm hover:bg-primaryGreen/80 transition duration-200 text-white'>Sign Out</button>
+                                <button onClick={() => signOut()} className='py-1 px-4 bg-secondary rounded-sm hover:bg-secondary/80 transition duration-200 text-white'>Sign Out</button>
                             </Link>
                             <Link href='/profile'>
                                 {session && session.user?.image ? (
@@ -84,15 +56,13 @@ const Header = () => {
                     )}
 
                     <div className='flex-row items-center gap-x-4 lg:hidden flex'>
-                        <button onClick={() => setSearchOpen(!isSearchOpen)}>
-                            <HiOutlineSearch size={28} />
-                        </button>
+
                         <div className='relative flex flex-row items-center'>
-                            <button onClick={() => setMenuOpen(!isMenuOpen)} className='  hover:bg-violet-800 rounded-sm p-1 text-white transition duration-200 '>
+                            <button onClick={() => setMenuOpen(!isMenuOpen)} className='  hover:bg-primary/90 rounded-sm p-1 text-white transition duration-200 '>
                                 <CgMenu size={28} />
                             </button>
                             {isMenuOpen ? (
-                                <div className={`${isMenuOpen ? 'top-full' : '-top-20'} transition-all duration-200 absolute w-[240px] h-auto -right-full  bg-primaryPurple`}>
+                                <div className={`${isMenuOpen ? 'top-full' : '-top-20'} transition-all duration-200 absolute w-[240px] h-auto -right-full  bg-primary`}>
                                     <ul className='flex flex-col w-full p-2 gap-y-2'>
                                         {session ? (
                                             <div className='flex flex-col w-full gap-y-2 justify-center'>
@@ -110,37 +80,8 @@ const Header = () => {
                             ) : (
                                 null
                             )}
-
                         </div>
                     </div>
-                    {isSearchOpen ? (
-                        <div className='absolute lg:hidden top-0 left-0 bg-white w-full h-full z-50 flex flex-row items-center'>
-                            <div className='relative w-full h-full text-gray-400 flex flex-row items-center'>
-                                <HiOutlineSearch className='absolute left-2' />
-                                <input value={search} onChange={(e) => setSearch(e.target.value)} className='w-full h-full outline-none pl-8' />
-                                <CgClose onClick={() => { setSearch(''); setSearchOpen(false) }} className='absolute right-2 cursor-pointer' />
-                                <div className='w-full absolute overflow-auto shadow-lg h-auto max-h-[200px] top-full flex flex-col px-2 bg-white gap-y-2'>
-                                    {search && search.length > 0 ? (
-                                        filteredSearch.length > 0 ? (
-                                            filteredSearch.map((houses: HouseData) => {
-                                                return (
-                                                    <Link key={houses.id} href={`/details/${houses.id}`} className='font-semibold w-full flex flex-row items-center hover:bg-violet-800 p-2 hover:text-white transition duration-200 text-xs gap-x-2 text-primaryPurple'>
-                                                        <Image src={houses.image} alt='Imagem da casa' width={30} height={30} /> {houses.address}, {houses.country} - ({houses.type})
-                                                    </Link>
-                                                )
-                                            })
-                                        ) : (
-                                            <p className='text-gray-600 text-xs'>Não encontramos resultados para a sua busca.</p>
-                                        )
-                                    ) : (
-                                        null
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    ) : (
-                        null
-                    )}
                 </div>
             </header>
         </>

@@ -24,27 +24,30 @@ const Carousel = () => {
     };
     return (
         <>
-            <div className='w-full py-16 h-auto flex flex-col gap-y-4'>
-                <p className='font-oswald text-2xl text-center lg:text-left'>Veja algumas das <span className='text-primaryPurple'>oportunidades</span> que esperam por você</p>
+            <div className='w-full pt-16 h-auto flex flex-col gap-y-4 '>
+                <div className='w-full flex flex-col gap-y-2 font-oswald items-center lg:items-start'>
+                    <p className='text-secondary text-2xl'>As melhores escolhas</p>
+                    <p className=' text-primary text-5xl font-semibold text-center lg:text-start'>Veja as casas mais populares</p>
+                </div>
                 <Swiper
                     modules={[Pagination]}
-                    autoplay={true}
+                    autoplay
                     breakpoints={
                         {
                             0: {
-                                slidesPerView: 2,
+                                slidesPerView: 1,
                                 spaceBetween: 10,
                             },
                             678: {
-                                slidesPerView: 3,
+                                slidesPerView: 2,
                                 spaceBetween: 10,
                             },
                             768: {
-                                slidesPerView: 4,
+                                slidesPerView: 3,
                                 spaceBetween: 40,
                             },
                             1024: {
-                                slidesPerView: 5,
+                                slidesPerView: 4,
                                 spaceBetween: 60,
                             },
                         }
@@ -54,8 +57,12 @@ const Carousel = () => {
                     {houses && houses.map((house: HouseData) => {
                         return (
                             <SwiperSlide key={house.id}>
-                                <Link href={`/details/${house.id}`}>
-                                    <Image className='w-32 h-32 rounded-full' src={house.image} alt='Casas' />
+                                <Link className='w-full flex flex-col hover:bg-quartiary rounded-md transition duration-200 hover:shadow-md p-3' href={`/details/${house.id}`}>
+                                    <div className='w-full flex flex-col gap-y-4 justify-center items-center'>
+                                        <Image className='w-full max-w-xs h-36 rounded-md object-cover hover:scale-105 transition duration-200' src={house.image} alt='Casas' />
+                                        <p className='text-primary text-lg font-semibold'>{house.address}</p>
+                                        <p className='text-secondary self-start'>R$ <span className='text-gray font-semibold'>{house.price}</span> </p>
+                                    </div>
                                 </Link>
                             </SwiperSlide>
                         )

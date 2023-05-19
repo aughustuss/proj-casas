@@ -52,7 +52,7 @@ import Agent9 from '../public/images/people/agent9.png';
 import Agent10 from '../public/images/people/agent10.png';
 import Agent11 from '../public/images/people/agent11.png';
 import Agent12 from '../public/images/people/agent12.png';
-import { HouseData, ContactFormData } from '@/typings';
+import { HouseData, ContactFormData, HeaderLink } from '@/typings';
 export const housesData: Array<HouseData> = [
   {
     id: 1,
@@ -469,3 +469,31 @@ export const housesData: Array<HouseData> = [
     data: null,
   },
 ];
+
+export const headerLinks:  Array<HeaderLink> = [
+  {
+    id: '1',
+    href: "#hero",
+    offset: '100',
+    children: "Home"
+  },
+  {
+    id: '2',
+    href: "#history",
+    offset: '100',
+    children: "Sobre Nós"
+  },
+  {
+    id: '3',
+    href: "#houses",
+    offset: '0',
+    children: "Casas"
+  },
+  {
+    id: '4',
+    href: "#contato",
+    offset: '0',
+    children: "Contato"
+  }
+];
+

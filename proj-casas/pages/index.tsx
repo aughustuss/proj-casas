@@ -2,6 +2,7 @@ import Banner from "@/components/Banner"
 import Carousel from "@/components/Carousel"
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
+import History from "@/components/History"
 import Houses from "@/components/Houses"
 import Roombanner from "@/components/Roombanner"
 import Search from "@/components/Search"
@@ -12,19 +13,22 @@ export default function Home() {
     <>
       <Header />
       <main className="font-roboto overflow-x-hidden tracking-wide">
-        <div className="w-full">
+        <div className="container mx-auto px-8 md:px-0">
           <Banner />
         </div>
-        <div className="w-full">
+        <div className="container mx-auto px-8 md:px-0">
           <Roombanner/>
         </div>
-        <div className="w-5/6 mx-auto">
+        <div className="container mx-auto px-8 md:px-0">
           <Carousel/>
         </div>
-        <div className="w-5/6 mx-auto">
+        <div className="container mx-auto px-8 md:px-0">
+          <History/>
+        </div>
+        <div className="container mx-auto px-8 sm:px-0">
           <Search />
         </div>
-        <div className="w-5/6 mx-auto py-16">
+        <div className="container mx-auto px-8 md:px-0 py-16">
           <Houses />
         </div>
       </main>
