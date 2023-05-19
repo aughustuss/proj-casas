@@ -1,10 +1,7 @@
-import Footer from '@/components/Footer'
-import Header from '@/components/Header'
 import Link from 'next/link'
 import { useRouter } from 'next/dist/client/router'
 import { UserForm } from '@/typings'
-import {InputAdornment, TextField, ThemeProvider, createTheme, styled, Snackbar, Alert } from '@mui/material'
-import axios, { AxiosError } from 'axios'
+import { InputAdornment, TextField, ThemeProvider, createTheme, styled, Snackbar, Alert } from '@mui/material'
 import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { ImSpinner2 } from 'react-icons/im'
@@ -13,6 +10,7 @@ import { BsFillKeyFill } from 'react-icons/bs'
 import { FcGoogle } from 'react-icons/fc'
 import { signIn } from 'next-auth/react'
 import { AiFillGithub } from 'react-icons/ai'
+import { GiHouseKeys } from 'react-icons/gi'
 
 export const CustomTextField = styled(TextField)({
   '& .MuiOutlinedInput-root': {
@@ -61,10 +59,9 @@ const Signin = () => {
 
   return (
     <>
-      <Header />
       <ThemeProvider theme={theme}>
         <main className='h-screen w-full flex justify-center items-center'>
-          <div className='w-5/6 sm:w-4/6 md:w-1/2 lg:w-1/3 xl:w-1/4 h-fit rounded-md shadow-md bg-white flex justify-center'>
+          <div className='w-5/6 sm:w-4/6 md:w-1/2 lg:w-1/3 xl:w-1/4 h-fit rounded-md bg-neutral-100 flex justify-center'>
             <div className='w-5/6 h-full flex flex-col items-center gap-y-4 py-4'>
               <h1 className='font-oswald font-semibold text-3xl text-primaryPurple'>Faça seu Login</h1>
               <form autoComplete='off' onSubmit={handleSubmit(onSubmit)} action="" className='w-full h-full flex flex-col justify-between items-center gap-y-4'>
@@ -130,7 +127,6 @@ const Signin = () => {
           </Snackbar>
         </main>
       </ThemeProvider>
-      <Footer />
     </>
   )
 }

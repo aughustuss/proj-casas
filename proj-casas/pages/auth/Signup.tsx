@@ -1,5 +1,3 @@
-import Footer from '@/components/Footer'
-import Header from '@/components/Header'
 import Link from 'next/link'
 import { useRouter } from 'next/dist/client/router'
 import { UserForm } from '@/typings'
@@ -52,10 +50,9 @@ const Signup = () => {
 
     return (
         <>
-            <Header />
             <ThemeProvider theme={theme}>
                 <main className='h-screen w-full flex justify-center items-center'>
-                    <div className='w-5/6 sm:w-4/6 md:w-1/2 lg:w-1/3 xl:w-1/4 h-fit rounded-md shadow-md bg-white flex justify-center'>
+                    <div className='w-5/6 sm:w-4/6 md:w-1/2 lg:w-1/3 xl:w-1/4 h-fit bg-neutral-100 flex justify-center'>
                         <div className='w-5/6 h-full flex flex-col items-center gap-y-4 py-4'>
                             <h1 className='font-oswald font-semibold text-3xl text-primaryPurple'>Crie sua conta</h1>
                             <form autoComplete='off' onSubmit={handleSubmit(onSubmit)} action="" className='w-full h-full flex flex-col justify-between items-center gap-y-4'>
@@ -128,7 +125,6 @@ const Signup = () => {
                     </Snackbar>
                 </main>
             </ThemeProvider>
-            <Footer />
         </>
     )
 }

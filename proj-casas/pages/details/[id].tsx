@@ -11,10 +11,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { BiBed, BiBath, BiArea } from 'react-icons/bi'
 import { TextField, styled, createTheme, ThemeProvider, Snackbar, Alert } from '@mui/material';
 import Footer from '@/components/Footer';
-import { AiFillMobile } from 'react-icons/ai';
-import { collectAppConfig } from 'next/dist/build/utils';
-import { CompletionInfoFlags } from 'typescript';
-import { setMaxIdleHTTPParsers } from 'http';
+import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io'
 interface HouseProps {
     house: HouseData;
     houses: HouseData[];
@@ -50,6 +47,8 @@ const HouseDetails = ({ house }: HouseProps) => {
     const { register, formState: { errors }, handleSubmit, getValues } = useForm<ContactFormData>();
     const { data: session } = useSession();
     const router = useRouter();
+
+    const [descSumm, setDescSumm] = useState<boolean>(false);
 
     const [contactOwner, setContactOwner] = useState<boolean>(false);
     const [buyOption, setBuyOption] = useState<boolean>(false)
@@ -126,6 +125,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                 setEmptyFieldsError(true);
             } else {
                 setEmptyFieldsError(false);
+                confirmBuy();
             }
         } else {
             confirmBuy();
@@ -157,6 +157,7 @@ const HouseDetails = ({ house }: HouseProps) => {
             setRentDaysError(true);
             return;
         };
+        const isAnyFieldEmpty = Object.keys(errors).length > 0;
         const newHouse = { ...house, data };
         const rentHouseExists = rentHouses.some((h) => h.id === newHouse.id);
         const boughtHouseExists = boughtHouses.some((h) => h.id === newHouse.id);
@@ -181,7 +182,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                         <div className='flex flex-col py-2 md:gap-y-0 lg:flex-row items-center w-full lg:justify-between gap-y-4 lg:gap-y-0'>
                             <p className='font-semibold text-xl w-full lg:w-auto'>{house.address}</p>
                             <p className='text-primaryGreen font-semibold w-full lg:w-auto text-xl flex flex-row gap-x-1 items-center'>R$ {house.price},00</p>
-                            <div className='flex flex-row items-center justify-start w-full lg:w-auto text-white gap-x-2'>
+                            <div className='flex flex-row items-center justify-start w-full lg:w-auto text-white gap-x-2 text-xs lg:text-base'>
                                 <p className='bg-primaryPurple w-fit rounded-full px-2 lg:text-center'>{house.country}</p>
                                 <p className='bg-primaryGreen w-fit rounded-full px-2 text-left lg:text-center '>{house.type}</p>
                                 {house.rentable && (
@@ -190,7 +191,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                             </div>
                         </div>
                         <div className='w-full flex flex-col lg:flex-row md:gap-x-4 gap-y-4 xl:gap-y-0 h-full'>
-                            <div className='flex flex-col gap-y-2'>
+                            <div className='flex flex-col gap-y-2 bg-white p-2 shadow-md border rounded-md'>
 
                                 <div className='max-w-3xl'>
                                     <Image alt='Imagem da casa' src={house.imageLg} className='bg-cover' />
@@ -202,16 +203,16 @@ const HouseDetails = ({ house }: HouseProps) => {
                                     <p className='flex flex-row items-center gap-x-1'><BiArea />{house.surface}</p>
                                 </div>
 
-                                <details className='max-w-3xl text-gray-500 cursor-pointer'>
-                                    <summary className=' before:content-none list-none [&::-webkit-details-marker]:hidden text-md lg:text-lg'>Descrição -</summary>
-                                    <p className='text-sm p-2'>{house.description}</p>
+                                <details onClick={() => setDescSumm(!descSumm)} className='max-w-3xl text-gray-500 cursor-pointer bg-neutral-100 border p-2'>
+                                    <summary className=' before:content-none list-none [&::-webkit-details-marker]:hidden text-sm lg:text-sm open:transition-all open:duration-300 flex flex-row items-center justify-center relative'>Descrição {descSumm ? <IoIosArrowDown className=' absolute right-2'/> : <IoIosArrowUp className=' absolute right-2'/>} </summary>
+                                    <p className='text-xs p-2'>{house.description}</p>
                                 </details>
                             </div>
                             {session ? (
-                                <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:w-1/3 flex flex-col gap-y-4 justify-between border border-primaryGreen p-2 rounded-sm '>
+                                <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:w-1/3 flex flex-col gap-y-4 justify-between border bg-white shadow-md p-2 rounded-md'>
                                     {!rentHouseAlreadyExists ? (
                                         <div>
-                                            <div className='flex flex-col w-full justify-center items-center text-center gap-y-4 text-sm lg:text-md '>
+                                            <div className='flex flex-col w-full justify-center items-center text-center gap-y-4 text-sm lg:text-md'>
                                                 {house.rentable ? (
                                                     <div className='flex flex-col gap-y-4'>
                                                         <div className='text-gray-500'>
@@ -321,8 +322,8 @@ const HouseDetails = ({ house }: HouseProps) => {
                                     </div>
                                 </form>
                             ) : (
-                                <div className='lg:w-1/3 h-auto w-full text-sm text-center text-gray-500 border flex flex-col justify-center'>
-                                    <p className='flex flex-col xl:flex-row items-center w-full justify-center gap-x-1'>Faça o <Link href='/auth/Signin' className='underline'>{' '} Login</Link> para solicitar aluguel ou compra da casa.</p>
+                                <div className='lg:w-1/3 w-full text-sm text-gray-500 mt-[150px] lg:min-h-[300px]'>
+                                    <p className='flex text-xs flex-col items-center sm:flex-row w-full justify-center gap-x-1'>Faça o <Link href='/auth/Signin' className='underline'>{' '} Login</Link> para solicitar aluguel ou compra da casa.</p>
                                 </div>
                             )}
                         </div>

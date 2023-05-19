@@ -24,7 +24,7 @@ const Houses = () => {
                         {houses && houses.slice((page - 1) * 9, (page - 1) * 9 + 9).map((house: HouseData) => {
                             return (
                                 <Link key={house.id} className='w-full flex flex-col justify-center items-center brightness-95 hover:brightness-100 transition duration-200' href={`/details/${house.id}`}>
-                                    <div className='flex flex-col justify-center w-full max-w-xs max-h-[450px] bg-white shadow-md p-4 gap-y-4'>
+                                    <div className='flex flex-col justify-center w-full max-w-xs max-h-[450px] bg-white rounded-md shadow-md p-4 gap-y-4'>
                                         <Image src={house.image} alt='Casa' className='hover:scale-105 transition duration-200' />
                                         <div className='flex flex-col w-full gap-y-2'>
                                             <div className='w-full flex flex-row items-center gap-x-2 text-white text-sm'>

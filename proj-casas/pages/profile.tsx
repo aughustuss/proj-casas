@@ -30,7 +30,7 @@ const Profile = () => {
             <Header />
             <section className='min-h-screen h-auto w-full mx-auto flex justify-center md:items-start items-center pt-16 pb-2 font-roboto overflow-y-auto'>
                 <div className='w-full md:w-5/6 flex flex-col h-full bg-white shadow-sm border text-black overflow-y-auto'>
-                    <div className='flex flex-col lg:flex-row w-full h-auto min-h-[140px] md:h-[50px] mb-auto' >
+                    <div className='flex flex-col lg:flex-row w-full h-auto min-h-[140px] md:min-h-[50px] mb-auto' >
                         <ul role="tablist" aria-label='Tabs' className='flex flex-col py-2 gap-y-2 lg:text-[14px] text-xs mb-auto md:flex-row items-center gap-x-4 justify-between w-full px-4 text-gray-500 border-b-neutral-100 border-b'>
                             <button type="button" className='hover:text-primaryGreen hs-tab-active:text-primaryGreen lg:bg-none bg-neutral-100 w-full p-2 rounded-sm border' id="tabs-with-underline-item-1" data-hs-tab="#tabs-with-underline-1" aria-controls="tabs-with-underline-1" role="tab">
                                 Minha Conta
@@ -70,7 +70,7 @@ const Profile = () => {
                                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-500 place-items-center py-4'>
                                     {rentHouses.length > 0 && rentHouses.map((house) => {
                                         return (
-                                            <div key={house.id} className='max-w-[300px] md:w-full lg:max-w-full justify-center items-center flex flex-col h-auto min-h-[160px] border bg-neutral-100 p-2 '>
+                                            <div key={house.id} className='max-w-[300px] md:w-full lg:max-w-full justify-center items-center flex flex-col h-auto min-h-[160px] border bg-neutral-100 p-2 rounded-md shadow-md'>
                                                 <div className="flex flex-col xl:flex-row items-center gap-x-4">
                                                     <Image alt='Casa' src={house.image} className=' h-auto w-[200px] bg-cover' />
                                                     <div className='flex flex-col gap-y-2 h-full justify-between w-full'>
@@ -105,7 +105,7 @@ const Profile = () => {
                                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-500 place-items-center py-4'>
                                     {boughtHouses.length > 0 && boughtHouses.map((house) => {
                                         return (
-                                            <div key={house.id} className='max-w-[300px] md:w-full lg:max-w-full justify-center items-center flex flex-col h-auto min-h-[160px] border bg-neutral-100 p-2 '>
+                                            <div key={house.id} className='max-w-[300px] md:w-full lg:max-w-full justify-center items-center flex flex-col h-auto min-h-[160px] border bg-neutral-100 p-2 rounded-md shadow-md '>
                                                 <div className="flex flex-col xl:flex-row items-center gap-x-4">
                                                     <Image alt='Casa' src={house.image} className=' h-auto w-[200px] bg-cover' />
                                                     <div className='flex flex-col gap-y-2 h-full justify-between w-full'>
