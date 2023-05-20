@@ -22,6 +22,7 @@ module.exports = {
         secondary: '#ffa500',
         tertiary: '#4066ff',
         quartiary: "#e6e6ff",
+        quinary: "#007aff",
         gray: '#8c8b8b',
       },
       fontFamily: {

@@ -19,10 +19,10 @@ interface HouseProps {
 const CustomTextField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
-            'borderColor': '#01D28E',
+            'border border-slate-200Color': '#01D28E',
         },
         '&:hover fieldset': {
-            'borderColor': '#01D28E'
+            'border border-slate-200Color': '#01D28E'
         },
         '& input': {
             'color': 'rgb(163, 163, 163) !important'
@@ -177,21 +177,21 @@ const HouseDetails = ({ house }: HouseProps) => {
         <>
             <Header />
             <ThemeProvider theme={theme}>
-                <section className='w-5/6 mx-auto py-24 min-h-screen h-auto flex justify-center items-center font-roboto relative tracking-wide'>
+                <section className='w-5/6 mx-auto py-24 min-h-screen h-auto flex justify-center items-center font-poppins relative tracking-wide text-gray'>
                     <div className='w-full h-full flex flex-col'>
                         <div className='flex flex-col py-2 md:gap-y-0 lg:flex-row items-center w-full lg:justify-between gap-y-4 lg:gap-y-0'>
-                            <p className='font-semibold text-xl w-full lg:w-auto'>{house.address}</p>
-                            <p className='text-primaryGreen font-semibold w-full lg:w-auto text-xl flex flex-row gap-x-1 items-center'>R$ {house.price},00</p>
+                            <p className='font-semibold text-2xl text-primary w-full lg:w-auto'>{house.address}</p>
+                            <p className='text-secondary w-full lg:w-auto text-xl flex flex-row gap-x-1 items-center'>R$ <span className='text-gray font-semibold'>{house.price},00</span> </p>
                             <div className='flex flex-row items-center justify-start w-full lg:w-auto text-white gap-x-2 text-xs lg:text-base'>
-                                <p className='bg-primaryPurple w-fit rounded-full px-2 lg:text-center'>{house.country}</p>
-                                <p className='bg-primaryGreen w-fit rounded-full px-2 text-left lg:text-center '>{house.type}</p>
+                                <p className='bg-primary w-fit rounded-full px-2 lg:text-center'>{house.country}</p>
+                                <p className='bg-secondary w-fit rounded-full px-2 text-left lg:text-center '>{house.type}</p>
                                 {house.rentable && (
-                                    <p className='bg-primaryBlue w-fit rounded-full px-2 text-left lg:text-center '>Alugável</p>
+                                    <p className='bg-quinary w-fit rounded-full px-2 text-left lg:text-center '>Alugável</p>
                                 )}
                             </div>
                         </div>
                         <div className='w-full flex flex-col lg:flex-row md:gap-x-4 gap-y-4 xl:gap-y-0 h-full'>
-                            <div className='flex flex-col gap-y-2 bg-white p-2 shadow-md border rounded-md'>
+                            <div className='flex flex-col gap-y-2 bg-white p-2 shadow-md border border-slate-200 rounded-md'>
 
                                 <div className='max-w-3xl'>
                                     <Image alt='Imagem da casa' src={house.imageLg} className='bg-cover' />
@@ -203,13 +203,13 @@ const HouseDetails = ({ house }: HouseProps) => {
                                     <p className='flex flex-row items-center gap-x-1'><BiArea />{house.surface}</p>
                                 </div>
 
-                                <details onClick={() => setDescSumm(!descSumm)} className='max-w-3xl text-gray-500 cursor-pointer bg-neutral-100 border p-2'>
+                                <details onClick={() => setDescSumm(!descSumm)} className='max-w-3xl text-gray-500 cursor-pointer bg-neutral-100 border border-slate-200 p-2'>
                                     <summary className=' before:content-none list-none [&::-webkit-details-marker]:hidden text-sm lg:text-sm open:transition-all open:duration-300 flex flex-row items-center justify-center relative'>Descrição {descSumm ? <IoIosArrowDown className=' absolute right-2'/> : <IoIosArrowUp className=' absolute right-2'/>} </summary>
                                     <p className='text-xs p-2'>{house.description}</p>
                                 </details>
                             </div>
                             {session ? (
-                                <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:w-1/3 flex flex-col gap-y-4 justify-between border bg-white shadow-md p-2 rounded-md'>
+                                <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:w-1/3 flex flex-col gap-y-4 justify-between border border-slate-200 bg-white shadow-md p-2 rounded-md'>
                                     {!rentHouseAlreadyExists ? (
                                         <div>
                                             <div className='flex flex-col w-full justify-center items-center text-center gap-y-4 text-sm lg:text-md'>
@@ -219,7 +219,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                             Esta propriedade pode ser alugada ou comprada inteiramente, selecione abaixo uma das opções e entre em contato com o proprietário em caso de dúvidas.
                                                         </div>
                                                         <p className='text-gray-500'>Se desejar alugar, selecione a quantidade de dias abaixo: </p>
-                                                        <select {...register("rentDays", { required: buyOption })} name="rentDays" className='outline-none w-full text-center border border-primaryGreen p-2 rounded-sm text-primaryGreen'>
+                                                        <select {...register("rentDays", { required: buyOption })} name="rentDays" className='outline-none w-full text-center border-slate-200 bg-primary text-white border p-2 rounded-sm'>
                                                             <option defaultValue='Selecione os dias para alugar' >Selecione os dias para alugar</option>
                                                             {RentOpts && RentOpts.map(({ days, label, price }) => {
                                                                 return (
@@ -254,10 +254,10 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                 )}
                                             </div>
                                             {contactOwner && (
-                                                <div className='border flex flex-col rounded-lg h-auto relative'>
+                                                <div className='border border-slate-200 flex flex-col rounded-lg h-auto relative'>
                                                     <button onClick={() => setContactOwner(false)} className='bg-gray-300 hover:bg-gray-400 transition duration-200 rounded-sm absolute right-0 top-0 text-gray-500 m-1 px-2' title='Cancelar mensagem'>x</button>
                                                     <div className='flex flex-col lg:flex-row items-center gap-x-4 w-full p-8 '>
-                                                        <Image width={90} height={90} alt='Locador' src={house.agent.image} className='object-cover border border-neutral-300 rounded-full p-1' />
+                                                        <Image width={90} height={90} alt='Locador' src={house.agent.image} className='object-cover border-slate-200 border border-slate-200-neutral-300 rounded-full p-1' />
                                                         <div className='flex flex-col w-full '>
                                                             <p className='text-[14px] text-center text-gray-500'>Proprietário(a)</p>
                                                             <p className='text-center font-semibold text-lg'>{house.agent.name}</p>
@@ -317,8 +317,8 @@ const HouseDetails = ({ house }: HouseProps) => {
                                         </div>
                                     )}
                                     <div className='w-full flex flex-col gap-y-2'>
-                                        <button type="button" onClick={handleBuyOption} disabled={boughtHouseAlreadyExists} className=' disabled:cursor-not-allowed disabled:bg-gray-400/40 disabled:text-gray-100 w-full bg-primaryGreen hover:bg-primaryGreen/80 transition duration-200 p-2 rounded-sm text-white'>Solicitar Compra</button>
-                                        {house.rentable && (<button type='submit' disabled={rentHouseAlreadyExists} className='disabled:cursor-not-allowed disabled:bg-gray-400/40 disabled:text-gray-100 disabled:border-none w-full border border-primaryGreen transition duration-200 p-2 rounded-sm text-primaryGreen'>Solicitar Aluguel</button>)}
+                                        <button type="button" onClick={handleBuyOption} disabled={boughtHouseAlreadyExists} className=' disabled:cursor-not-allowed disabled:bg-gray-400/40 disabled:text-gray-100 w-full bg-primary hover:bg-primary/80 transition duration-200 p-2 rounded-sm text-white'>Solicitar Compra</button>
+                                        {house.rentable && (<button type='submit' disabled={rentHouseAlreadyExists} className='disabled:cursor-not-allowed disabled:bg-gray-400/40 disabled:text-gray-100 disabled:border border-slate-200-none w-full border border-slate-200 border-slate-200-primary transition duration-200 p-2 rounded-sm text-primary'>Solicitar Aluguel</button>)}
                                     </div>
                                 </form>
                             ) : (
@@ -336,7 +336,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                         <div className='h-full w-full'>
                                             <button onClick={() => setBuyOption(false)} className='bg-gray-300 hover:bg-gray-400 transition duration-200 rounded-sm absolute right-0 top-0 text-gray-500 m-1 px-2' title='Cancelar mensagem'>x</button>
                                             <div className='flex flex-col w-full pt-6 gap-y-4'>
-                                                <p className='text-2xl font-semibold border-b' >Resumo do pedido</p>
+                                                <p className='text-2xl font-semibold border border-slate-200-b' >Resumo do pedido</p>
                                                 <div className='flex flex-col w-full gap-y-4 text-sm'>
                                                     <p className='flex flex-row items-center gap-x-2' >Valor do imóvel: R$ {house.price},00</p>
                                                     <p >Proprietário: {house.agent.name}</p>
@@ -351,8 +351,8 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                 </div>
                                             </div>
                                             <div className='flex flex-row w-full gap-x-4'>
-                                                <button onClick={confirmBuy} type="submit" className='w-full bg-primaryGreen p-2 rounded-sm text-white hover:bg-primaryGreen/80 transition duration-200'>Confirmar</button>
-                                                <button onClick={() => setBuyOption(false)} className='w-full p-2 border border-primaryGreen rounded-sm text-primaryGreen'>Cancelar</button>
+                                                <button onClick={confirmBuy} type="submit" className='w-full bg-primary p-2 rounded-sm text-white hover:bg-primary/80 transition duration-200'>Confirmar</button>
+                                                <button onClick={() => setBuyOption(false)} className='w-full p-2 border border-slate-200 border-slate-200-primary rounded-sm text-primary'>Cancelar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -363,7 +363,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                             <p>Esta casa já foi adicionada em seus aluguéis ou em suas compras. Favor selecionar outra.</p>
                                         </div>
                                         <div className='w-full text-center'>
-                                            <button onClick={() => setBuyOption(false)} className='w-full p-2 rounded-sm bg-primaryGreen hover:bg-primaryGreen/80 transition duration-200 text-white'>Ok</button>
+                                            <button onClick={() => setBuyOption(false)} className='w-full p-2 rounded-sm bg-primary hover:bg-primary/80 transition duration-200 text-white'>Ok</button>
                                         </div>
                                     </div>
                                 )}

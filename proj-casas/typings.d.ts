@@ -1,4 +1,5 @@
 import { StaticImageData } from "next/image";
+import { IconType } from "react-icons/lib";
 
 export interface HouseData {
     id: number;
@@ -29,6 +30,22 @@ export interface HeaderLink {
     offset: string;
     children: string;
 };
+
+export interface Accordion {
+    id: number;
+    icon: IconType;
+    content: string;
+    title: string;
+    focused: boolean;
+};
+
+export interface Contact {
+    id: string;
+    icon: IconType;
+    title: string;
+    info: string | null;
+    button: string;
+}
 
 export interface HouseContextType {
     country: string;

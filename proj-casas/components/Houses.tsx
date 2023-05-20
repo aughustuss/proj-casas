@@ -23,15 +23,15 @@ const Houses = () => {
                     <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'>
                         {houses && houses.slice((page - 1) * 12, (page - 1) * 12 + 12).map((house: HouseData) => {
                             return (
-                                <Link key={house.id} className='w-full flex flex-col justify-center items-center brightness-95 hover:brightness-100 transition duration-200 font-roboto' href={`/details/${house.id}`}>
-                                    <div className='flex flex-col justify-between w-full max-w-xs min-h-[300px] max-h-[350px] bg-white rounded-md shadow-md p-4 gap-y-4'>
+                                <Link key={house.id} className='w-full flex flex-col justify-center items-center hover:bg-quartiary transition duration-200 font-roboto' href={`/details/${house.id}`}>
+                                    <div className='flex flex-col justify-between w-full max-w-xs min-h-[300px] max-h-[350px] h-full rounded-md shadow-md p-4 gap-y-4'>
                                         <div className='flex flex-col gap-y-4'>
                                             <Image src={house.image} alt='Casa' className='hover:scale-105 transition duration-200 w-full object-cover h-[130px] rounded-md' />
                                             <div className='w-full flex flex-wrap flex-row  items-center gap-2 text-white text-sm'>
                                                 <p className='bg-primary w-fit rounded-full px-2 text-center '>{house.type}</p>
                                                 <p className='bg-secondary w-fit rounded-full px-2 text-center'>{house.country}</p>
                                                 {house.rentable && (
-                                                    <p className=' bg-tertiary w-fit rounded-full px-2 text-center'>Alugável</p>
+                                                    <p className=' bg-quinary w-fit rounded-full px-2 text-center'>Alugável</p>
                                                 )}
                                                 <p className='text-gray text-base'>{house.address}</p>
                                                 <div className='flex flex-row gap-x-2 text-gray items-center'>

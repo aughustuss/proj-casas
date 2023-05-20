@@ -52,7 +52,11 @@ import Agent9 from '../public/images/people/agent9.png';
 import Agent10 from '../public/images/people/agent10.png';
 import Agent11 from '../public/images/people/agent11.png';
 import Agent12 from '../public/images/people/agent12.png';
-import { HouseData, ContactFormData, HeaderLink } from '@/typings';
+import { HouseData, ContactFormData, HeaderLink, Accordion, Contact } from '@/typings';
+import { TbTargetArrow } from 'react-icons/tb';
+import { MdEmail, MdLocalOffer, MdOutlineWorkHistory } from 'react-icons/md';
+import { RiTeamFill } from 'react-icons/ri';
+import { BsFillCameraVideoFill, BsFillChatLeftDotsFill, BsFillTelephoneFill } from 'react-icons/bs';
 export const housesData: Array<HouseData> = [
   {
     id: 1,
@@ -496,4 +500,66 @@ export const headerLinks:  Array<HeaderLink> = [
     children: "Contato"
   }
 ];
+
+export const accordions: Array<Accordion> = [
+  {
+    id: 1,
+    content: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio minima eum fuga unde, veniam odio praesentium nemo voluptas sit, possimus porro reprehenderit hic ea eveniet assumenda aspernatur quidem autem eos?",
+    title: "Nossa missão",
+    icon: TbTargetArrow,
+    focused: false,
+  },
+  {
+    id: 2,
+    content: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio minima eum fuga unde, veniam odio praesentium nemo voluptas sit, possimus porro reprehenderit hic ea eveniet assumenda aspernatur quidem autem eos?",
+    title: "Nossa história",
+    icon: MdOutlineWorkHistory,
+    focused: false,
+  },
+  {
+    id: 3,
+    content: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio minima eum fuga unde, veniam odio praesentium nemo voluptas sit, possimus porro reprehenderit hic ea eveniet assumenda aspernatur quidem autem eos?",
+    title: "O que oferecemos",
+    icon: MdLocalOffer,
+    focused: false,
+  },
+  {
+    id: 4,
+    content: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio minima eum fuga unde, veniam odio praesentium nemo voluptas sit, possimus porro reprehenderit hic ea eveniet assumenda aspernatur quidem autem eos?",
+    title: "Quer fazer parte do nosso time?",
+    icon: RiTeamFill,
+    focused: false,
+  }
+];
+
+export const contacts: Array<Contact> = [
+  {
+    id: '1',
+    icon: BsFillTelephoneFill,
+    title: "Telefone",
+    info: "3232323232",
+    button: "Ligar agora"
+  },
+  {
+    id: '2',
+    icon: BsFillChatLeftDotsFill,
+    title: "Mensagem",
+    info: "",
+    button: "Enviar uma mensagem"
+  },
+  {
+    id: '3',
+    icon: BsFillCameraVideoFill,
+    title: "Agendar ligação",
+    info: "",
+    button: "Enviar solicitação"
+  },
+  {
+    id: '4',
+    icon: MdEmail,
+    title: "Enviar email",
+    info: "augustodpmenezes @gmail.com",
+    button: "Enviar email"
+  }
+]
 

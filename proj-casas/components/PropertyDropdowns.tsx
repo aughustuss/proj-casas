@@ -2,23 +2,25 @@ import React, { useContext, useState } from 'react'
 import { Menu } from '@headlessui/react'
 import HouseContext from '@/contexts/Housecontext'
 import { AiOutlineHome } from 'react-icons/ai'
-import { RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri'
+import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
 const PropertyDropDown = () => {
     const { property, setProperty, properties } = useContext(HouseContext);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     return (
         <>
-            <Menu as='div' className='relative w-full md:w-[250px]' >
-                <Menu.Button className='w-full text-left flex flex-row items-center gap-x-2' onClick={() => setIsOpen(!isOpen)}>
-                    <AiOutlineHome size={24} />
+            <Menu as='div' className='relative w-full ' >
+                <Menu.Button className='w-full text-left flex flex-row items-center gap-x-2 text-primary' onClick={() => setIsOpen(!isOpen)}>
+                    <div className='bg-quartiary text-quinary p-2 rounded-md'>
+                        <AiOutlineHome size={24} />
+                    </div>
                     <div className='flex flex-row items-center gap-x-2 w-full'>
                         <div className='flex flex-row items-center justify-between w-full'>
                             <div className='flex flex-col justify-center items-center w-full'>
-                                {property}
-                                <p className='text-xs text-gray-500'>Selecione o seu imóvel</p>
+                                <p className='font-semibold font-oswald text-lg'>{property}</p>
+                                <p className='text-xs text-gray'>Selecione o seu imóvel</p>
                             </div>
-                            <div>
-                                {isOpen ? <RiArrowUpSLine /> : <RiArrowDownSLine />}
+                            <div className='bg-quartiary text-quinary p-2 rounded-md'>
+                                {isOpen ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
                             </div>
                         </div>
                     </div>

@@ -8,19 +8,23 @@ const Search = () => {
     const { handleClick } = useContext(HouseContext);
     return (
         <>
-            <div className='w-full flex flex-col lg:flex-row items-center'>
-                <p className='text-xl pb-4 block lg:hidden'>Aplique seus filtros</p>
-                <div className='w-full flex flex-col gap-y-6 lg:gap-y-0 items-center lg:flex-row text-primaryPurple rounded-sm justify-center p-4 lg:py-2 border shadow-md md:justify-between'>
-                    <div className='md:w-[250px] w-full z-30'>
+            <div className='w-full flex flex-col items-center text-gray gap-y-4'>
+                <div className='w-full flex flex-col items-center lg:items-end font-oswald'>
+                    <p className='text-secondary text-2xl'>As disponíveis</p>
+                    <p className=' text-primary text-5xl font-semibold text-center lg:text-start'>Veja todas as propriedades anunciadas</p>
+                </div>
+                <p className='text-4xl font-oswald font-semibold text-primary pb-4 w-full flex items-center lg:items-start'>Aplique seus filtros</p>
+                <div className='w-full flex flex-col gap-y-6 lg:gap-y-0 items-center lg:flex-row rounded-sm justify-center p-4 lg:py-2 border border-slate-200 shadow-md shadow-quartiary md:justify-between'>
+                    <div className='lg:w-1/4 w-full z-30 '>
                         <CountryDropDown />
                     </div>
-                    <div className='md:w-[250px] w-full z-20'>
+                    <div className='lg:w-1/4 w-full z-20'>
                         <PropertyDropDown />
                     </div>
-                    <div className='md:w-[250px] w-full z-10'>
-                        <PriceDropDown/>
+                    <div className='lg:w-1/4 w-full z-10'>
+                        <PriceDropDown />
                     </div>
-                    <button onClick={handleClick} className='w-full lg:w-32 justify-center flex flex-row bg-primary rounded-sm text-white hover:bg-primaryGreen/80 transition duration-200 py-2'>
+                    <button onClick={handleClick} className='w-full md:w-1/4 lg:w-32 justify-center flex flex-row bg-primary rounded-sm text-white hover:bg-primaryGreen/80 transition duration-200 py-2'>
                         <HiOutlineSearch size={20} className='m-1' />
                     </button>
                 </div>

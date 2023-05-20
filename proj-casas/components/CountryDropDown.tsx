@@ -2,23 +2,25 @@ import React, { useContext, useState } from 'react'
 import { Menu } from '@headlessui/react'
 import HouseContext from '@/contexts/Housecontext'
 import { HiOutlineMap } from 'react-icons/hi'
-import { RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri'
+import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
 const CountryDropDown = () => {
     const { country, setCountry, countries } = useContext(HouseContext);
     const [isOpen, setIsOpen] = useState<boolean>(false);
     return (
         <>
             <Menu as='div' className='relative w-full' >
-                <Menu.Button className='w-full text-left flex flex-row items-center gap-x-2' onClick={() => setIsOpen(!isOpen)}>
-                    <HiOutlineMap size={24} />
+                <Menu.Button className='w-full text-left flex flex-row items-center gap-x-2 text-primary' onClick={() => setIsOpen(!isOpen)}>
+                    <div className='bg-quartiary text-quinary p-2 rounded-md'>
+                        <HiOutlineMap size={24} />
+                    </div>
                     <div className='flex flex-row items-center gap-x-2 w-full'>
                         <div className='flex flex-row items-center justify-between w-full'>
                             <div className='flex flex-col justify-center items-center w-full'>
-                                {country}
-                                <p className='text-xs text-gray-500'>Selecione a sua localidade</p>
+                                <p className='font-semibold font-oswald text-lg'>{country}</p>
+                                <p className='text-xs text-gray'>Selecione a sua localidade</p>
                             </div>
-                            <div>
-                                {isOpen ? <RiArrowUpSLine /> : <RiArrowDownSLine />}
+                            <div className='bg-quartiary text-quinary p-2 rounded-md'>
+                                {isOpen ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
                             </div>
                         </div>
                     </div>

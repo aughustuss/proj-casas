@@ -24,7 +24,7 @@ const Carousel = () => {
     };
     return (
         <>
-            <div className='w-full pt-16 h-auto flex flex-col gap-y-4 '>
+            <div className='w-full pt-16 h-auto flex flex-col gap-y-4'>
                 <div className='w-full flex flex-col gap-y-2 font-oswald items-center lg:items-start'>
                     <p className='text-secondary text-2xl'>As melhores escolhas</p>
                     <p className=' text-primary text-5xl font-semibold text-center lg:text-start'>Veja as casas mais populares</p>
@@ -57,7 +57,7 @@ const Carousel = () => {
                     {houses && houses.map((house: HouseData) => {
                         return (
                             <SwiperSlide key={house.id}>
-                                <Link className='w-full flex flex-col hover:bg-quartiary rounded-md transition duration-200 hover:shadow-md p-3' href={`/details/${house.id}`}>
+                                <Link className='w-full flex flex-col hover:bg-quartiary rounded-md transition duration-200 hover:shadow-md lg:p-3' href={`/details/${house.id}`}>
                                     <div className='w-full flex flex-col gap-y-4 justify-center items-center'>
                                         <Image className='w-full max-w-xs h-36 rounded-md object-cover hover:scale-105 transition duration-200' src={house.image} alt='Casas' />
                                         <p className='text-primary text-lg font-semibold'>{house.address}</p>
