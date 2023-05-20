@@ -11,7 +11,8 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { BiBed, BiBath, BiArea } from 'react-icons/bi'
 import { TextField, styled, createTheme, ThemeProvider, Snackbar, Alert } from '@mui/material';
 import Footer from '@/components/Footer';
-import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io'
+import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
+import { MdDescription } from 'react-icons/md';
 interface HouseProps {
     house: HouseData;
     houses: HouseData[];
@@ -19,10 +20,10 @@ interface HouseProps {
 const CustomTextField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
-            'border border-slate-200Color': '#01D28E',
+            'border border-slate-200Color': '#007aff',
         },
         '&:hover fieldset': {
-            'border border-slate-200Color': '#01D28E'
+            'border border-slate-200Color': '#007aff'
         },
         '& input': {
             'color': 'rgb(163, 163, 163) !important'
@@ -30,9 +31,6 @@ const CustomTextField = styled(TextField)({
         '& textarea': {
             'color': 'rgb(163, 163, 163)'
         }
-    },
-    '& MuiContainedButton-root': {
-
     }
 });
 
@@ -40,7 +38,7 @@ const HouseDetails = ({ house }: HouseProps) => {
     const theme = createTheme({
         palette: {
             primary: {
-                main: '#01D28E'
+                main: '#007aff'
             },
         },
     })
@@ -177,11 +175,11 @@ const HouseDetails = ({ house }: HouseProps) => {
         <>
             <Header />
             <ThemeProvider theme={theme}>
-                <section className='w-5/6 mx-auto py-24 min-h-screen h-auto flex justify-center items-center font-poppins relative tracking-wide text-gray'>
+                <section className='container px-8 md:px-0 mx-auto py-24 min-h-screen h-auto flex justify-center items-center font-poppins relative tracking-wide text-gray'>
                     <div className='w-full h-full flex flex-col'>
                         <div className='flex flex-col py-2 md:gap-y-0 lg:flex-row items-center w-full lg:justify-between gap-y-4 lg:gap-y-0'>
                             <p className='font-semibold text-2xl text-primary w-full lg:w-auto'>{house.address}</p>
-                            <p className='text-secondary w-full lg:w-auto text-xl flex flex-row gap-x-1 items-center'>R$ <span className='text-gray font-semibold'>{house.price},00</span> </p>
+                            <p className='text-secondary w-full lg:w-auto text-xl flex flex-row gap-x-1 items-center font-semibold'>R$ <span className='text-gray '>{house.price},00</span> </p>
                             <div className='flex flex-row items-center justify-start w-full lg:w-auto text-white gap-x-2 text-xs lg:text-base'>
                                 <p className='bg-primary w-fit rounded-full px-2 lg:text-center'>{house.country}</p>
                                 <p className='bg-secondary w-fit rounded-full px-2 text-left lg:text-center '>{house.type}</p>
@@ -191,34 +189,42 @@ const HouseDetails = ({ house }: HouseProps) => {
                             </div>
                         </div>
                         <div className='w-full flex flex-col lg:flex-row md:gap-x-4 gap-y-4 xl:gap-y-0 h-full'>
-                            <div className='flex flex-col gap-y-2 bg-white p-2 shadow-md border border-slate-200 rounded-md'>
+                            <div className='flex-[1.5] flex flex-col gap-y-2 bg-white p-2 shadow-md border border-slate-200 rounded-md'>
 
-                                <div className='max-w-3xl'>
-                                    <Image alt='Imagem da casa' src={house.imageLg} className='bg-cover' />
+                                <div className='max-w-4xl'>
+                                    <Image alt='Imagem da casa' src={house.imageLg} className='w-full object-cover' />
                                 </div>
 
-                                <div className='flex flex-row items-center gap-x-2 text-md font-semibold text-primaryPurple'>
+                                <div className='flex flex-row items-center gap-x-2 text-xs lg:text-sm font-semibold text-primaryPurple'>
                                     <p className='flex flex-row items-center gap-x-1'><BiBed />{house.bedrooms}</p>
                                     <p className='flex flex-row items-center gap-x-1'><BiBath />{house.bathrooms}</p>
                                     <p className='flex flex-row items-center gap-x-1'><BiArea />{house.surface}</p>
                                 </div>
 
-                                <details onClick={() => setDescSumm(!descSumm)} className='max-w-3xl text-gray-500 cursor-pointer bg-neutral-100 border border-slate-200 p-2'>
-                                    <summary className=' before:content-none list-none [&::-webkit-details-marker]:hidden text-sm lg:text-sm open:transition-all open:duration-300 flex flex-row items-center justify-center relative'>Descrição {descSumm ? <IoIosArrowDown className=' absolute right-2'/> : <IoIosArrowUp className=' absolute right-2'/>} </summary>
-                                    <p className='text-xs p-2'>{house.description}</p>
+                                <details onClick={() => setDescSumm(!descSumm)} className={`${descSumm ? 'shadow-md shadow-quartiary' : ''} text-xl items-center border border-slate-200 p-2 rounded-md`}>
+                                    <summary className='w-full font-oswald text-primary  font-semibold before:content-none list-none [&::-webkit-details-marker]:hidden text-sm lg:text-lg open:transition-all open:duration-300 flex flex-row items-center justify-between relative'>
+                                        <span className='bg-quartiary rounded-md text-quinary p-2'>
+                                            <MdDescription/>
+                                        </span>
+                                        Descrição
+                                        <span className='bg-quartiary rounded-md text-quinary p-2'>
+                                            {!descSumm ? <IoMdArrowDropup/> : <IoMdArrowDropdown/>}
+                                        </span>
+                                    </summary>
+                                    <p className='text-xs lg:text-sm p-2'>{house.description}</p>
                                 </details>
                             </div>
                             {session ? (
-                                <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:w-1/3 flex flex-col gap-y-4 justify-between border border-slate-200 bg-white shadow-md p-2 rounded-md'>
+                                <form onSubmit={handleSubmit(onSubmit)} className='w-full flex-[0.6] flex flex-col gap-y-4 justify-between border border-slate-200 bg-white shadow-md p-2 rounded-md'>
                                     {!rentHouseAlreadyExists ? (
                                         <div>
-                                            <div className='flex flex-col w-full justify-center items-center text-center gap-y-4 text-sm lg:text-md'>
+                                            <div className='flex flex-col w-full justify-center items-center text-center gap-y-4 text-xs lg:text-sm'>
                                                 {house.rentable ? (
                                                     <div className='flex flex-col gap-y-4'>
-                                                        <div className='text-gray-500'>
+                                                        <div >
                                                             Esta propriedade pode ser alugada ou comprada inteiramente, selecione abaixo uma das opções e entre em contato com o proprietário em caso de dúvidas.
                                                         </div>
-                                                        <p className='text-gray-500'>Se desejar alugar, selecione a quantidade de dias abaixo: </p>
+                                                        <p >Se desejar alugar, selecione a quantidade de dias abaixo: </p>
                                                         <select {...register("rentDays", { required: buyOption })} name="rentDays" className='outline-none w-full text-center border-slate-200 bg-primary text-white border p-2 rounded-sm'>
                                                             <option defaultValue='Selecione os dias para alugar' >Selecione os dias para alugar</option>
                                                             {RentOpts && RentOpts.map(({ days, label, price }) => {
@@ -227,10 +233,10 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                                 )
                                                             })}
                                                         </select>
-                                                        <p className='w-full text-center text-gray-500 text-xs'>{rentDaysError && (<p>Selecione quantos dias.</p>)}</p>
+                                                        <p className='w-full text-center text-xs'>{rentDaysError && (<p>Selecione quantos dias.</p>)}</p>
                                                     </div>
                                                 ) : (
-                                                    <div className='text-gray-500'>
+                                                    <div>
                                                         Esta propriedade não está disponível para aluguel. Mande uma mensagem para o proprietário em caso
                                                         de dúvidas ou se apresente caso queira comprar.
                                                     </div>
@@ -259,14 +265,14 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                     <div className='flex flex-col lg:flex-row items-center gap-x-4 w-full p-8 '>
                                                         <Image width={90} height={90} alt='Locador' src={house.agent.image} className='object-cover border-slate-200 border border-slate-200-neutral-300 rounded-full p-1' />
                                                         <div className='flex flex-col w-full '>
-                                                            <p className='text-[14px] text-center text-gray-500'>Proprietário(a)</p>
-                                                            <p className='text-center font-semibold text-lg'>{house.agent.name}</p>
+                                                            <p className='text-center text-gray-500 text-xs lg:text-sm'>Proprietário(a)</p>
+                                                            <p className='text-center font-semibold text-sm lg:text-lg'>{house.agent.name}</p>
                                                         </div>
                                                     </div>
 
-                                                    <div className='w-full h-full items-center flex flex-col justify-between gap-y-4 py-2'>
+                                                    <div className='w-full h-full items-center flex flex-col justify-between gap-y-4 py-2 text-xs'>
                                                         <div className='w-5/6 flex flex-col justify-center gap-y-4'>
-                                                            <p className='text-red-500 text-sm'>{emptyFieldsError && ( <p>Preencha todos os campos.</p> )}</p>
+                                                            <p className='text-red-500 text-sm'>{emptyFieldsError && (<p>Preencha todos os campos.</p>)}</p>
                                                             <CustomTextField
                                                                 label='Nome'
                                                                 type='text'
@@ -312,13 +318,13 @@ const HouseDetails = ({ house }: HouseProps) => {
                                             )}
                                         </div>
                                     ) : (
-                                        <div className='flex flex-col text-center items-center justify-center w-full h-[450px] text-sm text-gray-500'>
+                                        <div className='flex flex-col text-center items-center justify-center w-full h-[200px] max-h-[450px] text-xs lg:text-sm '>
                                             <p>Esta casa já foi adicionada em seus aluguéis ou em suas compras. Favor selecionar outra.</p>
                                         </div>
                                     )}
-                                    <div className='w-full flex flex-col gap-y-2'>
-                                        <button type="button" onClick={handleBuyOption} disabled={boughtHouseAlreadyExists} className=' disabled:cursor-not-allowed disabled:bg-gray-400/40 disabled:text-gray-100 w-full bg-primary hover:bg-primary/80 transition duration-200 p-2 rounded-sm text-white'>Solicitar Compra</button>
-                                        {house.rentable && (<button type='submit' disabled={rentHouseAlreadyExists} className='disabled:cursor-not-allowed disabled:bg-gray-400/40 disabled:text-gray-100 disabled:border border-slate-200-none w-full border border-slate-200 border-slate-200-primary transition duration-200 p-2 rounded-sm text-primary'>Solicitar Aluguel</button>)}
+                                    <div className='w-full flex flex-col gap-y-2 text-xs lg:text-sm font-semibold'>
+                                        <button type="button" onClick={handleBuyOption} disabled={boughtHouseAlreadyExists} className=' disabled:cursor-not-allowed disabled:bg-gray-400/40 disabled:text-gray-100 w-full bg-primary hover:scale-105 transition duration-200 p-2 rounded-sm text-white'>Solicitar Compra</button>
+                                        {house.rentable && (<button type='submit' disabled={rentHouseAlreadyExists} className='disabled:cursor-not-allowed disabled:bg-gray-400/40 disabled:text-gray-100 w-full border border-slate-200 hover:scale-105 transition duration-200 p-2 rounded-sm text-quinary'>Solicitar Aluguel</button>)}
                                     </div>
                                 </form>
                             ) : (

@@ -8,7 +8,7 @@ const Search = () => {
     const { handleClick } = useContext(HouseContext);
     return (
         <>
-            <div className='w-full flex flex-col items-center text-gray gap-y-4'>
+            <div className='w-full flex flex-col items-center text-gray gap-y-4 text-base lg:text-lg'>
                 <div className='w-full flex flex-col items-center lg:items-end font-oswald'>
                     <p className='text-secondary text-2xl'>As disponíveis</p>
                     <p className=' text-primary text-5xl font-semibold text-center lg:text-start'>Veja todas as propriedades anunciadas</p>
@@ -24,8 +24,8 @@ const Search = () => {
                     <div className='lg:w-1/4 w-full z-10'>
                         <PriceDropDown />
                     </div>
-                    <button onClick={handleClick} className='w-full md:w-1/4 lg:w-32 justify-center flex flex-row bg-primary rounded-sm text-white hover:bg-primaryGreen/80 transition duration-200 py-2'>
-                        <HiOutlineSearch size={20} className='m-1' />
+                    <button onClick={handleClick} className='w-full hover:scale-105 md:w-1/4 lg:w-32 justify-center flex flex-row bg-primary rounded-sm text-white hover:bg-primaryGreen/80 transition duration-200 py-2'>
+                        <HiOutlineSearch className='m-1' />
                     </button>
                 </div>
             </div>

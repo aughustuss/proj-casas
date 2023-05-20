@@ -479,7 +479,7 @@ export const headerLinks:  Array<HeaderLink> = [
     id: '1',
     href: "#hero",
     offset: '100',
-    children: "Home"
+    children: "Início"
   },
   {
     id: '2',
@@ -490,13 +490,13 @@ export const headerLinks:  Array<HeaderLink> = [
   {
     id: '3',
     href: "#houses",
-    offset: '0',
+    offset: '300',
     children: "Casas"
   },
   {
     id: '4',
     href: "#contato",
-    offset: '0',
+    offset: '50',
     children: "Contato"
   }
 ];
@@ -537,7 +537,7 @@ export const contacts: Array<Contact> = [
     id: '1',
     icon: BsFillTelephoneFill,
     title: "Telefone",
-    info: "3232323232",
+    info: "(32) 9 9846-8722",
     button: "Ligar agora"
   },
   {

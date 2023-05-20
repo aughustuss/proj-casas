@@ -11,17 +11,17 @@ const Contato = () => {
                 </div>
                 <div className='flex flex-col lg:flex-row w-full font-poppins'>
                     <div className='flex flex-1 h-fit'>
-                        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 lg:w-5/6 gap-2 place-items-center w-full'>
+                        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 lg:w-5/6 gap-2 place-items-center w-full '>
                             {contacts && contacts.map((contact) => {
                                 return (
-                                    <div id={contact.id} className='border border-slate-200 min-h-[140px] p-2 rounded-md flex flex-col justify-between w-full hover:scale-105 transition duration-200'>
+                                    <div key={contact.id} id={contact.id} className='border border-slate-200 min-h-[140px] p-2 rounded-md flex flex-col justify-between w-full hover:scale-105 transition duration-200'>
                                         <div className='flex flex-row w-full gap-x-8'>
                                             <div className='p-4 bg-quartiary rounded-md text-quinary'>
                                                 <contact.icon/>
                                             </div>
                                             <div className='w-full flex flex-col items-start'>
-                                                <p className='text-lg text-primary font-semibold'>{contact.title}</p> 
-                                                <p className='text-sm text-gray'>{contact.info}</p>
+                                                <p className='text-base lg:text-lg text-primary font-semibold font-oswald'>{contact.title}</p> 
+                                                <p className='text-xs text-gray'>{contact.info}</p>
                                             </div>
                                         </div>
                                         <button className='bg-quartiary text-quinary text-sm font-semibold w-full text-center p-3 rounded-md hover:scale-105 hover:bg-quinary hover:text-white transition duration-200'>

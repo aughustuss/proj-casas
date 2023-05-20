@@ -14,8 +14,8 @@ const Banner = () => {
     const filteredSearch = search.length > 0 ? houses.filter((house: HouseData) => { return house.address.toLowerCase().includes(search.toLowerCase()) }) : [];
     return (
         <>
-            <section id="hero" className='w-full md:h-auto pt-20 mb-8 text-gray'>
-                <div className='w-full flex flex-col md:flex-row items-center h-full gap-y-4 md:gap-y-0'>
+            <section id="hero" className='w-full md:h-auto pt-20 mb-8 text-gray text-xs lg:text-base'>
+                <div className='w-full flex flex-col md:flex-row items-center h-full gap-y-4 md:gap-y-0 gap-x-4'>
                     <div className='flex-1 gap-y-6 h-full flex flex-col justify-start md:justify-center lg:px-4 md:items-start text-center md:text-left items-center'>
                         <p className='text-4xl lg:text-5xl leading-none font-semibold font-oswald flex flex-col'><span className='text-primary text-5xl lg:text-8xl'>Descubra</span> a sua casa dos sonhos. </p>
                         <p className=' max-w-md'>
@@ -61,7 +61,7 @@ const Banner = () => {
                         </div>
                     </div>
                     <div className='flex-1 w-full md:block flex lg:p-2 '>
-                        <Image alt='Banner' src={BannerImage} className='w-full object-cover h-full rounded-md max-h-[400px] lg:max-h-[650px] self-end lg:p-2 lg:bg-black drop-shadow-lg' />
+                        <Image alt='Banner' src={BannerImage} className='w-full object-cover h-full rounded-md max-h-[400px] lg:max-h-[650px] self-end drop-shadow-lg' />
                     </div>
                 </div>
             </section>

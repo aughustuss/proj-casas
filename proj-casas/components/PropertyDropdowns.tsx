@@ -11,12 +11,12 @@ const PropertyDropDown = () => {
             <Menu as='div' className='relative w-full ' >
                 <Menu.Button className='w-full text-left flex flex-row items-center gap-x-2 text-primary' onClick={() => setIsOpen(!isOpen)}>
                     <div className='bg-quartiary text-quinary p-2 rounded-md'>
-                        <AiOutlineHome size={24} />
+                        <AiOutlineHome />
                     </div>
                     <div className='flex flex-row items-center gap-x-2 w-full'>
                         <div className='flex flex-row items-center justify-between w-full'>
                             <div className='flex flex-col justify-center items-center w-full'>
-                                <p className='font-semibold font-oswald text-lg'>{property}</p>
+                                <p className='font-semibold font-oswald '>{property}</p>
                                 <p className='text-xs text-gray'>Selecione o seu imóvel</p>
                             </div>
                             <div className='bg-quartiary text-quinary p-2 rounded-md'>
@@ -25,7 +25,7 @@ const PropertyDropDown = () => {
                         </div>
                     </div>
                 </Menu.Button>
-                <Menu.Items className='list-none absolute bg-neutral-100 rounded-b-md top-full py-4 text-sm w-full'>
+                <Menu.Items className='list-none absolute bg-neutral-100 rounded-b-md top-full py-4 w-full'>
                     {properties && properties.map((property) => {
                         return (
                             <Menu.Item className='cursor-pointer hover:bg-neutral-200 p-4 w-full text-center' onClick={() => setProperty(property)} as='li' key={property}>

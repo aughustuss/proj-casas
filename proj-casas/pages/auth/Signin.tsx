@@ -10,15 +10,14 @@ import { BsFillKeyFill } from 'react-icons/bs'
 import { FcGoogle } from 'react-icons/fc'
 import { signIn } from 'next-auth/react'
 import { AiFillGithub } from 'react-icons/ai'
-import { GiHouseKeys } from 'react-icons/gi'
 
 export const CustomTextField = styled(TextField)({
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
-      'borderColor': '#6d28d9',
+      'borderColor': '#007aff',
     },
     '&:hover fieldset': {
-      'borderColor': '#6d28d9'
+      'borderColor': '#007aff'
     },
     '& input': {
       'color': 'rgb(109, 109, 109) !important'
@@ -32,7 +31,7 @@ const Signin = () => {
   const theme = createTheme({
     palette: {
       primary: {
-        main: '#6d28d9',
+        main: '#007aff',
       }
     }
   });
@@ -108,18 +107,18 @@ const Signin = () => {
                     {error}
                   </p>
                 )}
-                <button disabled={submitted} className='bg-primaryPurple text-white hover:bg-primaryPurple/90 w-full p-2 rounded-sm font-semibold' type='submit' >{!submitted ? 'Entrar' : <div className='flex flex-row items-center gap-x-2'>Entrando... <ImSpinner2 className=' animate-spin' size={18} /> </div>}</button>
+                <button disabled={submitted} className='bg-quartiary text-quinary hover:bg-primary hover:text-white hover:scale-105 transition duration-200 w-full p-2 rounded-sm font-semibold' type='submit' >{!submitted ? 'Entrar' : <div className='flex flex-row items-center gap-x-2'>Entrando... <ImSpinner2 className=' animate-spin' size={18} /> </div>}</button>
                 <div className='flex flex-col w-full justify-center items-center gap-y-2'>
-                  <p className='text-center w-full text-xs text-gray-500'>ou</p>
-                  <button onClick={handleGoogleSignIn} className='w-full normal-case flex flex-row items-center gap-x-4 border bg-neutral-100 text-gray-600 hover:shadow-md p-2 rounded-sm justify-center'>
+                  <p className='text-center w-full text-xs text-gray'>ou</p>
+                  <button onClick={handleGoogleSignIn} className='w-full normal-case flex flex-row items-center gap-x-4 border border-slate-200 bg-white text-gray hover:shadow-md p-2 rounded-sm justify-center'>
                     <FcGoogle size={32} /> Entre com o Google
                   </button>
-                  <button onClick={handleGitHubSignIn} className='w-full normal-case flex flex-row items-center gap-x-4 border bg-neutral-100 text-gray-600 hover:shadow-md p-2 rounded-sm justify-center' >
+                  <button onClick={handleGitHubSignIn} className='w-full normal-case flex flex-row items-center gap-x-4 border border-slate-200 bg-white text-gray hover:shadow-md p-2 rounded-sm justify-center' >
                     <AiFillGithub size={32} /> Entre com o GitHub
                   </button>
                 </div>
               </form>
-              <p className='text-xs'>Ainda não possui uma conta? <Link className='text-primaryPurple' href='Signup'>Crie uma!</Link></p>
+              <p className='text-xs'>Ainda não possui uma conta? <Link className='text-quinary underline' href='Signup'>Crie uma!</Link></p>
             </div>
           </div>
           <Snackbar open={snack} autoHideDuration={5000} onClose={() => setSnack(false)}>

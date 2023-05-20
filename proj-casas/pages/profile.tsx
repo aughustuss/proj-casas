@@ -32,40 +32,40 @@ const Profile = () => {
         <>
             <Header />
             <section className='min-h-screen h-auto w-full mx-auto flex justify-center md:items-start items-center pt-16 pb-2 font-poppins overflow-y-auto '>
-                <div className='w-full md:w-5/6 flex flex-col h-full bg-white shadow-sm border border-slate-200 overflow-y-auto text-gray'>
-                    <div className='flex flex-col lg:flex-row w-full h-auto min-h-[140px] md:min-h-[50px] mb-auto' >
+                <div className='container px-8 md:px-0 flex flex-col h-full overflow-y-auto text-gray'>
+                    <div className='flex flex-col lg:flex-row w-full h-auto min-h-[140px] md:min-h-[50px] mb-auto bg-white border border-slate-200 rounded-md' >
                         <ul role="tablist" aria-label='Tabs' className='flex flex-col py-2 gap-y-2 lg:text-[14px] text-xs mb-auto md:flex-row items-center gap-x-4 justify-between w-full px-4 border-b-neutral-100 border-b'>
-                            <button type="button" className='flex flex-row items-center hover:text-primary font-semibold text-quinary hs-tab-active:text-primary lg:bg-none bg-neutral-100 w-full p-2 rounded-sm border-slate-200' id="tabs-with-underline-item-1" data-hs-tab="#tabs-with-underline-1" aria-controls="tabs-with-underline-1" role="tab">
+                            <button type="button" className='flex flex-row items-center hover:text-primary hover:scale-105 transition duration-200 hover:bg-quartiary font-semibold text-quinary hs-tab-active:text-primary lg:bg-none bg-neutral-100 w-full p-2 rounded-sm border-slate-200' id="tabs-with-underline-item-1" data-hs-tab="#tabs-with-underline-1" aria-controls="tabs-with-underline-1" role="tab">
                                 <MdAccountCircle size={20}/> <span className='flex-1'>Minha conta</span>
                             </button>
-                            <button type="button" className='flex flex-row items-center hover:text-primary font-semibold text-quinary hs-tab-active:text-primary lg:bg-none bg-neutral-100 w-full p-2 rounded-sm border-slate-200 ' id="tabs-with-underline-item-2" data-hs-tab="#tabs-with-underline-2" aria-controls="tabs-with-underline-2" role="tab">
+                            <button type="button" className='flex flex-row items-center hover:text-primary hover:scale-105 transition duration-200 hover:bg-quartiary font-semibold text-quinary hs-tab-active:text-primary lg:bg-none bg-neutral-100 w-full p-2 rounded-sm border-slate-200 ' id="tabs-with-underline-item-2" data-hs-tab="#tabs-with-underline-2" aria-controls="tabs-with-underline-2" role="tab">
                                 <BsKeyFill size={20}/> <span className='flex-1'> Meus pedidos de aluguel</span>
                             </button>
-                            <button type="button" className='flex flex-row items-center hover:text-primary font-semibold text-quinary hs-tab-active:text-primary lg:bg-none bg-neutral-100 w-full p-2 rounded-sm border-slate-200' id="tabs-with-underline-item-3" data-hs-tab="#tabs-with-underline-3" aria-controls="tabs-with-underline-3" role="tab">
+                            <button type="button" className='flex flex-row items-center hover:text-primary hover:scale-105 transition duration-200 hover:bg-quartiary font-semibold text-quinary hs-tab-active:text-primary lg:bg-none bg-neutral-100 w-full p-2 rounded-sm border-slate-200' id="tabs-with-underline-item-3" data-hs-tab="#tabs-with-underline-3" aria-controls="tabs-with-underline-3" role="tab">
                                 <BiMoney size={20}/> <span className='flex-1'>Meus pedidos de compra</span> 
                             </button>
                         </ul>
                     </div>
-                    <div className="p-4 m-auto h-full">
+                    <div className="p-4 mt-2 h-full bg-white w-full rounded-md border border-slate-200">
                         <div className='flex flex-col justify-between h-full min-h-[540px] gap-y-8' id="tabs-with-underline-1" role="tabpanel" aria-labelledby="tabs-with-underline-item-1">
                             <div className='text-center capitalize font-oswald text-2xl lg:text-4xl w-full flex flex-col gap-y-12 h-full'>
                                 <div className='flex flex-col-reverse gap-y-4 lg:flex-row items-center font-semibold  w-full text-center'>
-                                    <p className='md:flex-1'>Olá, {session && session?.user?.name}!</p>
+                                    <p className='md:flex-1 text-primary'>Olá, {session && session?.user?.name}!</p>
                                     {session && session.user?.image && (
                                         <img alt='Perfill' src={session.user.image} className='rounded-full object-cover h-20 w-20 lg:h-28 lg:w-28' />
                                     )}
                                 </div>
                                 <div className='flex flex-col w-full gap-y-8 font-roboto'>
                                     <p className='text-xl lg:text-2xl font-semibold font-oswald text-center'>Suas informações pessoais: </p>
-                                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 text-gray-700 text-xs lg:text-sm'>
-                                        <p className='p-2 bg-neutral-200 border-slate-200 rounded-sm'>Email: {session && session?.user?.email}</p>
-                                        <p className='p-2 bg-neutral-200 border-slate-200 rounded-sm'>Nome registrado: {session && session?.user?.name}</p>
-                                        <p className='p-2 bg-neutral-200 border-slate-200 rounded-sm col-span-1 lg:col-span-2'>Sessão expira em: {session && session.expires ? new Date(session?.expires).toLocaleDateString() : ''} </p>
+                                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 text-gray text-xs lg:text-base'>
+                                        <p className='p-2 bg-quartiary border-slate-200 rounded-sm'>Email: {session && session?.user?.email}</p>
+                                        <p className='p-2 bg-quartiary border-slate-200 rounded-sm'>Nome registrado: {session && session?.user?.name}</p>
+                                        <p className='p-2 bg-quartiary border-slate-200 rounded-sm col-span-1 lg:col-span-2'>Sessão expira em: {session && session.expires ? new Date(session?.expires).toLocaleDateString() : ''} </p>
                                     </div>
                                 </div>
                             </div>
-                            <div className='w-full justify-center flex flex-row text-xs lg:text-base'>
-                                <button onClick={() => signOut()} className='w-2/5 bg-primaryPurple text-white hover:bg-primaryPurple/90 px-4 py-2 rounded-sm tracking-wide'>Sign Out</button>
+                            <div className='w-full justify-center flex flex-row  lg:text-base'>
+                                <button onClick={() => signOut()} className='transition duration-200 w-full lg:w-2/5 text-xs lg:text-sm bg-quartiary font-semibold hover:bg-primary hover:scale-105 hover:text-white text-quinary px-4 py-2 rounded-sm tracking-wide'>Sign Out</button>
                             </div>
                         </div>
                         <div id="tabs-with-underline-2" className="hidden" role="tabpanel" aria-labelledby="tabs-with-underline-item-2">

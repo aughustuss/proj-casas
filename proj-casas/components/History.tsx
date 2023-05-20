@@ -2,7 +2,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import Team from '../public/images/our-team.jpg'
 import { Accordion, AccordionItem, AccordionItemButton, AccordionItemHeading, AccordionItemPanel, AccordionItemState } from 'react-accessible-accordion'
-import { IoMdArrowDropdown } from 'react-icons/io'
+import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
 import { accordions } from '@/utils/data'
 const History = () => {
     const [isExpand, setExpand] = useState<number | null>(null);
@@ -26,17 +26,17 @@ const History = () => {
                             <Accordion className='text-sm flex flex-col gap-y-2' allowMultipleExpanded={false} preExpanded={[0]}>
                                 {accordions && accordions.map((accordion) => {
                                     return (
-                                        <AccordionItem onClick={() => handleExpandedAccordion(accordion.id)} className={`${accordion.id === isExpand ? 'shadow-lg shadow-quartiary' : ''} flex flex-col gap-y-4 border-slate-200 p-2 border`} uuid={accordion.id}>
+                                        <AccordionItem key={accordion.id} onClick={() => handleExpandedAccordion(accordion.id)} className={`${accordion.id === isExpand ? 'shadow-lg shadow-quartiary' : ''} flex flex-col gap-y-4 border-slate-200 p-2 border`} uuid={accordion.id}>
                                             <AccordionItemHeading>
                                                 <AccordionItemButton className='text-primary font-oswald text-xl font-semibold flex flex-row justify-between items-center'>
                                                     <div className='bg-quartiary text-quinary p-3 rounded-md'>
                                                         <accordion.icon />
                                                     </div>
-                                                    <div>
+                                                    <div className='lg:text-lg text-base'>
                                                         {accordion.title}
                                                     </div>
                                                     <div className='bg-quartiary text-quinary p-3 rounded-md'>
-                                                        <IoMdArrowDropdown />
+                                                        {accordion.id === isExpand ?<IoMdArrowDropup/>  : <IoMdArrowDropdown /> }
                                                     </div>
                                                 </AccordionItemButton>
                                             </AccordionItemHeading>

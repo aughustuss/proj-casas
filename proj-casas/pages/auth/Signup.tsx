@@ -12,10 +12,10 @@ import { BsFillKeyFill } from 'react-icons/bs'
 export const CustomTextField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
-            'borderColor': '#6d28d9',
+            'borderColor': '#007aff',
         },
         '&:hover fieldset': {
-            'borderColor': '#6d28d9'
+            'borderColor': '#007aff'
         },
         '& input': {
             'color': 'rgb(109, 109, 109) !important'
@@ -29,7 +29,7 @@ const Signup = () => {
     const theme = createTheme({
         palette: {
             primary: {
-                main: '#6d28d9',
+                main: '#007aff',
             }
         }
     });
@@ -115,9 +115,9 @@ const Signup = () => {
                                         {error}
                                     </p>
                                 )}
-                                <button disabled={submitted} className='bg-primaryPurple text-white hover:bg-primaryPurple/90 w-full p-2 rounded-sm font-semibold' type='submit'>{!submitted ? 'Criar Conta' : <div className='flex flex-row items-center gap-x-2'>Enviando... <ImSpinner2 className=' animate-spin' size={18} /> </div>}</button>
+                                <button disabled={submitted} className='bg-quartiary text-quinary hover:bg-primary hover:text-white hover:scale-105 transition duration-200 w-full p-2 rounded-sm font-semibold' type='submit'>{!submitted ? 'Criar Conta' : <div className='flex flex-row items-center gap-x-2'>Enviando... <ImSpinner2 className=' animate-spin' size={18} /> </div>}</button>
                             </form>
-                            <p className='text-xs'>Já possui uma conta? <Link className='text-primaryPurple' href='Signin'>Faça o Login!</Link></p>
+                            <p className='text-xs'>Já possui uma conta? <Link className='text-quinary underline' href='Signin'>Faça o Login!</Link></p>
                         </div>
                     </div>
                     <Snackbar open={snack} autoHideDuration={5000} onClose={() => setSnack(false)}>
