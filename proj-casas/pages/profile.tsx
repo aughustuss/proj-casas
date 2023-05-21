@@ -11,7 +11,6 @@ import { BsKeyFill } from 'react-icons/bs'
 const Profile = () => {
     const [rentHouses, setRentHouses] = useState<HouseData[]>([]);
     const [boughtHouses, setBoughtHouses] = useState<HouseData[]>([]);
-    const [loadingBoughtHouse, setLoadingBoughtHouse] = useState<boolean>(false);
     const { data: session } = useSession();
     const key = session?.user?.email
 

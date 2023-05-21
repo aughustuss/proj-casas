@@ -114,11 +114,10 @@ const HouseDetails = ({ house }: HouseProps) => {
     if (router.isFallback) {
         return <div>Carregando...</div>;
     }
-
+    const contactData = getValues();
     function handleBuyOption() {
         if (contactOwner) {
             trigger();
-            const contactData = getValues();
             const emptyField = Object.values(contactData).some((field) => field === '');
             if (emptyField) {
                 setEmptyFieldsError(true);
@@ -132,8 +131,8 @@ const HouseDetails = ({ house }: HouseProps) => {
 
     }
 
-    const confirmBuy = () => {
-        const newHouse = { ...house };
+    const confirmBuy = (data: ContactFormData) => {
+        const newHouse = { ...house, data };
         const rentHouseExists = rentHouses.some((h) => h.id === newHouse.id);
         const boughtHouseExists = boughtHouses.some((h) => h.id === newHouse.id);
         if (!rentHouseExists && !boughtHouseExists) {
@@ -359,7 +358,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                 </div>
                                             </div>
                                             <div className='flex flex-row w-full gap-x-4'>
-                                                <button onClick={confirmBuy} type="submit" className='w-full bg-primary p-2 rounded-sm text-white hover:scale-105 transition duration-200'>Confirmar</button>
+                                                <button onClick={() => confirmBuy(contactData)} type="submit" className='w-full bg-primary p-2 rounded-sm text-white hover:scale-105 transition duration-200'>Confirmar</button>
                                                 <button onClick={() => setBuyOption(false)} className='w-full p-2 border border-slate-200 bg-quartiary rounded-sm text-quinary hover:scale-105 transition duration-200'>Cancelar</button>
                                             </div>
                                         </div>
