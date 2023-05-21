@@ -37,10 +37,11 @@ const Signup = () => {
     const [error, setError] = useState<string>('');
     const [snack, setSnack] = useState<boolean>(false);
     const router = useRouter();
-    const { register, formState: { errors }, reset, handleSubmit } = useForm<UserForm>();
+    const { register, formState: { errors, isValid, isValidating }, reset, handleSubmit } = useForm<UserForm>();
 
     const onSubmit: SubmitHandler<UserForm> = async (data) => {
         setSubmitted(true);
+        reset();
         setTimeout(() => {
             setSubmitted(false);
             setSnack(true);
@@ -56,6 +57,9 @@ const Signup = () => {
                         <div className='w-5/6 h-full flex flex-col items-center gap-y-4 py-4'>
                             <h1 className='font-oswald font-semibold text-3xl text-primaryPurple'>Crie sua conta</h1>
                             <form autoComplete='off' onSubmit={handleSubmit(onSubmit)} action="" className='w-full h-full flex flex-col justify-between items-center gap-y-4'>
+                                {!isValidating && !isValid && (
+                                    <p className='text-red-600 text-xs text-left w-full '>Preencha todos os campos corretamente. </p>
+                                )}
                                 <div className='w-full h-full flex flex-col gap-y-4'>
                                     <CustomTextField
                                         label='Nome'
@@ -64,7 +68,6 @@ const Signup = () => {
                                             required: true,
                                             minLength: 8,
                                         })}
-                                        helperText={errors.name && (errors.name.type === 'required' ? 'Digite o nome.' : 'Deve ter no mínimo 8 caractéres.')}
                                         InputProps={{
                                             startAdornment: (
                                                 <InputAdornment position='start'>
@@ -73,6 +76,7 @@ const Signup = () => {
                                             )
                                         }}
                                     />
+                                    <p className='text-red-600 text-xs text-left w-full '>{errors.name && (errors.name.type === 'required' ? 'Preencha o nome' : 'Mínimo de 8 caractéres')}</p>
                                     <CustomTextField
                                         label='Email'
                                         type='email'
@@ -80,7 +84,6 @@ const Signup = () => {
                                             required: true,
                                             pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                                         })}
-                                        helperText={errors.email && (errors.email.type === 'required' ? 'Digite o email. ' : 'Email inválido. ')}
                                         InputProps={
                                             {
                                                 startAdornment: (
@@ -91,6 +94,7 @@ const Signup = () => {
                                             }
                                         }
                                     />
+                                    <p className='text-red-600 text-xs text-left w-full '>{errors.email && (errors.email.type === 'required' ? 'Preencha o e-mail' : 'E-mail inválido')}</p>
                                     <CustomTextField
                                         label='Senha'
                                         type='password'
@@ -98,7 +102,6 @@ const Signup = () => {
                                             required: true,
                                             minLength: 6,
                                         })}
-                                        helperText={errors.password && (errors.password.type === 'required' ? 'Digite sua senha. ' : 'Deve ter no mínimo 6 caractéres.')}
                                         InputProps={
                                             {
                                                 startAdornment: (
@@ -109,13 +112,9 @@ const Signup = () => {
                                             }
                                         }
                                     />
+                                    <p className='text-red-600 text-xs text-left w-full '>{errors.password && (errors.password.type === 'required' ? 'Preencha a senha' : 'Mínimo de 6 caractéres')}</p>
                                 </div>
-                                {error && error.length > 1 && (
-                                    <p className='text-[14px] self-start text-red-600 '>
-                                        {error}
-                                    </p>
-                                )}
-                                <button disabled={submitted} className='bg-quartiary text-quinary hover:bg-primary hover:text-white hover:scale-105 transition duration-200 w-full p-2 rounded-sm font-semibold' type='submit'>{!submitted ? 'Criar Conta' : <div className='flex flex-row items-center gap-x-2'>Enviando... <ImSpinner2 className=' animate-spin' size={18} /> </div>}</button>
+                                <button disabled={submitted} className='bg-quartiary flex flex-row items-center justify-center text-quinary hover:bg-primary hover:text-white hover:scale-105 transition duration-200 w-full p-2 rounded-sm font-semibold' type='submit'>{!submitted ? 'Criar Conta' : <div className='flex flex-row items-center gap-x-2'>Enviando... <ImSpinner2 className=' animate-spin' size={18} /> </div>}</button>
                             </form>
                             <p className='text-xs'>Já possui uma conta? <Link className='text-quinary underline' href='Signin'>Faça o Login!</Link></p>
                         </div>

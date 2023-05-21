@@ -36,13 +36,13 @@ const Profile = () => {
                     <div className='flex flex-col lg:flex-row w-full h-auto min-h-[140px] md:min-h-[50px] mb-auto bg-white border border-slate-200 rounded-md' >
                         <ul role="tablist" aria-label='Tabs' className='flex flex-col py-2 gap-y-2 lg:text-[14px] text-xs mb-auto md:flex-row items-center gap-x-4 justify-between w-full px-4 border-b-neutral-100 border-b'>
                             <button type="button" className='flex flex-row items-center hover:text-primary hover:scale-105 transition duration-200 hover:bg-quartiary font-semibold text-quinary hs-tab-active:text-primary lg:bg-none bg-neutral-100 w-full p-2 rounded-sm border-slate-200' id="tabs-with-underline-item-1" data-hs-tab="#tabs-with-underline-1" aria-controls="tabs-with-underline-1" role="tab">
-                                <MdAccountCircle size={20}/> <span className='flex-1'>Minha conta</span>
+                                <MdAccountCircle size={20} /> <span className='flex-1'>Minha conta</span>
                             </button>
                             <button type="button" className='flex flex-row items-center hover:text-primary hover:scale-105 transition duration-200 hover:bg-quartiary font-semibold text-quinary hs-tab-active:text-primary lg:bg-none bg-neutral-100 w-full p-2 rounded-sm border-slate-200 ' id="tabs-with-underline-item-2" data-hs-tab="#tabs-with-underline-2" aria-controls="tabs-with-underline-2" role="tab">
-                                <BsKeyFill size={20}/> <span className='flex-1'> Meus pedidos de aluguel</span>
+                                <BsKeyFill size={20} /> <span className='flex-1'> Meus pedidos de aluguel</span>
                             </button>
                             <button type="button" className='flex flex-row items-center hover:text-primary hover:scale-105 transition duration-200 hover:bg-quartiary font-semibold text-quinary hs-tab-active:text-primary lg:bg-none bg-neutral-100 w-full p-2 rounded-sm border-slate-200' id="tabs-with-underline-item-3" data-hs-tab="#tabs-with-underline-3" aria-controls="tabs-with-underline-3" role="tab">
-                                <BiMoney size={20}/> <span className='flex-1'>Meus pedidos de compra</span> 
+                                <BiMoney size={20} /> <span className='flex-1'>Meus pedidos de compra</span>
                             </button>
                         </ul>
                     </div>
@@ -73,24 +73,26 @@ const Profile = () => {
                                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 place-items-center py-4'>
                                     {rentHouses.length > 0 && rentHouses.map((house) => {
                                         return (
-                                            <div key={house.id} className='max-w-[300px] md:w-full lg:max-w-full justify-center items-center flex flex-col h-auto min-h-[160px] border-slate-200 bg-neutral-100 p-2 rounded-md shadow-md'>
-                                                <div className="flex flex-col xl:flex-row items-center gap-x-4">
-                                                    <Image alt='Casa' src={house.image} className=' h-auto w-[200px] bg-cover' />
-                                                    <div className='flex flex-col gap-y-2 h-full justify-between w-full'>
-                                                        <div className='flex flex-col w-full gap-y-2 text-xs'>
-                                                            <p className='text-lg font-semibold text-primary'>{house.address}, {house.country}</p>
-                                                            <div className='flex flex-col gap-y-4 lg:gap-y-0 lg:flex-row w-full lg:w-full gap-x-8 '>
-                                                                <p>R${house.price},00</p>
-                                                                <p>Quartos: {house.bedrooms}</p>
-                                                                <p>Banheiros: {house.bathrooms}</p>
+                                            <div key={house.id} className='max-w-[300px] md:w-full lg:max-w-full justify-center items-center flex flex-col h-auto  border-slate-200 bg-neutral-100 p-2 rounded-md shadow-md'>
+                                                <div className="flex flex-col items-center gap-x-4 overflow-hidden w-full gap-y-2">
+                                                    <div className='flex xl:flex-row flex-col w-full gap-x-4'>
+                                                        <Image alt='Casa' src={house.image} className='self-start max-h-[140px] lg:max-h-[150px] h-full bg-black w-full max-w-full rounded-md object-cover' />
+                                                        <div className='flex flex-col gap-y-2 h-full justify-between w-full'>
+                                                            <div className='flex flex-col w-full gap-y-2 text-xs'>
+                                                                <p className='text-lg font-semibold text-primary'>{house.address}, {house.country}</p>
+                                                                <div className='flex flex-col gap-y-4 lg:gap-y-0 lg:flex-row gap-x-8 '>
+                                                                    <p>R${house.price},00</p>
+                                                                    <p>Quartos: {house.bedrooms}</p>
+                                                                    <p>Banheiros: {house.bathrooms}</p>
+                                                                </div>
+                                                                <p>Dias solicitados para aluguel: {house?.data?.rentDays}</p>
+                                                                <p>Mensagem enviada para o proprietário: {house?.data?.notSendMessage ? 'Não' : 'Sim'}</p>
+                                                                <p>Resposta do proprietário: {!house?.data?.ownerAnswer ? 'Pendente' : 'Respondida'}</p>
                                                             </div>
-                                                            <p>Dias solicitados para aluguel: {house?.data?.rentDays}</p>
-                                                            <p>Mensagem enviada para o proprietário: {house?.data?.notSendMessage ? 'Não' : 'Sim'}</p>
-                                                            <p>Resposta do proprietário: {!house?.data?.ownerAnswer ? 'Pendente' : 'Respondida'}</p>
                                                         </div>
-                                                        <div className='flex flex-col text-xs'>
-                                                            <p className='flex flex-row items-center gap-x-2'><Image alt='Proprietário' src={house.agent.image} className='w-6 h-6 bg-cover' />  {house.agent.name} - ({house.agent.phone}) - Proprietário</p>
-                                                        </div>
+                                                    </div>
+                                                    <div className='flex flex-col text-xs w-full'>
+                                                        <p className='flex flex-row items-center gap-x-2'><Image alt='Proprietário' src={house.agent.image} className='w-6 h-6 bg-cover' />  {house.agent.name} - ({house.agent.phone}) - Proprietário</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -108,23 +110,25 @@ const Profile = () => {
                                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 place-items-center py-4'>
                                     {boughtHouses.length > 0 && boughtHouses.map((house) => {
                                         return (
-                                            <div key={house.id} className='max-w-[300px] md:w-full lg:max-w-full justify-center items-center flex flex-col h-auto min-h-[160px] border border-slate-200 bg-neutral-100 p-2 rounded-md shadow-md '>
-                                                <div className="flex flex-col xl:flex-row items-center gap-x-4">
-                                                    <Image alt='Casa' src={house.image} className=' h-auto w-[200px] bg-cover' />
-                                                    <div className='flex flex-col gap-y-2 h-full justify-between w-full'>
-                                                        <div className='flex flex-col w-full gap-y-2 text-xs'>
-                                                            <p className='text-lg font-semibold text-primary'>{house.address}, {house.country}</p>
-                                                            <div className='flex flex-col gap-y-4 lg:gap-y-0 lg:flex-row w-full lg:w-full gap-x-8 '>
-                                                                <p>R${house.price},00</p>
-                                                                <p>Quartos: {house.bedrooms}</p>
-                                                                <p>Banheiros: {house.bathrooms}</p>
+                                            <div key={house.id} className='max-w-[300px] md:w-full lg:max-w-full justify-center items-center flex flex-col h-auto  border-slate-200 bg-neutral-100 p-2 rounded-md shadow-md'>
+                                                <div className="flex flex-col items-center gap-x-4 overflow-hidden w-full gap-y-2">
+                                                    <div className='flex xl:flex-row flex-col w-full gap-x-4'>
+                                                        <Image alt='Casa' src={house.image} className='self-start max-h-[140px] lg:max-h-[150px] h-full bg-black w-full max-w-full rounded-md object-cover' />
+                                                        <div className='flex flex-col gap-y-2 h-full justify-between w-full'>
+                                                            <div className='flex flex-col w-full gap-y-2 text-xs'>
+                                                                <p className='text-lg font-semibold text-primary'>{house.address}, {house.country}</p>
+                                                                <div className='flex flex-col gap-y-4 lg:gap-y-0 lg:flex-row gap-x-8 '>
+                                                                    <p>R${house.price},00</p>
+                                                                    <p>Quartos: {house.bedrooms}</p>
+                                                                    <p>Banheiros: {house.bathrooms}</p>
+                                                                </div>
+                                                                <p>Mensagem enviada para o proprietário: {house?.data?.notSendMessage ? 'Não' : 'Sim'}</p>
+                                                                <p>Resposta do proprietário: {!house?.data?.ownerAnswer ? 'Pendente' : 'Respondida'}</p>
                                                             </div>
-                                                            <p>Mensagem enviada para o proprietário: {house?.data?.notSendMessage ? 'Não' : 'Sim'}</p>
-                                                            <p>Resposta do proprietário: {!house?.data?.ownerAnswer ? 'Pendente' : 'Respondida'}</p>
                                                         </div>
-                                                        <div className='flex flex-col text-xs'>
-                                                            <p className='flex flex-row items-center gap-x-2'><Image alt='Proprietário' src={house.agent.image} className='w-6 h-6 bg-cover' />  {house.agent.name} - ({house.agent.phone}) - Proprietário</p>
-                                                        </div>
+                                                    </div>
+                                                    <div className='flex flex-col text-xs w-full'>
+                                                        <p className='flex flex-row items-center gap-x-2'><Image alt='Proprietário' src={house.agent.image} className='w-6 h-6 bg-cover' />  {house.agent.name} - ({house.agent.phone}) - Proprietário</p>
                                                     </div>
                                                 </div>
                                             </div>

@@ -42,7 +42,7 @@ const HouseDetails = ({ house }: HouseProps) => {
             },
         },
     })
-    const { register, formState: { errors }, handleSubmit, getValues } = useForm<ContactFormData>();
+    const { register, formState: { errors, isValid }, handleSubmit, getValues, trigger } = useForm<ContactFormData>();
     const { data: session } = useSession();
     const router = useRouter();
 
@@ -117,16 +117,17 @@ const HouseDetails = ({ house }: HouseProps) => {
 
     function handleBuyOption() {
         if (contactOwner) {
+            trigger();
             const contactData = getValues();
             const emptyField = Object.values(contactData).some((field) => field === '');
             if (emptyField) {
                 setEmptyFieldsError(true);
             } else {
                 setEmptyFieldsError(false);
-                confirmBuy();
+                setBuyOption(true);
             }
         } else {
-            confirmBuy();
+            setBuyOption(true);
         }
 
     }
@@ -155,7 +156,6 @@ const HouseDetails = ({ house }: HouseProps) => {
             setRentDaysError(true);
             return;
         };
-        const isAnyFieldEmpty = Object.keys(errors).length > 0;
         const newHouse = { ...house, data };
         const rentHouseExists = rentHouses.some((h) => h.id === newHouse.id);
         const boughtHouseExists = boughtHouses.some((h) => h.id === newHouse.id);
@@ -204,11 +204,11 @@ const HouseDetails = ({ house }: HouseProps) => {
                                 <details onClick={() => setDescSumm(!descSumm)} className={`${descSumm ? 'shadow-md shadow-quartiary' : ''} text-xl items-center border border-slate-200 p-2 rounded-md`}>
                                     <summary className='w-full font-oswald text-primary  font-semibold before:content-none list-none [&::-webkit-details-marker]:hidden text-sm lg:text-lg open:transition-all open:duration-300 flex flex-row items-center justify-between relative'>
                                         <span className='bg-quartiary rounded-md text-quinary p-2'>
-                                            <MdDescription/>
+                                            <MdDescription />
                                         </span>
                                         Descrição
                                         <span className='bg-quartiary rounded-md text-quinary p-2'>
-                                            {!descSumm ? <IoMdArrowDropup/> : <IoMdArrowDropdown/>}
+                                            {!descSumm ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
                                         </span>
                                     </summary>
                                     <p className='text-xs lg:text-sm p-2'>{house.description}</p>
@@ -225,7 +225,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                             Esta propriedade pode ser alugada ou comprada inteiramente, selecione abaixo uma das opções e entre em contato com o proprietário em caso de dúvidas.
                                                         </div>
                                                         <p >Se desejar alugar, selecione a quantidade de dias abaixo: </p>
-                                                        <select {...register("rentDays", { required: buyOption })} name="rentDays" className='outline-none w-full text-center border-slate-200 bg-primary text-white border p-2 rounded-sm'>
+                                                        <select {...register("rentDays", { required: buyOption })} name="rentDays" className='font-semibold hover:scale-105 transition duration-200 outline-none w-full text-center border-slate-200 bg-primary text-white border p-2 rounded-sm'>
                                                             <option defaultValue='Selecione os dias para alugar' >Selecione os dias para alugar</option>
                                                             {RentOpts && RentOpts.map(({ days, label, price }) => {
                                                                 return (
@@ -233,7 +233,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                                 )
                                                             })}
                                                         </select>
-                                                        <p className='w-full text-center text-xs'>{rentDaysError && (<p>Selecione quantos dias.</p>)}</p>
+                                                        <p className='w-full text-center text-xs'>{rentDaysError && (<span>Selecione quantos dias.</span>)}</p>
                                                     </div>
                                                 ) : (
                                                     <div>
@@ -272,7 +272,9 @@ const HouseDetails = ({ house }: HouseProps) => {
 
                                                     <div className='w-full h-full items-center flex flex-col justify-between gap-y-4 py-2 text-xs'>
                                                         <div className='w-5/6 flex flex-col justify-center gap-y-4'>
-                                                            <p className='text-red-500 text-sm'>{emptyFieldsError && (<p>Preencha todos os campos.</p>)}</p>
+                                                            {!isValid && emptyFieldsError && (
+                                                                <p className='text-red-600 text-xs text-left w-full '>Preencha todos os campos corretamente. </p>
+                                                            )}
                                                             <CustomTextField
                                                                 label='Nome'
                                                                 type='text'
@@ -280,8 +282,8 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                                     required: contactOwner,
                                                                     minLength: 10,
                                                                 })}
-                                                                helperText={errors.name && (errors.name?.type === 'required' ? 'Preencha o seu nome.' : 'Deve ter no mínimo 10 caractéres. ')}
                                                             />
+                                                            <p className='text-red-600 text-xs text-left w-full '>{errors.name && (errors.name?.type === 'required' ? 'Preencha o seu nome.' : 'Deve ter no mínimo 10 caractéres. ')}</p>
                                                             <CustomTextField
                                                                 label='Email'
                                                                 type='email'
@@ -289,8 +291,8 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                                     required: contactOwner,
                                                                     pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                                                                 })}
-                                                                helperText={errors.email && (errors.email.type === 'required' ? 'Preencha o seu e-mail.' : 'E-mail inválido. ')}
                                                             />
+                                                            <p className='text-red-600 text-xs text-left w-full '>{errors.email && (errors.email.type === 'required' ? 'Preencha o seu e-mail.' : 'E-mail inválido. ')}</p>
                                                             <CustomTextField
                                                                 label='Telefone'
                                                                 type='tel'
@@ -299,8 +301,8 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                                     minLength: 11,
                                                                     maxLength: 11,
                                                                 })}
-                                                                helperText={errors.tel && (errors.tel.type === 'required' ? 'Preencha o seu telefone.' : 'Deve ter 11 caractéres. ')}
                                                             />
+                                                            <p className='text-red-600 text-xs text-left w-full '>{errors.tel && (errors.tel.type === 'required' ? 'Preencha o seu telefone.' : 'Deve ter 11 caractéres. ')}</p>
                                                             <CustomTextField
                                                                 multiline
                                                                 rows={6}
@@ -309,8 +311,8 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                                     required: contactOwner,
                                                                     maxLength: 2000
                                                                 })}
-                                                                helperText={errors.msg && (errors.msg.type === 'required' ? 'Escreva a sua mensagem. ' : 'Máximo de 2000 caractéres. ')}
                                                             />
+                                                            <p className='text-red-600 text-xs text-left w-full '>{errors.msg && (errors.msg.type === 'required' ? 'Escreva a sua mensagem. ' : 'Máximo de 2000 caractéres. ')}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -323,8 +325,8 @@ const HouseDetails = ({ house }: HouseProps) => {
                                         </div>
                                     )}
                                     <div className='w-full flex flex-col gap-y-2 text-xs lg:text-sm font-semibold'>
-                                        <button type="button" onClick={handleBuyOption} disabled={boughtHouseAlreadyExists} className=' disabled:cursor-not-allowed disabled:bg-gray-400/40 disabled:text-gray-100 w-full bg-primary hover:scale-105 transition duration-200 p-2 rounded-sm text-white'>Solicitar Compra</button>
-                                        {house.rentable && (<button type='submit' disabled={rentHouseAlreadyExists} className='disabled:cursor-not-allowed disabled:bg-gray-400/40 disabled:text-gray-100 w-full border border-slate-200 hover:scale-105 transition duration-200 p-2 rounded-sm text-quinary'>Solicitar Aluguel</button>)}
+                                        <button type="button" onClick={handleBuyOption} disabled={boughtHouseAlreadyExists} className=' disabled:cursor-not-allowed disabled:bg-gray/40 disabled:text-gray/30 w-full bg-primary hover:scale-105 transition duration-200 p-2 rounded-sm text-white'>Solicitar Compra</button>
+                                        {house.rentable && (<button type='submit' disabled={rentHouseAlreadyExists} className='disabled:cursor-not-allowed disabled:bg-gray/40 disabled:text-gray/30 w-full border border-slate-200 hover:scale-105 transition duration-200 p-2 rounded-sm text-quinary bg-quartiary'>Solicitar Aluguel</button>)}
                                     </div>
                                 </form>
                             ) : (
@@ -335,14 +337,14 @@ const HouseDetails = ({ house }: HouseProps) => {
                         </div>
                     </div>
                     {buyOption && (
-                        <div className='absolute inset-0 bg-blurred w-full h-full text-gray-500 z-30'>
+                        <div className='absolute inset-0 bg-blurred w-full h-full text-gray z-30'>
                             <div className='flex justify-center items-center w-full h-full'>
                                 {!boughtHouseAlreadyExists ? (
                                     <div className='w-[300px] h-auto min-h-[450px] rounded-lg bg-white shadow-md shadow-gray-400 flex flex-col justify-between relative p-8 gap-y-4'>
-                                        <div className='h-full w-full'>
-                                            <button onClick={() => setBuyOption(false)} className='bg-gray-300 hover:bg-gray-400 transition duration-200 rounded-sm absolute right-0 top-0 text-gray-500 m-1 px-2' title='Cancelar mensagem'>x</button>
+                                        <div className='h-full w-full flex flex-col gap-y-4'>
+                                            <button onClick={() => setBuyOption(false)} className='bg-quartiary hover:scale-105 transition duration-200 rounded-sm absolute right-0 top-0 text-gray-500 m-1 px-2' title='Cancelar mensagem'>x</button>
                                             <div className='flex flex-col w-full pt-6 gap-y-4'>
-                                                <p className='text-2xl font-semibold border border-slate-200-b' >Resumo do pedido</p>
+                                                <p className='text-2xl font-semibold border-b border-slate-200' >Resumo do pedido</p>
                                                 <div className='flex flex-col w-full gap-y-4 text-sm'>
                                                     <p className='flex flex-row items-center gap-x-2' >Valor do imóvel: R$ {house.price},00</p>
                                                     <p >Proprietário: {house.agent.name}</p>
@@ -357,8 +359,8 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                 </div>
                                             </div>
                                             <div className='flex flex-row w-full gap-x-4'>
-                                                <button onClick={confirmBuy} type="submit" className='w-full bg-primary p-2 rounded-sm text-white hover:bg-primary/80 transition duration-200'>Confirmar</button>
-                                                <button onClick={() => setBuyOption(false)} className='w-full p-2 border border-slate-200 border-slate-200-primary rounded-sm text-primary'>Cancelar</button>
+                                                <button onClick={confirmBuy} type="submit" className='w-full bg-primary p-2 rounded-sm text-white hover:scale-105 transition duration-200'>Confirmar</button>
+                                                <button onClick={() => setBuyOption(false)} className='w-full p-2 border border-slate-200 bg-quartiary rounded-sm text-quinary hover:scale-105 transition duration-200'>Cancelar</button>
                                             </div>
                                         </div>
                                     </div>
