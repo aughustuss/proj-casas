@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import BannerImage from '../public/images/hero-banner.png'
 import Image from 'next/image'
-import { HiOutlineSearch } from 'react-icons/hi'
 import { CgClose } from 'react-icons/cg'
 import { HouseData } from '@/typings'
 import Link from 'next/link'

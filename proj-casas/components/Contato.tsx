@@ -33,7 +33,7 @@ const Contato = () => {
                         </div>
                     </div>
                     <div className='flex flex-1 w-full p-2 justify-center'>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1562.7306786813115!2d-42.87048358616757!3d-21.318092765357186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa2e75ba20b19d5%3A0xb4161c6efc742847!2sR.%20Sete%2C%2098%20-%20Astolfo%20Dutra%2C%20MG%2C%2036780-000!5e0!3m2!1spt-BR!2sbr!4v1684543147770!5m2!1spt-BR!2sbr" width="600" height="450" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2690121.1724087475!2d-44.665861316559834!3d-21.380449379569495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1685107328376!5m2!1spt-BR!2sbr" width="600" height="450" style={{border:0}} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
 

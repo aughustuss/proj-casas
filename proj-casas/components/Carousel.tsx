@@ -3,51 +3,26 @@ import { HouseData } from '@/typings';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useContext } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import "swiper/css";
-import "swiper/css/pagination"
-import { Pagination } from 'swiper'
+import { SwiperSlide } from 'swiper/react';
+import Slides from './reusables/Slides';
+import mediaQuery from '@/utils/mediaquery';
 
 const Carousel = () => {
     const { houses } = useContext(HouseContext)
     return (
         <>
-            <div className='w-full pt-16 h-auto flex flex-col gap-y-4 lg:text-base text-sm'>
+            <div className='w-full pt-16 h-auto flex flex-col gap-y-4 lg:text-base text-sm py-4'>
                 <div className='w-full flex flex-col gap-y-2 font-oswald items-center lg:items-start'>
                     <p className='text-secondary text-2xl'>As melhores escolhas</p>
                     <p className=' text-primary text-5xl font-semibold text-center lg:text-start'>Veja as casas mais populares</p>
                 </div>
-                <Swiper
-                    modules={[Pagination]}
-                    autoplay
-                    breakpoints={
-                        {
-                            0: {
-                                slidesPerView: 1,
-                                spaceBetween: 10,
-                            },
-                            678: {
-                                slidesPerView: 2,
-                                spaceBetween: 10,
-                            },
-                            768: {
-                                slidesPerView: 3,
-                                spaceBetween: 40,
-                            },
-                            1024: {
-                                slidesPerView: 4,
-                                spaceBetween: 60,
-                            },
-                        }
-                    }
-                    className='w-full'
-                >
+                <Slides classes='w-full'>
                     {houses && houses.map((house: HouseData) => {
                         return (
                             <SwiperSlide key={house.id}>
                                 <Link className='w-full flex flex-col hover:bg-quartiary rounded-md transition duration-200 hover:shadow-md lg:p-3' href={`/details/${house.id}`}>
                                     <div className='w-full flex flex-col gap-y-4 justify-center items-center'>
-                                        <Image className='w-full max-w-xs h-36 rounded-md object-cover hover:scale-105 transition duration-200' src={house.image} alt='Casas' />
+                                        <Image className='w-full max-w-xs max-h-24 h-24 sm:h-28 sm:max-h-28 lg:h-32 lg:max-h-32 rounded-md object-cover hover:scale-105 transition duration-200' src={house.image} alt='Casas' />
                                         <p className='text-primary text-base lg:text-lg font-semibold'>{house.address}</p>
                                         <p className='text-secondary self-start font-semibold'>R$ <span className='text-gray '>{house.price}</span> </p>
                                     </div>
@@ -55,7 +30,7 @@ const Carousel = () => {
                             </SwiperSlide>
                         )
                     })}
-                </Swiper>
+                </Slides>
             </div>
         </>
     )

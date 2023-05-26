@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import Team from '../public/images/our-team.jpg'
-import { Accordion, AccordionItem, AccordionItemButton, AccordionItemHeading, AccordionItemPanel, AccordionItemState } from 'react-accessible-accordion'
+import { Accordion, AccordionItem, AccordionItemButton, AccordionItemHeading, AccordionItemPanel } from 'react-accessible-accordion'
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io'
 import { accordions } from '@/utils/data'
 const History = () => {

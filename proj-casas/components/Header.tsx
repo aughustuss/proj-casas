@@ -29,7 +29,7 @@ const Header = () => {
         return () => {
             window.removeEventListener('resize', checkTargetElements);
         };
-    }, [headerLinks]);
+    }, []);
     return (
         <>
             <header className=' bg-primary text-white transition duration-200 w-full fixed py-2 flex flex-row items-center shadow-md z-50 font-poppins'>

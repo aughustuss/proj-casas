@@ -42,7 +42,7 @@ const HouseDetails = ({ house }: HouseProps) => {
             },
         },
     })
-    const { register, formState: { errors, isValid }, handleSubmit, getValues, trigger } = useForm<ContactFormData>();
+    const { register, formState: { errors, isValid, isValidating }, handleSubmit, getValues, trigger } = useForm<ContactFormData>();
     const { data: session } = useSession();
     const router = useRouter();
 
@@ -116,19 +116,26 @@ const HouseDetails = ({ house }: HouseProps) => {
     }
     const contactData = getValues();
     function handleBuyOption() {
-        if (contactOwner) {
-            trigger();
-            const emptyField = Object.values(contactData).some((field) => field === '');
-            if (emptyField) {
-                setEmptyFieldsError(true);
+        trigger();
+        if (boughtHouseAlreadyExists || rentHouseAlreadyExists) {
+            if (contactOwner) {
+                trigger();
+                const emptyField = Object.values(contactData).some((field) => field === '');
+                if (emptyField) {
+                    setEmptyFieldsError(true);
+                } else {
+                    setEmptyFieldsError(false);
+                    setBuyOption(true);
+                }
             } else {
-                setEmptyFieldsError(false);
-                setBuyOption(true);
+                if (!errors.notSendMessage && !isValidating) {
+                    setBuyOption(true);
+                }
             }
         } else {
-            setBuyOption(true);
+            setBoughtHouseAlreadyExists(true);
+            setRentHouseAlreadyExists(true);
         }
-
     }
 
     const confirmBuy = (data: ContactFormData) => {
@@ -145,6 +152,7 @@ const HouseDetails = ({ house }: HouseProps) => {
             }, 2000);
         } else {
             setBoughtHouseAlreadyExists(true);
+            setRentHouseAlreadyExists(true);
         }
     };
 
@@ -215,7 +223,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                             </div>
                             {session ? (
                                 <form onSubmit={handleSubmit(onSubmit)} className='w-full flex-[0.6] flex flex-col gap-y-4 justify-between border border-slate-200 bg-white shadow-md p-2 rounded-md'>
-                                    {!rentHouseAlreadyExists ? (
+                                    {!rentHouseAlreadyExists || !boughtHouseAlreadyExists ? (
                                         <div>
                                             <div className='flex flex-col w-full justify-center items-center text-center gap-y-4 text-xs lg:text-sm'>
                                                 {house.rentable ? (
