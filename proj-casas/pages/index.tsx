@@ -13,26 +13,26 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="font-poppins overflow-x-hidden tracking-wide">
-        <div className="container mx-auto px-8 md:px-0">
+      <main className="font-poppins overflow-x-hidden tracking-wide container mx-auto px-4 lg:px-0">
+        <div className="w-full">
           <Banner />
         </div>
-        <div className="container mx-auto px-8 md:px-0">
+        <div className="w-full">
           <Roombanner/>
         </div>
-        <div className="container mx-auto px-8 md:px-0">
+        <div className="w-full">
           <Carousel/>
         </div>
-        <div className="container mx-auto px-8 md:px-0">
+        <div className="w-full">
           <History/>
         </div>
-        <div className="container mx-auto px-8 sm:px-0">
+        <div className="w-full">
           <Search />
         </div>
-        <div className="container mx-auto px-8 md:px-0 py-16">
+        <div className="w-full py-16">
           <Houses />
         </div>
-        <div className="container mx-auto px-8 md:px-0 pb-16">
+        <div className="w-full pb-16">
           <Contato/>
         </div>
       </main>
