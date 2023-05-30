@@ -166,7 +166,7 @@ const HouseDetails = ({ house }: HouseProps) => {
         const newHouse = { ...house, data };
         const rentHouseExists = rentHouses.some((h) => h.id === newHouse.id);
         const boughtHouseExists = boughtHouses.some((h) => h.id === newHouse.id);
-        if (!rentHouseExists && !boughtHouseExists) {
+        if (!rentHouseExists) {
             const newHouses = [...Object.values(rentHouses), newHouse];
             localStorage.setItem(`user_email_${key}_rent_data`, JSON.stringify(newHouses));
             setRentHouseAlreadyExists(false);
@@ -182,7 +182,7 @@ const HouseDetails = ({ house }: HouseProps) => {
         <>
             <Header />
             <ThemeProvider theme={theme}>
-                <section className='container px-8 md:px-0 mx-auto py-24 min-h-screen h-auto flex justify-center items-center font-poppins relative tracking-wide text-gray'>
+                <section className='container px-2 md:px-0 mx-auto py-24 min-h-screen h-auto flex justify-center items-center font-poppins relative tracking-wide text-gray'>
                     <div className='w-full h-full flex flex-col'>
                         <div className='flex flex-col py-2 md:gap-y-0 lg:flex-row items-center w-full lg:justify-between gap-y-4 lg:gap-y-0'>
                             <p className='font-semibold text-2xl text-primary w-full lg:w-auto'>{house.address}</p>
@@ -196,10 +196,10 @@ const HouseDetails = ({ house }: HouseProps) => {
                             </div>
                         </div>
                         <div className='w-full flex flex-col lg:flex-row md:gap-x-4 gap-y-4 xl:gap-y-0 h-full'>
-                            <div className='flex-[1.5] flex flex-col gap-y-2 bg-white p-2 shadow-md border border-slate-200 rounded-md'>
+                            <div className='flex-[1.5] flex flex-col gap-y-2 '>
 
                                 <div className='max-w-4xl'>
-                                    <Image alt='Imagem da casa' src={house.imageLg} className='w-full object-cover' />
+                                    <Image alt='Imagem da casa' src={house.imageLg} className='w-full object-cover rounded-md' />
                                 </div>
 
                                 <div className='flex flex-row items-center gap-x-2 text-xs lg:text-sm font-semibold text-primaryPurple'>
@@ -222,7 +222,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                 </details>
                             </div>
                             {session ? (
-                                <form onSubmit={handleSubmit(onSubmit)} className='w-full flex-[0.6] flex flex-col gap-y-4 justify-between border border-slate-200 bg-white shadow-md p-2 rounded-md'>
+                                <form onSubmit={handleSubmit(onSubmit)} className='w-full flex-[0.6] flex flex-col gap-y-4 justify-between bg-white shadow-md p-2 rounded-md'>
                                     {!rentHouseAlreadyExists || !boughtHouseAlreadyExists ? (
                                         <div>
                                             <div className='flex flex-col w-full justify-center items-center text-center gap-y-4 text-xs lg:text-sm'>
@@ -232,7 +232,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                             Esta propriedade pode ser alugada ou comprada inteiramente, selecione abaixo uma das opções e entre em contato com o proprietário em caso de dúvidas.
                                                         </div>
                                                         <p >Se desejar alugar, selecione a quantidade de dias abaixo: </p>
-                                                        <select {...register("rentDays", { required: buyOption })} name="rentDays" className='font-semibold hover:scale-105 transition duration-200 outline-none w-full text-center border-slate-200 bg-primary text-white border p-2 rounded-sm'>
+                                                        <select {...register("rentDays", { required: buyOption })} name="rentDays" className='font-semibold hover:scale-105 transition duration-200 outline-none w-full text-center bg-primary text-white border p-2 rounded-md'>
                                                             <option defaultValue='Selecione os dias para alugar' >Selecione os dias para alugar</option>
                                                             {RentOpts && RentOpts.map(({ days, label, price }) => {
                                                                 return (
@@ -267,7 +267,7 @@ const HouseDetails = ({ house }: HouseProps) => {
                                                 )}
                                             </div>
                                             {contactOwner && (
-                                                <div className='border border-slate-200 flex flex-col rounded-lg h-auto relative'>
+                                                <div className=' flex flex-col rounded-lg h-auto relative'>
                                                     <button onClick={() => setContactOwner(false)} className='bg-gray-300 hover:bg-gray-400 transition duration-200 rounded-sm absolute right-0 top-0 text-gray-500 m-1 px-2' title='Cancelar mensagem'>x</button>
                                                     <div className='flex flex-col lg:flex-row items-center gap-x-4 w-full p-8 '>
                                                         <Image width={90} height={90} alt='Locador' src={house.agent.image} className='object-cover border-slate-200 border border-slate-200-neutral-300 rounded-full p-1' />
@@ -332,8 +332,8 @@ const HouseDetails = ({ house }: HouseProps) => {
                                         </div>
                                     )}
                                     <div className='w-full flex flex-col gap-y-2 text-xs lg:text-sm font-semibold'>
-                                        <button type="button" onClick={handleBuyOption} disabled={boughtHouseAlreadyExists} className=' disabled:cursor-not-allowed disabled:bg-gray/40 disabled:text-gray/30 w-full bg-primary hover:scale-105 transition duration-200 p-2 rounded-sm text-white'>Solicitar Compra</button>
-                                        {house.rentable && (<button type='submit' disabled={rentHouseAlreadyExists} className='disabled:cursor-not-allowed disabled:bg-gray/40 disabled:text-gray/30 w-full border border-slate-200 hover:scale-105 transition duration-200 p-2 rounded-sm text-quinary bg-quartiary'>Solicitar Aluguel</button>)}
+                                        <button type="button" onClick={handleBuyOption} disabled={boughtHouseAlreadyExists} className=' disabled:cursor-not-allowed disabled:bg-gray/40 disabled:text-gray/30 w-full bg-primary enabled:hover:scale-105 transition duration-200 p-2 rounded-md text-white'>Solicitar Compra</button>
+                                        {house.rentable && (<button type='submit' disabled={rentHouseAlreadyExists} className='disabled:cursor-not-allowed disabled:bg-gray/40 disabled:text-gray/30 w-full border border-slate-200 enabled:hover:scale-105 transition duration-200 p-2 rounded-md text-quinary bg-quartiary'>Solicitar Aluguel</button>)}
                                     </div>
                                 </form>
                             ) : (

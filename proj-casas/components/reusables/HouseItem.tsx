@@ -12,9 +12,9 @@ const HouseItem = ({house}: HouseProps) => {
     return (
         <>
             <Link key={house.id} className='w-full flex flex-col justify-center items-center hover:bg-quartiary transition duration-200' href={`/details/${house.id}`}>
-                <div className='flex flex-col justify-between w-full max-w-xs min-h-[300px] max-h-[350px] h-full rounded-md shadow-md p-1 sm:p-4 gap-y-4'>
+                <div className='flex flex-col justify-between w-full max-w-xs min-h-[280px] max-h-[350px] h-full rounded-md shadow-md p-1 sm:p-4 gap-y-2'>
                     <div className='flex flex-col gap-y-4'>
-                        <Image src={house.image} alt='Casa' className='hover:scale-105 transition duration-200 w-full object-cover h-[70px] sm:h-[130px] rounded-md' />
+                        <Image src={house.image} alt='Casa' className='hover:scale-105 transition duration-200 w-full object-cover h-[90px] sm:h-[130px] rounded-md' />
                         <div className='w-full flex flex-wrap flex-row  items-center gap-2 text-white text-xs lg:text-sm'>
                             <p className='bg-primary w-fit rounded-full px-2 text-center '>{house.type}</p>
                             <p className='bg-secondary w-fit rounded-full px-2 text-center'>{house.country}</p>

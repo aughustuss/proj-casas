@@ -6,8 +6,8 @@ const Contato = () => {
         <>
             <section className='w-full flex flex-col h-auto gap-y-4' id="contato">
                 <div className='flex flex-col w-full gap-y-2 lg:items-start items-center font-oswald'>
-                    <p className='text-2xl text-secondary'>Entre em contato</p>
-                    <p className='text-primary text-5xl font-semibold text-center lg:text-start' >Nos encontre de uma das formas abaixo</p>
+                    <p className='text-lg lg:text-2xl text-secondary'>Entre em contato</p>
+                    <p className='text-primary text-3xl lg:text-5xl font-semibold text-center lg:text-start' >Nos encontre de uma das formas abaixo</p>
                 </div>
                 <div className='flex flex-col lg:flex-row w-full font-poppins'>
                     <div className='flex flex-1 h-fit'>

@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="font-poppins overflow-x-hidden tracking-wide container mx-auto px-4 lg:px-0">
+      <main className="font-poppins overflow-x-hidden tracking-wide container mx-auto px-2 lg:px-0">
         <div className="w-full">
           <Banner />
         </div>

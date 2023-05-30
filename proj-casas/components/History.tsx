@@ -18,8 +18,8 @@ const History = () => {
                     </div>
                     <div className='flex-1 flex flex-col gap-y-8'>
                         <div className='w-full flex flex-col items-center lg:items-start gap-y-2 font-oswald max-w-md'>
-                            <p className='text-secondary text-2xl'>O nosso time</p>
-                            <p className=' text-primary text-5xl font-semibold text-center'>Saiba o que fazemos</p>
+                            <p className='text-secondary text-lg :text-2xl'>O nosso time</p>
+                            <p className=' text-primary text-3xl lg:text-5xl font-semibold text-center'>Saiba o que fazemos</p>
                             <p className='font-roboto text-sm mt-5'>Buscando inovação e conforto, nós surgimos com a intenção de inovar o mercado imobiliário. Trazendo as melhores oportunidades para quem almeja mudar de vida.</p>
                         </div>
                         <div>

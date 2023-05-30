@@ -13,8 +13,8 @@ const Carousel = () => {
         <>
             <div className='w-full pt-16 h-auto flex flex-col gap-y-4 lg:text-base text-sm py-4'>
                 <div className='w-full flex flex-col gap-y-2 font-oswald items-center lg:items-start'>
-                    <p className='text-secondary text-2xl'>As melhores escolhas</p>
-                    <p className=' text-primary text-5xl font-semibold text-center lg:text-start'>Veja as casas mais populares</p>
+                    <p className='text-secondary text-lg lg:text-2xl'>As melhores escolhas</p>
+                    <p className=' text-primary text-3xl lg:text-5xl font-semibold text-center lg:text-start'>Veja as casas mais populares</p>
                 </div>
                 <Slides classes='w-full'>
                     {houses && houses.map((house: HouseData) => {

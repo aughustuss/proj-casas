@@ -31,8 +31,8 @@ const Profile = () => {
         <>
             <Header />
             <section className='min-h-screen h-auto w-full mx-auto flex justify-center md:items-start items-center pt-16 pb-2 font-poppins overflow-y-auto '>
-                <div className='container px-8 md:px-0 flex flex-col h-full overflow-y-auto text-gray'>
-                    <div className='flex flex-col lg:flex-row w-full h-auto min-h-[140px] md:min-h-[50px] mb-auto bg-white border border-slate-200 rounded-md' >
+                <div className='container px-2 md:px-0 flex flex-col h-full overflow-y-auto text-gray'>
+                    <div className='flex flex-col lg:flex-row w-full h-auto min-h-[140px] md:min-h-[50px] mb-auto bg-white  rounded-md' >
                         <ul role="tablist" aria-label='Tabs' className='flex flex-col py-2 gap-y-2 lg:text-[14px] text-xs mb-auto md:flex-row items-center gap-x-4 justify-between w-full px-4 border-b-neutral-100 border-b'>
                             <button type="button" className='flex flex-row items-center hover:text-primary hover:scale-105 transition duration-200 hover:bg-quartiary font-semibold text-quinary hs-tab-active:text-primary lg:bg-none bg-neutral-100 w-full p-2 rounded-sm border-slate-200' id="tabs-with-underline-item-1" data-hs-tab="#tabs-with-underline-1" aria-controls="tabs-with-underline-1" role="tab">
                                 <MdAccountCircle size={20} /> <span className='flex-1'>Minha conta</span>
@@ -45,7 +45,7 @@ const Profile = () => {
                             </button>
                         </ul>
                     </div>
-                    <div className="p-4 mt-2 h-full bg-white w-full rounded-md border border-slate-200">
+                    <div className="p-4 mt-2 h-full bg-white w-full rounded-md ">
                         <div className='flex flex-col justify-between h-full min-h-[540px] gap-y-8' id="tabs-with-underline-1" role="tabpanel" aria-labelledby="tabs-with-underline-item-1">
                             <div className='text-center capitalize font-oswald text-2xl lg:text-4xl w-full flex flex-col gap-y-12 h-full'>
                                 <div className='flex flex-col-reverse gap-y-4 lg:flex-row items-center font-semibold  w-full text-center'>
