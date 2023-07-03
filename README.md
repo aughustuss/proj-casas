@@ -21,10 +21,9 @@ Site que permite a visualização de propriedades fictícias disponíveis para c
 
 ## Instalação
 
-Instale proj-casas com npm
+Instale projeto-casas com npm
 
 ```bash
-  cd proj-casas
   npm i
 ```
     
