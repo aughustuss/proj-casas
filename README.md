@@ -34,6 +34,11 @@ Instale projeto-casas
 ```bash
   yarn add
 ```
+Rode projeto-casas
+
+```bash
+  npm run dev
+```
     
 ## Link para o projeto 
 
