@@ -25,7 +25,13 @@ Instale projeto-casas
 
 ```bash
   /npm i
+```
+
+```bash
   /pnpm i
+```
+
+```bash
   /yarn add
 ```
     
