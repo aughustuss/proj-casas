@@ -21,10 +21,12 @@ Site que permite a visualização de propriedades fictícias disponíveis para c
 
 ## Instalação
 
-Instale projeto-casas com npm
+Instale projeto-casas
 
 ```bash
-  npm i
+  /npm i
+  /pnpm i
+  /yarn add
 ```
     
 ## Link para o projeto 
